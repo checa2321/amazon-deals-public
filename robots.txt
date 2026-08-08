@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://checa2321.github.io/amazon-deals-public/sitemap.xml
