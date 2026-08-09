@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://checa2321.github.io/half-or-nothing/sitemap.xml
+Sitemap: https://halfornothing.com/sitemap.xml
