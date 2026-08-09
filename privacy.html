@@ -1,0 +1,284 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy &mdash; Half or Nothing</title>
+<meta name="description" content="Half or Nothing collects nothing about you: no account, no analytics, no cookies set by this site. What the affiliate links and retailers do is spelled out here.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230B2A21'/><text x='50' y='72' font-size='62' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%23ffffff'>&#189;</text></svg>">
+<meta property="og:title" content="Privacy &mdash; Half or Nothing">
+<meta property="og:description" content="Half or Nothing collects nothing about you: no account, no analytics, no cookies set by this site. What the affiliate links and retailers do is spelled out here.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://checa2321.github.io/amazon-deals-public/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{
+  --pine:#0B2A21; --pine-deep:#071C16; --pine-line:#1E4A3C;
+  --paper:#FFFFFF; --paper-2:#F7F7F4; --paper-3:#EFEFEA;
+  --ink:#12140F; --muted:#6E6E66; --rule:#E4E4DE;
+  --signal:#D93A12; --gate:#0E6B49; --gate-soft:#5C9B81;
+  --display:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI Variable Display","Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"Cascadia Mono",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+     font:400 16px/1.55 var(--display);font-synthesis-weight:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* ---- masthead: the one inverted block on the page ---- */
+.mast{background:var(--pine);color:#fff;padding:44px 0 26px}
+.brand{font-weight:800;letter-spacing:-.045em;line-height:.92;
+       font-size:clamp(2.5rem,8.5vw,5.25rem);margin:0}
+.brand .half{color:var(--gate-soft)}
+.gate{height:3px;background:var(--pine-line);margin:22px 0 0;position:relative;overflow:hidden}
+.gate::after{content:'';position:absolute;inset:0;background:#fff;
+             transform-origin:left;animation:draw .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.rule-line{font-size:clamp(1rem,2.2vw,1.35rem);font-weight:500;margin:16px 0 0;color:#DCE8E2}
+.stats{margin-top:22px;font:500 12px/1 var(--mono);letter-spacing:.09em;
+       text-transform:uppercase;color:#8FB3A5;display:flex;flex-wrap:wrap;gap:10px 20px}
+.stats b{color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
+nav.top{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
+nav.top a{font:600 13px/1 var(--display);letter-spacing:.02em;color:#BFD6CC;text-decoration:none;
+          padding:8px 14px;border:1px solid var(--pine-line);border-radius:999px}
+nav.top a:hover{color:#fff;border-color:#5C9B81}
+nav.top a[aria-current]{background:#fff;color:var(--pine);border-color:#fff}
+
+/* ---- disclosure: normal body size, never small grey text ---- */
+.disclosure{margin:26px 0;padding:16px 18px;background:var(--paper-2);
+            border:1px solid var(--rule);border-left:3px solid var(--gate);
+            border-radius:4px;font-size:15px;color:#33352E;max-width:76ch}
+
+/* ---- best new deal: the only place the signal red gets a full block ---- */
+.best{margin:26px 0;border:1px solid var(--rule);border-top:3px solid var(--signal);
+      background:var(--paper-2);padding:18px 20px;border-radius:4px}
+.best .eyebrow{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+               color:var(--signal)}
+.best .t{display:block;margin-top:10px;font-size:1.15rem;font-weight:600;
+         color:var(--ink);text-decoration:none;line-height:1.35}
+.best .t:hover{text-decoration:underline}
+.best .figs{margin-top:10px;font:500 15px/1 var(--mono);color:var(--muted);
+            font-variant-numeric:tabular-nums}
+.best .figs b{color:var(--ink);font-size:1.15rem}
+
+/* ---- the list ---- */
+.table-wrap{overflow-x:auto;margin-top:8px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font:600 11px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+   text-align:left;padding:12px 12px;border-bottom:1px solid var(--ink);white-space:nowrap;
+   background:var(--paper);position:sticky;top:0;z-index:2}
+td{padding:13px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+/* overflow establishes a block formatting context so the last line of a long
+   title can't wrap back underneath the floated thumbnail */
+td.t{max-width:620px;overflow:hidden}
+td.src,td.num,td.seen{padding-top:14px}
+tr.v td{background:#F2F8F5}
+tr.v td:first-child{box-shadow:inset 3px 0 0 var(--gate)}
+tr.z td{color:var(--muted)}
+tbody tr:hover td,table tr:hover td{background:var(--paper-3)}
+td.t a{color:var(--ink);text-decoration:none;font-weight:500}
+td.t a:hover{text-decoration:underline;text-decoration-color:var(--gate-soft);
+             text-underline-offset:3px}
+tr.z td.t a{color:#4A4C45}
+.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.rank{color:#A6A69E;font-size:12px;width:1%}
+.was{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.src{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.seen{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+img.thumb{width:44px;height:44px;object-fit:contain;float:left;margin:-2px 12px 0 0;
+          background:#fff;border:1px solid var(--rule);border-radius:4px;padding:3px}
+
+/* ---- signature element: the threshold meter ----
+   The bar measures how far PAST the 50% rule a listing landed, not the raw
+   discount: its left edge is the gate itself, so 50% shows an empty track
+   and 100% a full one. Measuring from zero instead made every bar look
+   nearly full (the page is sorted by discount, so the top is all 85%+) and
+   read as an underline rather than a meter. Stacked down 800 rows it shows
+   the shape of the whole inventory. One span, gradients only, no extra DOM
+   per row. */
+.mv{display:inline-block;min-width:82px}
+.mv b{display:block;font-weight:600;font-variant-numeric:tabular-nums}
+.mv::after{content:'';display:block;height:5px;margin-top:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--bar) 0 calc(var(--d) * 1%),var(--rule) calc(var(--d) * 1%));}
+.t1{--bar:var(--gate-soft)} .t1 b{color:#2F6B54}
+.t2{--bar:var(--gate)}      .t2 b{color:var(--gate)}
+.t3{--bar:var(--signal)}    .t3 b{color:var(--signal)}
+
+.divider td{padding:26px 12px 10px;font:600 11px/1 var(--mono);letter-spacing:.11em;
+            text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink)}
+.empty td{padding:40px 12px;color:var(--muted)}
+
+footer.site{margin:56px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+            font-size:14px;color:var(--muted)}
+footer.site a{color:var(--muted)}
+footer.site .runline{font:400 12px/1.6 var(--mono);color:#8C8C84;margin-top:14px}
+
+/* ---- prose pages ---- */
+.prose{max-width:68ch;padding:44px 0 0}
+.prose h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:800;letter-spacing:-.035em;
+          line-height:1.05;margin:0 0 8px}
+.prose .lede{font-size:1.15rem;color:#43453D;margin:0 0 30px}
+.prose h2{font-size:1.28rem;font-weight:700;letter-spacing:-.015em;margin:38px 0 10px;
+          padding-top:18px;border-top:1px solid var(--rule)}
+.prose p{margin:0 0 16px}
+.prose ul{margin:0 0 16px;padding-left:0;list-style:none}
+.prose li{position:relative;padding-left:22px;margin-bottom:10px}
+.prose li::before{content:'';position:absolute;left:0;top:.62em;width:9px;height:3px;
+                  border-radius:2px;background:var(--gate-soft)}
+.prose strong{font-weight:650}
+.prose a{color:var(--gate);text-underline-offset:3px}
+.prose .stat{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+a:focus-visible,th:focus-visible{outline:2px solid var(--gate);outline-offset:3px;border-radius:2px}
+
+@media (max-width:760px){
+  .wrap{padding:0 18px}
+  .mast{padding:32px 0 22px}
+  .disclosure{font-size:14px;padding:14px}
+  th{display:none}
+  .table-wrap{overflow-x:visible}
+  table,tbody,tr,td{display:block;width:100%}
+  tr{border-bottom:1px solid var(--rule);padding:14px 0;position:relative}
+  tr.v{background:#F2F8F5;box-shadow:inset 3px 0 0 var(--gate);padding-left:12px}
+  td{border:0;padding:2px 0}
+  tr.v td,tr:hover td,table tr:hover td{background:transparent}
+  /* the desktop left-edge marker moves to the row itself here; without this
+     reset the rank cell keeps it and paints a stray green line on the right,
+     where the cell is absolutely positioned */
+  tr.v td:first-child{box-shadow:none}
+  td.rank{position:absolute;right:0;top:14px;font-size:11px}
+  td.t{padding-right:44px;font-size:15px}
+  td.src,td.seen{display:inline-block;width:auto;margin-right:14px;padding-top:6px}
+  td.now,td.was,td.off{display:inline-block;width:auto;text-align:left;margin-right:16px;padding-top:6px}
+  .mv{min-width:78px}
+  .divider td,.empty td{display:block;padding:24px 0 8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .gate::after{animation:none}
+  *{transition:none!important}
+}
+</style></head><body>
+<header class="mast"><div class="wrap">
+<h1 class="brand"><span class="half">Half</span> or Nothing</h1>
+<div class="gate" aria-hidden="true"></div>
+<p class="rule-line">50% off or it doesn't make the page.</p>
+
+<nav class="top"><a href="index.html">Deals</a><a href="about.html">About</a><a href="privacy.html" aria-current="page">Privacy</a><a href="contact.html">Contact</a></nav>
+</div></header>
+<main class="wrap">
+<div class="disclosure">Some links on this site are affiliate links. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in &mdash; listings are sorted by discount percentage, highest first.</div>
+
+<div class="prose">
+<h1>Privacy</h1>
+<p class="lede">This site doesn't collect anything about you. No account, no login, no
+newsletter, no comments, no analytics, and no cookies set by this site.</p>
+<p class="stat">Last updated: August 8, 2026</p>
+
+<h2>What this site collects</h2>
+<p>Nothing. Half or Nothing is a static page. There is no database, no form, and no
+script on this site that records anything about visitors. The only JavaScript on the page sorts
+the table columns when you click a header, and it runs entirely in your browser.</p>
+
+<h2>Hosting</h2>
+<p>This site is hosted on GitHub Pages. Like nearly all web hosting, GitHub's servers may log
+standard technical request information (IP address, browser user-agent, time of request) for
+security and operational purposes. I don't have access to those logs and don't use them.
+GitHub's own privacy practices are described in the GitHub Privacy Statement.</p>
+
+<h2>Affiliate links and third parties</h2>
+<p>This is the part that matters, so it's stated plainly:</p>
+<p>Some product links on this site are affiliate links. <strong>When you click one, you leave
+this site and the destination retailer takes over.</strong> Those retailers, and the affiliate
+networks that handle their programs, will typically set their own cookies or tracking
+identifiers to attribute the visit and any resulting purchase.</p>
+<p>That tracking is theirs, not mine. I don't control it, don't receive your personal
+information from it, and can't turn it off. What I see is aggregate commission reporting, not
+who you are or what you personally bought.</p>
+<p>Each of those companies publishes its own privacy policy governing what it collects once you
+arrive on their site. If you want to limit that tracking, standard browser cookie controls and
+privacy extensions apply to it the same way they apply to any other site.</p>
+
+<h2>Product images</h2>
+<p>Product thumbnails on this site are loaded directly from the retailers' own image servers.
+This means your browser makes a request to those servers when the page loads, and those servers
+can see that request. This is standard for any page displaying retailer product images.</p>
+
+<h2>Children</h2>
+<p>This site isn't directed at children under 13 and doesn't knowingly collect information from
+anyone.</p>
+
+<h2>Your rights</h2>
+<p>Since no personal data is collected or stored by this site, there's nothing held about you to
+access, correct, or delete. For data the retailers or affiliate networks collect after you click
+through, contact them directly. Their policies govern that.</p>
+
+<h2>Changes</h2>
+<p>If this site ever starts collecting anything, analytics, an email list, anything at all, this
+page gets updated <strong>before</strong> that goes live, and the date above changes.</p>
+
+<h2>Contact</h2>
+<p>Questions about this policy: <a href="mailto:checa2321@gmail.com">checa2321@gmail.com</a></p>
+</div>
+
+<footer class="site">
+<p>Half or Nothing &middot; <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></p>
+<p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
+
+</footer>
+</main>
+<script>
+(function(){
+  var table = document.querySelector('table');
+  if (!table) return;
+  var tbody = table.tBodies[0] || table;
+  var headerRow = tbody.rows[0];
+  function ageMinutes(text){
+    text = text.trim();
+    if (text === 'now') return 0;
+    var m = text.match(/(\d+)d ago/);
+    if (m) return parseInt(m[1], 10) * 1440;
+    m = text.match(/(\d+)h ago/);
+    if (m) return parseInt(m[1], 10) * 60;
+    return Infinity;
+  }
+  function cellValue(td, type){
+    var text = td.textContent;
+    if (type === 'num') {
+      var n = parseFloat(text.replace(/[^0-9.\-]/g, ''));
+      return isNaN(n) ? -Infinity : n;
+    }
+    if (type === 'age') return ageMinutes(text);
+    return text.trim().toLowerCase();
+  }
+  Array.prototype.forEach.call(headerRow.cells, function(th, colIdx){
+    var type = th.getAttribute('data-type');
+    if (!type) return;
+    th.tabIndex = 0;
+    function doSort(){
+      var rows = Array.prototype.filter.call(tbody.rows, function(r, i){
+        return i > 0 && r.cells.length === headerRow.cells.length;
+      });
+      var asc = th.getAttribute('data-dir') !== 'asc';
+      rows.sort(function(a, b){
+        var va = cellValue(a.cells[colIdx], type), vb = cellValue(b.cells[colIdx], type);
+        if (va < vb) return asc ? -1 : 1;
+        if (va > vb) return asc ? 1 : -1;
+        return 0;
+      });
+      Array.prototype.forEach.call(headerRow.cells, function(h){
+        h.removeAttribute('data-dir');
+        h.removeAttribute('aria-sort');
+      });
+      th.setAttribute('data-dir', asc ? 'asc' : 'desc');
+      th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
+      var divider = Array.prototype.filter.call(tbody.rows, function(r){ return r.cells.length === 1; })[0];
+      if (divider) divider.style.display = 'none';
+      rows.forEach(function(r){ tbody.appendChild(r); });
+    }
+    th.addEventListener('click', doSort);
+    th.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doSort(); }
+    });
+  });
+})();
+</script>
+</body></html>
