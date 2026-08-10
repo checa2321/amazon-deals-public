@@ -56,13 +56,13 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 /* ---- hero: brand statement with the ghost half-mark ---- */
 .mast{background:var(--card);color:var(--ink);padding:58px 0 48px;position:relative;
       border-bottom:1px solid var(--rule);overflow:hidden}
-.mast-ghost{position:absolute;right:-16px;top:50%;transform:translateY(-52%);
-            font:900 290px/1 Georgia,serif;color:rgba(217,58,18,.055);
-            pointer-events:none;user-select:none}
+.mast-ghost{position:absolute;left:max(28px,calc(50% - 562px));top:50%;transform:translateY(-52%);
+            font:900 290px/1 Georgia,serif;color:rgba(0,168,99,.09);
+            pointer-events:none;user-select:none;z-index:0}
 @supports(-webkit-text-stroke:2px red){
-  .mast-ghost{color:transparent;-webkit-text-stroke:2.5px rgba(217,58,18,.17)}
+  .mast-ghost{color:transparent;-webkit-text-stroke:2.5px rgba(0,168,99,.22)}
 }
-@media(max-width:760px){.mast-ghost{font-size:175px;right:-28px}}
+@media(max-width:760px){.mast-ghost{font-size:175px;left:max(18px,calc(50% - 562px))}}
 .brand{font-weight:800;letter-spacing:-.02em;line-height:.95;position:relative;
        font-size:clamp(2.2rem,6vw,3.4rem);margin:0;color:var(--ink)}
 .brand .half{color:var(--signal)}
@@ -326,11 +326,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 ::selection{background:var(--signal);color:#fff}
 html{scroll-behavior:smooth}
 
-/* ---- price history sparkline + lowest-tracked pill ---- */
-.spark{width:64px;height:18px;color:var(--gate-soft);flex-shrink:0}
+/* ---- price history range + lowest-tracked pill ---- */
 .low-pill{border:1px solid var(--gate);color:var(--gate);background:transparent;
           font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
           padding:1px 6px;border-radius:3px}
+/* Printed $lo-$hi range -- always visible, no hover/tap needed (a hover-only
+   SVG sparkline used to carry this and was unreachable on touch devices). */
+.price-range{font-size:11px;color:var(--gate);font-weight:600;white-space:nowrap}
 
 /* ---- category landing pages: breadcrumb + fashion subnav ---- */
 .crumbs{margin:26px 0 2px;font-size:13px;color:var(--muted)}
