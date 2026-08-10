@@ -136,17 +136,14 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 .price-was{font-size:13px;color:var(--muted);text-decoration:line-through;font-family:var(--mono);
            font-variant-numeric:tabular-nums}
 
-/* ---- filter bar: search + category dropdown + sort ---- */
+/* ---- filter bar: category dropdown + sort (search lives in the hero now) ----
+   The old #dealSearch block that sat here was deleted 2026-08-10 along with the
+   .searchwrap it styled: an ID selector outranks .herosearch input, so its
+   background:var(--card) was still winning and painting an opaque panel over
+   the rotating hint sitting behind the transparent field. */
 .filterbar{margin:26px 0 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.searchwrap{position:relative;flex:1 1 300px;max-width:400px}
-.searchwrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);
-                width:16px;height:16px;stroke:var(--muted);pointer-events:none}
-#dealSearch{width:100%;font:400 14px/1 var(--display);color:var(--ink);
-            background:var(--card);border:1px solid var(--rule);border-radius:999px;
-            padding:10px 12px 10px 38px;box-sizing:border-box}
-#dealSearch:focus{outline:none;border-color:var(--signal);
-                  box-shadow:0 0 0 3px rgba(217,58,18,.12)}
 #dealSearch::placeholder{color:#AAA}
+#dealSearch::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
 #dealSort{font:500 13px/1 var(--display);color:var(--ink);background:var(--card);
           border:1px solid var(--rule);border-radius:999px;padding:10px 16px;cursor:pointer}
 .no-results{padding:40px 12px;color:var(--muted);text-align:center;
@@ -331,9 +328,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 @media (max-width:760px){
   .wrap{padding:0 18px}
   .topnav .inner{padding:10px 18px}
-  .mast{padding:30px 0 20px}
-  .disclosure{font-size:13px;padding:12px}
-  .searchwrap{max-width:none;flex-basis:100%}
+  .mast{padding:20px 0 18px}
+  .disclosure{font-size:13px}
+  .disclosure>summary{padding:12px 14px}
+  .disclosure-body{padding:0 14px 14px}
+  .herosearch{max-width:none;margin-top:14px}
   .pager{gap:10px}
   /* was 22px here -- shrinking the one control on the card that fingers have
      to hit was backwards; keep it full size on phones and let ::before carry
