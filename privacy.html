@@ -5,12 +5,17 @@
 <meta name="description" content="Half or Nothing collects nothing about you: no account, no analytics, no cookies set by this site. What the affiliate links and retailers do is spelled out here.">
 <meta name="impact-site-verification" value="af49e245-f07a-4b19-a67e-c1898e402a49">
 <meta name="fo-verify" content="36141c38-378c-45b6-b864-23d8c13b94c4">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M4 4h20L4 24z' fill='%23D93A12'/><path d='M28 9v19H9z' fill='none' stroke='%23D93A12' stroke-width='2.6' stroke-linejoin='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 2h26L2 28z' fill='%23D93A12'/><path d='M30 4v26H4z' fill='none' stroke='%23D93A12' stroke-width='2.6' stroke-linejoin='round'/></svg>">
 <meta property="og:title" content="Privacy. Half or Nothing">
 <meta property="og:description" content="Half or Nothing collects nothing about you: no account, no analytics, no cookies set by this site. What the affiliate links and retailers do is spelled out here.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://halfornothing.com/">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://halfornothing.com/privacy.html">
+<link rel="canonical" href="https://halfornothing.com/privacy.html">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:image" content="https://halfornothing.com/logo-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://halfornothing.com/logo-og.png">
+
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -320,6 +325,24 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 ::selection{background:var(--signal);color:#fff}
 html{scroll-behavior:smooth}
 
+/* ---- price history sparkline + lowest-tracked pill ---- */
+.spark{width:64px;height:18px;color:var(--gate-soft);flex-shrink:0}
+.low-pill{border:1px solid var(--gate);color:var(--gate);background:transparent;
+          font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+          padding:1px 6px;border-radius:3px}
+
+/* ---- category landing pages: breadcrumb + fashion subnav ---- */
+.crumbs{margin:26px 0 2px;font-size:13px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs a:hover{color:var(--signal)}
+.crumbs b{color:var(--ink);font-weight:600}
+.subnav{margin:8px 0 0;font-size:13px}
+.subnav a{color:var(--gate);font-weight:600;text-decoration:none;margin-right:16px}
+.subnav a:hover{color:var(--signal)}
+.footer-cats{font-size:12.5px;line-height:1.9;color:var(--muted);max-width:80ch}
+.footer-cats a{color:var(--muted);font-weight:500}
+.footer-cats a:hover{color:var(--signal)}
+
 /* ---- dark mode: same identity, inverted paper ---- */
 @media (prefers-color-scheme: dark){
   :root{--card:#1C1C1A;--paper-2:#131312;--paper-3:#232320;--ink:#ECEAE4;--ink-soft:#C7C5BD;
@@ -340,7 +363,7 @@ html{scroll-behavior:smooth}
 </style></head><body>
 <nav class="topnav"><div class="inner">
 <a class="logo" href="index.html" aria-label="Half or Nothing">
-<svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 4h20L4 24z" fill="currentColor"/><path d="M28 9v19H9z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
+<svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 2h26L2 28z" fill="currentColor"/><path d="M30 4v26H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
 <span class="lg-half">HALF</span><span class="lg-or">or</span><span class="lg-nothing">NOTHING</span></a>
 
 <div class="links"><a href="index.html">Deals</a><a href="about.html">About</a><a href="privacy.html" aria-current="page">Privacy</a><a href="contact.html">Contact</a></div>
@@ -419,6 +442,7 @@ page gets updated <strong>before</strong> that goes live, and the date above cha
 <footer class="site">
 <div class="disclosure">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first.</div>
 <p>Half or Nothing &middot; <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></p>
+<p class="footer-cats">Browse: <a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='fashion-men.html'>Men&#x27;s Fashion</a> &middot; <a href='fashion-women.html'>Women&#x27;s Fashion</a> &middot; <a href='fashion-kids.html'>Kids&#x27; Fashion</a></p>
 <p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
 
 </footer>
@@ -447,23 +471,8 @@ page gets updated <strong>before</strong> that goes live, and the date above cha
       if (!was) megaPanel.classList.add('open');
     });
     megaPanel.addEventListener('click', function(e){ e.stopPropagation(); });
-    Array.prototype.forEach.call(megaPanel.querySelectorAll('.has-fly > a'), function(a){
-      a.addEventListener('click', function(){
-        if (window.matchMedia('(max-width: 800px)').matches) a.parentElement.classList.toggle('open');
-      });
-    });
-    Array.prototype.forEach.call(megaPanel.querySelectorAll('.mega-link'), function(a){
-      a.addEventListener('click', function(){
-        var val = a.getAttribute('data-val');
-        if (!val) return;
-        var isFlyParent = a.parentElement && a.parentElement.classList.contains('has-fly');
-        if (isFlyParent && window.matchMedia('(max-width: 800px)').matches) return;
-        if (!grid) { location.href = 'index.html'; return; }
-        applyCats([val]);
-        closeAll();
-        grid.scrollIntoView({behavior: 'smooth', block: 'start'});
-      });
-    });
+    // mega-menu links are plain hrefs to the per-category pages -- real,
+    // crawlable navigation; no JS needed beyond open/close.
   }
 
   if (!grid) return;
