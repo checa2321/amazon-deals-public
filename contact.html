@@ -106,15 +106,25 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 
 /* ---- trust strip: clean and minimal ---- */
 /* ---- footer trust line + disclosure accordion + social ---- */
-.trust-line{font-size:13px;line-height:1.6;color:var(--ink-soft);max-width:76ch;margin:0 0 14px}
+.trust-line{font-size:13.5px;line-height:1.65;color:var(--ink-soft);max-width:76ch;margin:0}
 .trust-line b{color:var(--ink);font-weight:700}
-.footer-social{margin:14px 0}
-.footer-social a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;
-                 color:var(--ink-soft);font-weight:600;font-size:13px;
-                 border:1px solid var(--rule);border-radius:999px;padding:12px 18px;
+
+/* Footer: stacked accordions on the left, social icons pinned right. The
+   icon list is a <ul> so adding Instagram/X later is one <li>, and the icons
+   carry no visible label -- the accessible name lives on aria-label. */
+.footer-grid{display:flex;align-items:flex-start;justify-content:space-between;gap:32px}
+.footer-main{flex:1;min-width:0}
+.footer-social{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;flex-shrink:0}
+.footer-social a{display:flex;align-items:center;justify-content:center;
+                 width:44px;height:44px;text-decoration:none;color:var(--ink-soft);
+                 border:1px solid var(--rule);border-radius:50%;
                  transition:border-color .15s ease,color .15s ease,background .15s ease}
 .footer-social a:hover{border-color:var(--signal);color:var(--signal);background:var(--paper-2)}
-.footer-social svg{width:17px;height:17px;fill:currentColor}
+.footer-social svg{width:19px;height:19px;fill:currentColor}
+@media(max-width:640px){
+  .footer-grid{flex-direction:column-reverse;gap:20px}
+  .footer-social{align-self:flex-start}
+}
 
 /* ---- disclosure: normal body size, left-border accent ---- */
 .disclosure{margin:20px 0;padding:0;background:var(--card);
@@ -306,6 +316,8 @@ footer.site{margin:48px 0 0;border-top:2px solid var(--ink);padding:24px 0 56px;
             font-size:14px;color:var(--muted)}
 footer.site a{color:var(--gate);font-weight:600}
 footer.site .runline{font:400 12px/1.6 var(--mono);color:var(--muted);margin-top:12px}
+footer.site .footer-legal{margin-top:18px}
+footer.site .disclosure{margin:14px 0}
 
 /* ---- prose pages ---- */
 .prose{max-width:68ch;padding:44px 0 0}
@@ -434,7 +446,7 @@ html{scroll-behavior:smooth}
 .subnav{margin:8px 0 0;font-size:13px}
 .subnav a{color:var(--gate);font-weight:600;text-decoration:none;margin-right:16px}
 .subnav a:hover{color:var(--signal)}
-.footer-cats{font-size:12.5px;line-height:1.9;color:var(--muted);max-width:80ch}
+.footer-cats{font-size:12.5px;line-height:2;color:var(--muted);max-width:80ch}
 .footer-cats a{color:var(--muted);font-weight:500}
 .footer-cats a:hover{color:var(--signal)}
 
@@ -492,20 +504,30 @@ pointed you there.</p>
 <p>Business and affiliate inquiries: same address.</p>
 </div>
 
-<footer class="site">
-<p class="trust-line"><b>eBay and Walmart only.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged.</p>
+<footer class="site"><div class="footer-grid">
+<div class="footer-main">
+<details class="disclosure">
+<summary>Browse</summary>
+<div class="disclosure-body footer-cats"><a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='fashion-men.html'>Men&#x27;s Fashion</a> &middot; <a href='fashion-women.html'>Women&#x27;s Fashion</a> &middot; <a href='fashion-kids.html'>Kids&#x27; Fashion</a></div>
+</details>
+<details class="disclosure">
+<summary>eBay and Walmart only</summary>
+<div class="disclosure-body"><p class="trust-line"><b>eBay and Walmart only.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged.</p></div>
+</details>
+<p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
+
 <details class="disclosure">
 <summary>Affiliate disclosure &amp; how this page is built</summary>
 <div class="disclosure-body">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first.</div>
 </details>
-<p class="footer-social"><a href="https://www.tiktok.com/@halfornothing_" target="_blank" rel="noopener me" aria-label="Half or Nothing on TikTok">
+<p class="footer-legal">Half or Nothing &middot; <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></p>
+</div>
+<ul class="footer-social" aria-label="Follow Half or Nothing">
+<li><a href="https://www.tiktok.com/@halfornothing_" target="_blank" rel="noopener me" aria-label="Half or Nothing on TikTok" title="@halfornothing_">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 3a5.5 5.5 0 0 0 5 4.5v3a8.5 8.5 0 0 1-5-1.7v6.3a6.1 6.1 0 1 1-6.1-6.1c.3 0 .6 0 .9.1v3.1a3 3 0 1 0 2.1 2.9V3h3.1z"/></svg>
-<span>@halfornothing_</span></a></p>
-<p>Half or Nothing &middot; <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></p>
-<p class="footer-cats">Browse: <a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='fashion-men.html'>Men&#x27;s Fashion</a> &middot; <a href='fashion-women.html'>Women&#x27;s Fashion</a> &middot; <a href='fashion-kids.html'>Kids&#x27; Fashion</a></p>
-<p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
-
-</footer>
+</a></li>
+</ul>
+</div></footer>
 </main>
 <script>
 (function(){
@@ -579,6 +601,13 @@ pointed you there.</p>
     if (state.sort === 'price-asc') return num(a, 'data-price') - num(b, 'data-price');
     if (state.sort === 'price-desc') return num(b, 'data-price') - num(a, 'data-price');
     if (state.sort === 'newest') return num(a, 'data-age') - num(b, 'data-age');
+    if (state.sort === 'realdrop') {
+      // Listings we have no history for carry -1 and go last, in discount
+      // order among themselves, rather than being ranked as 0% drops.
+      var ra = num(a, 'data-realdrop'), rb = num(b, 'data-realdrop');
+      if (ra < 0 && rb < 0) return num(b, 'data-discount') - num(a, 'data-discount');
+      return rb - ra;
+    }
     return num(b, 'data-discount') - num(a, 'data-discount');
   }
 
