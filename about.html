@@ -3,6 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About &mdash; Half or Nothing</title>
 <meta name="description" content="How Half or Nothing curates deals: one rule, 50% off or it doesn't make the page. Where the listings come from, how often they update, and what the site does not do.">
+<meta name="impact-site-verification" value="af49e245-f07a-4b19-a67e-c1898e402a49">
+<meta name="fo-verify" content="36141c38-378c-45b6-b864-23d8c13b94c4">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230B2A21'/><text x='50' y='72' font-size='62' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%23ffffff'>&#189;</text></svg>">
 <meta property="og:title" content="About &mdash; Half or Nothing">
 <meta property="og:description" content="How Half or Nothing curates deals: one rule, 50% off or it doesn't make the page. Where the listings come from, how often they update, and what the site does not do.">
@@ -20,92 +22,160 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);
+body{margin:0;background:var(--paper-2);color:var(--ink);
      font:400 16px/1.55 var(--display);font-synthesis-weight:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
 
-/* ---- masthead: the one inverted block on the page ---- */
-.mast{background:var(--pine);color:#fff;padding:44px 0 26px}
-.brand{font-weight:800;letter-spacing:-.045em;line-height:.92;
-       font-size:clamp(2.5rem,8.5vw,5.25rem);margin:0}
+/* ---- 2026-08-09 redesign: cards replace the table. Visual language merged
+   from three reference templates Che picked (kept as CSS-only, no external
+   deps, per the site's no-third-party-requests privacy promise): rounded
+   cards + hover lift + image zoom, a circular corner discount badge, and
+   clean two-tier price typography. Signature meter bar retired in favor of
+   the badge -- same "how far past 50%" idea, now a number, not a bar. ---- */
+
+/* ---- sticky top nav: logo + page links, separate from the hero below ---- */
+.topnav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--rule)}
+.topnav .inner{max-width:1180px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:24px}
+.topnav .logo{font-weight:800;letter-spacing:-.04em;font-size:19px;color:var(--ink);text-decoration:none;flex-shrink:0}
+.topnav .logo .half{color:var(--gate)}
+.topnav .links{display:flex;gap:20px;font-size:14px;font-weight:600;margin-left:auto}
+.topnav .links a{color:var(--muted);text-decoration:none}
+.topnav .links a:hover{color:var(--ink)}
+.topnav .links a[aria-current]{color:var(--ink)}
+@media(max-width:640px){.topnav .links{gap:14px;font-size:13px}}
+
+/* ---- hero: the one inverted block on the page ---- */
+.mast{background:var(--pine);color:#fff;padding:48px 0 30px;position:relative;overflow:hidden}
+.mast::after{content:'';position:absolute;right:-100px;top:-100px;width:380px;height:380px;
+             background:radial-gradient(circle,rgba(94,155,129,.22),transparent 70%);pointer-events:none}
+.brand{font-weight:800;letter-spacing:-.045em;line-height:.92;position:relative;
+       font-size:clamp(2.3rem,7.5vw,4.6rem);margin:0}
 .brand .half{color:var(--gate-soft)}
-.gate{height:3px;background:var(--pine-line);margin:22px 0 0;position:relative;overflow:hidden}
-.gate::after{content:'';position:absolute;inset:0;background:#fff;
-             transform-origin:left;animation:draw .9s cubic-bezier(.2,.7,.2,1) both}
-@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.rule-line{font-size:clamp(1rem,2.2vw,1.35rem);font-weight:500;margin:16px 0 0;color:#DCE8E2}
-.stats{margin-top:22px;font:500 12px/1 var(--mono);letter-spacing:.09em;
-       text-transform:uppercase;color:#8FB3A5;display:flex;flex-wrap:wrap;gap:10px 20px}
-.stats b{color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
-nav.top{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
-nav.top a{font:600 13px/1 var(--display);letter-spacing:.02em;color:#BFD6CC;text-decoration:none;
-          padding:8px 14px;border:1px solid var(--pine-line);border-radius:999px}
-nav.top a:hover{color:#fff;border-color:#5C9B81}
-nav.top a[aria-current]{background:#fff;color:var(--pine);border-color:#fff}
+.rule-line{font-size:clamp(1rem,2.1vw,1.25rem);font-weight:500;margin:14px 0 0;color:#DCE8E2;
+           position:relative;max-width:560px}
+.stats{margin-top:24px;font:500 12px/1 var(--mono);letter-spacing:.09em;
+       text-transform:uppercase;color:#8FB3A5;display:flex;flex-wrap:wrap;gap:10px 24px;position:relative}
+.stats b{color:#fff;font-weight:700;font-size:15px;display:block;margin-bottom:2px;font-variant-numeric:tabular-nums}
+
+/* ---- trust strip: what the site actually offers, Electro-style icon row ---- */
+.trust{background:#fff;border-bottom:1px solid var(--rule)}
+.trust .inner{max-width:1180px;margin:0 auto;padding:20px 28px;
+              display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.trust .inner{grid-template-columns:1fr;padding:16px 18px}}
+.trust-item{display:flex;align-items:center;gap:12px}
+.trust-item .ic{width:36px;height:36px;border-radius:9px;background:var(--paper-3);
+                 display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gate)}
+.trust-item b{display:block;font-size:13px;font-weight:700}
+.trust-item span{font-size:12px;color:var(--muted)}
 
 /* ---- disclosure: normal body size, never small grey text ---- */
-.disclosure{margin:26px 0;padding:16px 18px;background:var(--paper-2);
+.disclosure{margin:26px 0;padding:16px 18px;background:#fff;
             border:1px solid var(--rule);border-left:3px solid var(--gate);
             border-radius:4px;font-size:15px;color:#33352E;max-width:76ch}
 
-/* ---- best new deal: the only place the signal red gets a full block ---- */
+/* ---- best deal: always on screen, so a first-time visitor always has one
+   product to land on instead of a bare grid. Red border+eyebrow when the
+   top deal is new this run (the rare, notable case); green when it's just
+   the best of what's still active, so the signal color still means "new". */
 .best{margin:26px 0;border:1px solid var(--rule);border-top:3px solid var(--signal);
-      background:var(--paper-2);padding:18px 20px;border-radius:4px}
+      background:#fff;padding:18px 20px;border-radius:12px}
+.best.seen{border-top-color:var(--gate)}
 .best .eyebrow{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
                color:var(--signal)}
+.best.seen .eyebrow{color:var(--gate)}
 .best .t{display:block;margin-top:10px;font-size:1.15rem;font-weight:600;
-         color:var(--ink);text-decoration:none;line-height:1.35}
+         color:var(--ink);text-decoration:none;line-height:1.35;
+         white-space:normal;overflow-wrap:break-word}
 .best .t:hover{text-decoration:underline}
 .best .figs{margin-top:10px;font:500 15px/1 var(--mono);color:var(--muted);
             font-variant-numeric:tabular-nums}
 .best .figs b{color:var(--ink);font-size:1.15rem}
 
-/* ---- the list ---- */
-.table-wrap{overflow-x:auto;margin-top:8px}
-table{border-collapse:collapse;width:100%;font-size:14px}
-th{font:600 11px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
-   text-align:left;padding:12px 12px;border-bottom:1px solid var(--ink);white-space:nowrap;
-   background:var(--paper);position:sticky;top:0;z-index:2}
-td{padding:13px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
-/* overflow establishes a block formatting context so the last line of a long
-   title can't wrap back underneath the floated thumbnail */
-td.t{max-width:620px;overflow:hidden}
-td.src,td.num,td.seen{padding-top:14px}
-tr.v td{background:#F2F8F5}
-tr.v td:first-child{box-shadow:inset 3px 0 0 var(--gate)}
-tr.z td{color:var(--muted)}
-tbody tr:hover td,table tr:hover td{background:var(--paper-3)}
-td.t a{color:var(--ink);text-decoration:none;font-weight:500}
-td.t a:hover{text-decoration:underline;text-decoration-color:var(--gate-soft);
-             text-underline-offset:3px}
-tr.z td.t a{color:#4A4C45}
-.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
-.rank{color:#A6A69E;font-size:12px;width:1%}
-.was{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
-.src{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.seen{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
-img.thumb{width:44px;height:44px;object-fit:contain;float:left;margin:-2px 12px 0 0;
-          background:#fff;border:1px solid var(--rule);border-radius:4px;padding:3px}
+/* ---- filter bar: search + sort + category chips ---- */
+.filterbar{margin:30px 0 8px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.searchwrap{position:relative;flex:1 1 320px;max-width:420px}
+.searchwrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);
+                width:16px;height:16px;stroke:var(--muted);pointer-events:none}
+#dealSearch{width:100%;font:500 15px/1 var(--display);color:var(--ink);
+            background:#fff;border:1px solid var(--rule);border-radius:10px;
+            padding:12px 14px 12px 40px;box-sizing:border-box}
+#dealSearch:focus{outline:none;border-color:var(--gate-soft);
+                  box-shadow:0 0 0 3px rgba(14,107,73,.12)}
+#dealSearch::placeholder{color:#A6A69E}
+#dealSort{font:600 13px/1 var(--display);color:var(--ink);background:#fff;
+          border:1px solid var(--rule);border-radius:10px;padding:11px 14px;cursor:pointer}
+.cats{margin-top:2px;width:100%;display:flex;flex-wrap:wrap;gap:8px}
+.cat{font:600 13px/1 var(--display);letter-spacing:.01em;color:var(--ink);
+     background:#fff;border:1px solid var(--rule);border-radius:999px;
+     padding:8px 14px;cursor:pointer}
+.cat:hover{border-color:var(--gate-soft)}
+.cat.active{background:var(--pine);border-color:var(--pine);color:#fff}
+.cat .n{color:var(--muted);font-family:var(--mono);font-size:11px;margin-left:5px}
+.cat.active .n{color:#9FC2B3}
+.no-results{padding:40px 12px;color:var(--muted);text-align:center;
+            border:1px dashed var(--rule);border-radius:10px;display:none}
 
-/* ---- signature element: the threshold meter ----
-   The bar measures how far PAST the 50% rule a listing landed, not the raw
-   discount: its left edge is the gate itself, so 50% shows an empty track
-   and 100% a full one. Measuring from zero instead made every bar look
-   nearly full (the page is sorted by discount, so the top is all 85%+) and
-   read as an underline rather than a meter. Stacked down 800 rows it shows
-   the shape of the whole inventory. One span, gradients only, no extra DOM
-   per row. */
-.mv{display:inline-block;min-width:82px}
-.mv b{display:block;font-weight:600;font-variant-numeric:tabular-nums}
-.mv::after{content:'';display:block;height:5px;margin-top:6px;border-radius:3px;
-  background:linear-gradient(90deg,var(--bar) 0 calc(var(--d) * 1%),var(--rule) calc(var(--d) * 1%));}
-.t1{--bar:var(--gate-soft)} .t1 b{color:#2F6B54}
-.t2{--bar:var(--gate)}      .t2 b{color:var(--gate)}
-.t3{--bar:var(--signal)}    .t3 b{color:var(--signal)}
+/* ---- pager: caps the grid at PAGE_SIZE cards instead of an endless scroll ---- */
+.pager{display:flex;align-items:center;justify-content:center;gap:18px;
+      margin:28px 0 8px;font:500 13px/1 var(--display)}
+.pager button{font:600 13px/1 var(--mono);letter-spacing:.04em;color:var(--ink);
+              background:#fff;border:1px solid var(--rule);border-radius:999px;
+              padding:9px 16px;cursor:pointer}
+.pager button:hover:not(:disabled){border-color:var(--gate-soft)}
+.pager button:disabled{color:#C6C6BE;cursor:default}
+.pager-status{color:var(--muted);font:500 12px/1 var(--mono)}
 
-.divider td{padding:26px 12px 10px;font:600 11px/1 var(--mono);letter-spacing:.11em;
-            text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink)}
-.empty td{padding:40px 12px;color:var(--muted)}
+/* ---- the grid ---- */
+.divider-banner{grid-column:1/-1;padding:10px 2px;font:600 11px/1 var(--mono);
+                letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+                border-bottom:1px solid var(--ink);margin-bottom:4px}
+.grid{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--rule);
+      box-shadow:0 1px 2px rgba(18,20,15,.04);
+      transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(18,20,15,.12)}
+.card.v{border-top:3px solid var(--gate)}
+
+.card .imgwrap{position:relative;aspect-ratio:1/1;background:var(--paper-3);overflow:hidden}
+.card .imgwrap img{width:100%;height:100%;object-fit:contain;padding:14px;
+                    transition:transform .3s ease}
+.card:hover .imgwrap img{transform:scale(1.06)}
+.card .imgwrap.noimg{display:flex;align-items:center;justify-content:center;
+                      color:#A6A69E;font-size:12px;font-family:var(--mono)}
+
+.badge{position:absolute;top:10px;left:10px;background:var(--signal);color:#fff;
+       font-weight:800;line-height:1;width:52px;height:52px;border-radius:50%;
+       display:flex;align-items:center;justify-content:center;flex-direction:column;
+       box-shadow:0 4px 10px rgba(217,58,18,.35)}
+.badge .pct{font-size:15px;font-variant-numeric:tabular-nums}
+.badge .off{font-size:7.5px;letter-spacing:.05em;text-transform:uppercase;opacity:.9}
+
+.source{position:absolute;top:10px;right:10px;background:rgba(11,42,33,.85);color:#fff;
+        font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+        padding:4px 9px;border-radius:20px}
+.newpill{position:absolute;bottom:10px;left:10px;background:var(--gate);color:#fff;
+         font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+         padding:4px 9px;border-radius:20px}
+
+.card .body{padding:14px 16px 16px}
+.card h3{font-size:14px;line-height:1.35;font-weight:600;margin:0 0 10px;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{text-decoration:underline;text-decoration-color:var(--gate-soft);text-underline-offset:2px}
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:2.7em}
+
+.prices{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.price-now{font-size:20px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.price-was{font-size:12.5px;color:var(--muted);text-decoration:line-through;font-variant-numeric:tabular-nums}
+.card .meta{font-size:11px;color:var(--muted);font-family:var(--mono);margin-bottom:12px}
+
+.cta{display:block;width:100%;text-align:center;padding:10px 0;border-radius:9px;
+     background:var(--pine);color:#fff;font-weight:700;font-size:13px;text-decoration:none}
+.cta:hover{background:var(--pine-deep)}
+
+.empty-state{padding:60px 12px;color:var(--muted);text-align:center;grid-column:1/-1}
 
 footer.site{margin:56px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
             font-size:14px;color:var(--muted)}
@@ -128,44 +198,41 @@ footer.site .runline{font:400 12px/1.6 var(--mono);color:#8C8C84;margin-top:14px
 .prose a{color:var(--gate);text-underline-offset:3px}
 .prose .stat{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-a:focus-visible,th:focus-visible{outline:2px solid var(--gate);outline-offset:3px;border-radius:2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gate);outline-offset:3px;border-radius:2px}
 
 @media (max-width:760px){
   .wrap{padding:0 18px}
-  .mast{padding:32px 0 22px}
+  .topnav .inner{padding:12px 18px}
+  .mast{padding:34px 0 22px}
   .disclosure{font-size:14px;padding:14px}
-  th{display:none}
-  .table-wrap{overflow-x:visible}
-  table,tbody,tr,td{display:block;width:100%}
-  tr{border-bottom:1px solid var(--rule);padding:14px 0;position:relative}
-  tr.v{background:#F2F8F5;box-shadow:inset 3px 0 0 var(--gate);padding-left:12px}
-  td{border:0;padding:2px 0}
-  tr.v td,tr:hover td,table tr:hover td{background:transparent}
-  /* the desktop left-edge marker moves to the row itself here; without this
-     reset the rank cell keeps it and paints a stray green line on the right,
-     where the cell is absolutely positioned */
-  tr.v td:first-child{box-shadow:none}
-  td.rank{position:absolute;right:0;top:14px;font-size:11px}
-  td.t{padding-right:44px;font-size:15px}
-  td.src,td.seen{display:inline-block;width:auto;margin-right:14px;padding-top:6px}
-  td.now,td.was,td.off{display:inline-block;width:auto;text-align:left;margin-right:16px;padding-top:6px}
-  .mv{min-width:78px}
-  .divider td,.empty td{display:block;padding:24px 0 8px}
+  .searchwrap{max-width:none;flex-basis:100%}
+  .pager{gap:12px}
 }
 @media (prefers-reduced-motion:reduce){
-  .gate::after{animation:none}
   *{transition:none!important}
 }
 </style></head><body>
+<nav class="topnav"><div class="inner">
+<a class="logo" href="index.html">Half or <span class="half">Nothing</span></a>
+<div class="links"><a href="index.html">Deals</a><a href="about.html" aria-current="page">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
+</div></nav>
 <header class="mast"><div class="wrap">
 <h1 class="brand"><span class="half">Half</span> or Nothing</h1>
-<div class="gate" aria-hidden="true"></div>
 <p class="rule-line">50% off or it doesn't make the page.</p>
 
-<nav class="top"><a href="index.html">Deals</a><a href="about.html" aria-current="page">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></nav>
 </div></header>
+
+<div class="trust"><div class="inner">
+<div class="trust-item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<div><b>Verified retailers only</b><span>Amazon, eBay and Walmart. No unknown sellers.</span></div></div>
+<div class="trust-item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+<div><b>Refreshed hourly</b><span>New deals scanned every hour, not once a day.</span></div></div>
+<div class="trust-item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+<div><b>Sorted by discount</b><span>Highest percent off first. Commission never affects order.</span></div></div>
+</div></div>
+
 <main class="wrap">
-<div class="disclosure">Some links on this site are affiliate links. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in &mdash; listings are sorted by discount percentage, highest first.</div>
+<div class="disclosure">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first.</div>
 
 <div class="prose">
 <h1>How this works</h1>
@@ -241,7 +308,7 @@ link, that covers what I need to keep the page running and to keep improving it.
 </div>
 
 <footer class="site">
-<div class="disclosure">Some links on this site are affiliate links. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in &mdash; listings are sorted by discount percentage, highest first.</div>
+<div class="disclosure">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first.</div>
 <p>Half or Nothing &middot; <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></p>
 <p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
 
@@ -249,58 +316,108 @@ link, that covers what I need to keep the page running and to keep improving it.
 </main>
 <script>
 (function(){
-  var table = document.querySelector('table');
-  if (!table) return;
-  var tbody = table.tBodies[0] || table;
-  var headerRow = tbody.rows[0];
-  function ageMinutes(text){
-    text = text.trim();
-    if (text === 'now') return 0;
-    var m = text.match(/(\d+)d ago/);
-    if (m) return parseInt(m[1], 10) * 1440;
-    m = text.match(/(\d+)h ago/);
-    if (m) return parseInt(m[1], 10) * 60;
-    return Infinity;
+  var grid = document.querySelector('.grid');
+  if (!grid) return;
+  var PAGE_SIZE = 40;
+
+  var allCards = Array.prototype.filter.call(grid.children, function(el){
+    return el.classList.contains('card');
+  });
+  var banner = grid.querySelector('.divider-banner');
+  if (banner) banner.style.display = 'none';
+
+  var searchEl = document.getElementById('dealSearch');
+  var sortEl = document.getElementById('dealSort');
+  var catButtons = document.querySelectorAll('.cat');
+  var pagerEl = document.getElementById('pager');
+  var pagerPrev = document.getElementById('pagerPrev');
+  var pagerNext = document.getElementById('pagerNext');
+  var pagerStatus = document.getElementById('pagerStatus');
+  var emptyEl = document.getElementById('filterEmpty');
+
+  var state = { search: '', cat: 'all', page: 1, sort: 'default' };
+
+  function num(card, attr){
+    var n = parseFloat(card.getAttribute(attr));
+    return isNaN(n) ? -Infinity : n;
   }
-  function cellValue(td, type){
-    var text = td.textContent;
-    if (type === 'num') {
-      var n = parseFloat(text.replace(/[^0-9.\-]/g, ''));
-      return isNaN(n) ? -Infinity : n;
-    }
-    if (type === 'age') return ageMinutes(text);
-    return text.trim().toLowerCase();
+  function matches(card){
+    if (state.cat !== 'all' && card.getAttribute('data-cat') !== state.cat) return false;
+    if (state.search && card.getAttribute('data-title').indexOf(state.search) === -1) return false;
+    return true;
   }
-  Array.prototype.forEach.call(headerRow.cells, function(th, colIdx){
-    var type = th.getAttribute('data-type');
-    if (!type) return;
-    th.tabIndex = 0;
-    function doSort(){
-      var rows = Array.prototype.filter.call(tbody.rows, function(r, i){
-        return i > 0 && r.cells.length === headerRow.cells.length;
-      });
-      var asc = th.getAttribute('data-dir') !== 'asc';
-      rows.sort(function(a, b){
-        var va = cellValue(a.cells[colIdx], type), vb = cellValue(b.cells[colIdx], type);
-        if (va < vb) return asc ? -1 : 1;
-        if (va > vb) return asc ? 1 : -1;
-        return 0;
-      });
-      Array.prototype.forEach.call(headerRow.cells, function(h){
-        h.removeAttribute('data-dir');
-        h.removeAttribute('aria-sort');
-      });
-      th.setAttribute('data-dir', asc ? 'asc' : 'desc');
-      th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
-      var divider = Array.prototype.filter.call(tbody.rows, function(r){ return r.cells.length === 1; })[0];
-      if (divider) divider.style.display = 'none';
-      rows.forEach(function(r){ tbody.appendChild(r); });
+  function sortCompare(a, b){
+    if (state.sort === 'price-asc') return num(a, 'data-price') - num(b, 'data-price');
+    if (state.sort === 'price-desc') return num(b, 'data-price') - num(a, 'data-price');
+    if (state.sort === 'newest') return num(a, 'data-age') - num(b, 'data-age');
+    return num(b, 'data-discount') - num(a, 'data-discount');
+  }
+
+  function render(){
+    var filtered = allCards.filter(matches);
+
+    if (state.sort !== 'default') {
+      filtered = filtered.slice().sort(sortCompare);
+      filtered.forEach(function(c){ grid.appendChild(c); });
     }
-    th.addEventListener('click', doSort);
-    th.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doSort(); }
+
+    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    if (state.page > totalPages) state.page = totalPages;
+    var start = (state.page - 1) * PAGE_SIZE;
+    var visible = filtered.slice(start, start + PAGE_SIZE);
+    var visibleSet = new Set(visible);
+
+    allCards.forEach(function(c){ c.style.display = visibleSet.has(c) ? '' : 'none'; });
+
+    if (emptyEl) emptyEl.style.display = filtered.length ? 'none' : '';
+    if (pagerEl) pagerEl.style.display = filtered.length > PAGE_SIZE ? 'flex' : 'none';
+    if (pagerStatus) {
+      pagerStatus.textContent = filtered.length
+        ? ('Page ' + state.page + ' of ' + totalPages + ' \u00b7 ' + filtered.length + ' deals')
+        : '';
+    }
+    if (pagerPrev) pagerPrev.disabled = state.page <= 1;
+    if (pagerNext) pagerNext.disabled = state.page >= totalPages;
+  }
+
+  if (searchEl) {
+    searchEl.addEventListener('input', function(){
+      state.search = searchEl.value.trim().toLowerCase();
+      state.page = 1;
+      render();
+    });
+  }
+
+  if (sortEl) {
+    sortEl.addEventListener('change', function(){
+      state.sort = sortEl.value;
+      state.page = 1;
+      render();
+    });
+  }
+
+  Array.prototype.forEach.call(catButtons, function(btn){
+    btn.addEventListener('click', function(){
+      Array.prototype.forEach.call(catButtons, function(b){
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      state.cat = btn.getAttribute('data-cat');
+      state.page = 1;
+      render();
     });
   });
+
+  if (pagerPrev) pagerPrev.addEventListener('click', function(){
+    if (state.page > 1) { state.page--; render(); window.scrollTo({top: grid.offsetTop - 20, behavior: 'smooth'}); }
+  });
+  if (pagerNext) pagerNext.addEventListener('click', function(){
+    state.page++; render(); window.scrollTo({top: grid.offsetTop - 20, behavior: 'smooth'});
+  });
+
+  render();
 })();
 </script>
 </body></html>
