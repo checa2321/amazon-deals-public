@@ -56,13 +56,13 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 /* ---- hero: brand statement with the ghost half-mark ---- */
 .mast{background:var(--card);color:var(--ink);padding:58px 0 48px;position:relative;
       border-bottom:1px solid var(--rule);overflow:hidden}
-.mast-ghost{position:absolute;left:max(28px,calc(50% - 562px));top:50%;transform:translateY(-52%);
+.mast-ghost{position:absolute;right:18px;top:50%;transform:translateY(-46%);
             font:900 290px/1 Georgia,serif;color:rgba(0,168,99,.09);
             pointer-events:none;user-select:none;z-index:0}
 @supports(-webkit-text-stroke:2px red){
-  .mast-ghost{color:transparent;-webkit-text-stroke:2.5px rgba(0,168,99,.22)}
+  .mast-ghost{color:transparent;-webkit-text-stroke:2.5px rgba(0,168,99,.28)}
 }
-@media(max-width:760px){.mast-ghost{font-size:175px;left:max(18px,calc(50% - 562px))}}
+@media(max-width:760px){.mast-ghost{font-size:175px;right:8px}}
 .brand{font-weight:800;letter-spacing:-.02em;line-height:.95;position:relative;
        font-size:clamp(2.2rem,6vw,3.4rem);margin:0;color:var(--ink)}
 .brand .half{color:var(--signal)}
