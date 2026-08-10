@@ -2,21 +2,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travel & Experiences Deals, 50% Off or More | Half or Nothing</title>
-<meta name="description" content="0 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
+<meta name="description" content="1 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
 <meta name="impact-site-verification" value="af49e245-f07a-4b19-a67e-c1898e402a49">
 <meta name="fo-verify" content="36141c38-378c-45b6-b864-23d8c13b94c4">
 <meta name="google-site-verification" content="f7g1-1eLILyzP5F5ZoIs4WsJXi_sfJB0Rm3-kYCop9w" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 2h26L2 28z' fill='%23D93A12'/><path d='M30 4v26H4z' fill='none' stroke='%23D93A12' stroke-width='2.6' stroke-linejoin='round'/></svg>">
 <meta property="og:title" content="Travel & Experiences Deals, 50% Off or More | Half or Nothing">
-<meta property="og:description" content="0 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
+<meta property="og:description" content="1 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://halfornothing.com/travel.html">
 <link rel="canonical" href="https://halfornothing.com/travel.html">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:image" content="https://halfornothing.com/logo-og.png">
+<meta property="og:image" content="https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://halfornothing.com/logo-og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Travel & Experiences","item":"https://halfornothing.com/travel.html"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","numberOfItems":0,"itemListElement":[]}</script>
+<meta name="twitter:image" content="https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Travel & Experiences","item":"https://halfornothing.com/travel.html"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","numberOfItems":1,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Travel Wallet Family Passport Holder Accessories Document Organizer Bag Case US","offers":{"@type":"Offer","price":"4.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/travel.html#d-ebay-id-401767477635"},"image":"https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg"}}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -47,11 +47,23 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 @supports(-webkit-text-stroke:1px red){
   .lg-nothing{color:transparent;-webkit-text-stroke:1.1px var(--ink)}
 }
-.topnav .links{display:flex;gap:24px;font-size:13px;font-weight:600;margin-left:auto}
+.topnav .herosearch{flex:1 1 auto;min-width:0;max-width:430px;margin:0}
+.topnav .herosearch input{padding:10px 0;font-size:14px}
+.topnav .hero-hint{font-size:14px;left:44px}
+.topnav .links{display:flex;gap:24px;font-size:13px;font-weight:600;flex-shrink:0}
 .topnav .links a{color:var(--muted);text-decoration:none}
 .topnav .links a:hover{color:var(--ink)}
 .topnav .links a[aria-current]{color:var(--signal);font-weight:700}
 @media(max-width:640px){.topnav .links{display:none}}
+/* Phone: the search moved into the nav, and at 375px the full wordmark plus a
+   usable field do not both fit (measured: logo 172px + padding left 24px of
+   375). The mark alone still identifies the site, and the wordmark is repeated
+   in the hero directly below anyway. */
+@media(max-width:560px){
+  .topnav .inner{gap:12px}
+  .lg-half,.lg-or,.lg-nothing{display:none}
+  .topnav .herosearch{max-width:none}
+}
 
 /* ---- hero: compact. Cut down 2026-08-10 from a full-screen brand statement:
    the visitor already knows the site from the nav logo and the tab title, and
@@ -184,7 +196,8 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 #catClear:hover{border-color:var(--signal)}
 
 /* ---- mega menu (top nav Categories, DealNews-style flyout) ---- */
-.megamenu-wrap{position:relative}
+.megamenu-wrap{position:relative;margin:16px 0 0}
+.mast .megamenu-wrap{display:inline-block}
 #megaBtn{font:600 13px/1 var(--display);color:var(--ink);background:var(--card);
          border:1px solid var(--rule);border-radius:999px;padding:9px 16px;cursor:pointer}
 #megaBtn:hover{border-color:var(--signal);color:var(--signal)}
@@ -344,7 +357,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
   .disclosure{font-size:13px}
   .disclosure>summary{padding:12px 14px}
   .disclosure-body{padding:0 14px 14px}
-  .herosearch{max-width:none;margin-top:14px}
+  .herosearch{max-width:none}
   .pager{gap:10px}
   /* was 22px here -- shrinking the one control on the card that fingers have
      to hit was backwards; keep it full size on phones and let ::before carry
@@ -472,32 +485,37 @@ html{scroll-behavior:smooth}
 <a class="logo" href="index.html" aria-label="Half or Nothing">
 <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 2h26L2 28z" fill="currentColor"/><path d="M30 4v26H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
 <span class="lg-half">HALF</span><span class="lg-or">or</span><span class="lg-nothing">NOTHING</span></a>
-<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>232</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>418</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>590 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (185)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (189)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (73)</a></div></div></li><li><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>37</span></a></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>100</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>240</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>105</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>27</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>19</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>154</span></a></li></ul></div></div>
+
 <div class="links"><a href="index.html">Deals</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
 </div></nav>
 <header class="mast"><span class="mast-ghost" aria-hidden="true">&#189;</span><div class="wrap">
 <h1 class="brand"><span class="half">Half</span> <span class="brand-or">or</span> <span class="brand-nothing">Nothing</span></h1>
 <p class="rule-line">50% off or it doesn't make the page.</p>
-
-<div class='stats'><span><b>0</b><span>Live Travel &amp; Experiences listings</span></span></div>
+<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>235</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>436</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>554 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (170)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (215)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (84)</a></div></div></li><li><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>35</span></a></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>98</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>248</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>116</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>27</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>7</span></a></li><li><a class='mega-link' href='jewelry-watches.html'>Jewelry &amp; Watches<span class='cnt'>90</span></a></li><li><a class='mega-link' href='collectibles-art.html'>Collectibles &amp; Art<span class='cnt'>43</span></a></li><li><a class='mega-link' href='books-music-movies.html'>Books, Music &amp; Movies<span class='cnt'>18</span></a></li><li><a class='mega-link' href='travel.html'>Travel &amp; Experiences<span class='cnt'>1</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>14</span></a></li></ul></div></div>
+<div class='stats'><span><b>1</b><span>Live Travel &amp; Experiences listings</span></span></div>
 </div></header>
 <main class="wrap">
-<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <b>Travel &amp; Experiences</b></nav><div class='filterbar'><select id='dealSort' aria-label='Sort deals'><option value='default'>Highest discount</option><option value='realdrop'>Biggest drop we tracked</option><option value='name-asc'>Name: A to Z</option><option value='name-desc'>Name: Z to A</option><option value='newest'>Newest first</option><option value='price-asc'>Price: low to high</option><option value='price-desc'>Price: high to low</option></select></div><div class='grid'><div class='empty-state'>No Travel &amp; Experiences deals cleared 50% this hour. New scans run hourly.</div></div><div class='pager' id='pager' style='display:none'><span class='pager-status' id='pagerStatus'></span><button type='button' id='loadMore'>Load more</button></div><div class='no-results' id='filterEmpty'>No deals match that search or category.</div>
+<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <b>Travel &amp; Experiences</b></nav><div class='filterbar'><select id='dealSort' aria-label='Sort deals'><option value='default'>Highest discount</option><option value='realdrop'>Biggest drop we tracked</option><option value='name-asc'>Name: A to Z</option><option value='name-desc'>Name: Z to A</option><option value='newest'>Newest first</option><option value='price-asc'>Price: low to high</option><option value='price-desc'>Price: high to low</option></select></div><div class='grid'><div class='card z' id='d-ebay-id-401767477635' data-cat='travel' data-subcat='' data-title='travel wallet family passport holder accessories document organizer bag case us' data-price='4.99' data-discount='60.0' data-age='50' data-realdrop='-1.0'><a class='thumb' href='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' target='_blank' rel='noopener sponsored'><img src="https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></a><div class='body'><div class='over-menu' data-url='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' data-title='Travel Wallet Family Passport Holder Accessories Document Organizer Bag Case US'><span class='dots'>&#8942;</span><div class='dropdown'><a class='menu-open'>Open in New Tab</a><a class='menu-report' href='contact.html'>Report an Error</a><div class='has-sub'><a class='menu-share-lbl'>&#9666; Share</a><div class='subdrop'><a class='sh' data-net='copy'>Copy Link</a><a class='sh' data-net='email'>Email</a><a class='sh' data-net='facebook'>Facebook</a><a class='sh' data-net='twitter'>Twitter / X</a><a class='sh' data-net='pinterest'>Pinterest</a></div></div></div></div><h3 class='clamp2'><a href='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' target='_blank' rel='noopener sponsored'>Travel Wallet Family Passport Holder Accessories Document Organizer Bag Case US</a></h3><div class='prices'><span class='price-now'>$4.99</span><span class='price-was'>$12.48</span><span class='pct-pill'>60% off</span></div><div class='meta'><span class='src-tag'>eBay</span><span>Seen now</span></div><a class='cta' href='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' target='_blank' rel='noopener sponsored'>View Deal</a></div></div></div><div class='pager' id='pager' style='display:none'><span class='pager-status' id='pagerStatus'></span><button type='button' id='loadMore'>Load more</button></div><div class='no-results' id='filterEmpty'>No deals match that search or category.</div>
 <footer class="site"><div class="footer-grid">
 <div class="footer-main">
 <details class="disclosure">
 <summary>Browse</summary>
-<div class="disclosure-body footer-cats"><a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='fashion-men.html'>Men&#x27;s Fashion</a> &middot; <a href='fashion-women.html'>Women&#x27;s Fashion</a> &middot; <a href='fashion-kids.html'>Kids&#x27; Fashion</a></div>
+<div class="disclosure-body footer-cats"><a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='jewelry-watches.html'>Jewelry &amp; Watches</a> &middot; <a href='collectibles-art.html'>Collectibles &amp; Art</a> &middot; <a href='books-music-movies.html'>Books, Music &amp; Movies</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='fashion-men.html'>Men&#x27;s Fashion</a> &middot; <a href='fashion-women.html'>Women&#x27;s Fashion</a> &middot; <a href='fashion-kids.html'>Kids&#x27; Fashion</a></div>
 </details>
 <details class="disclosure">
 <summary>eBay and Walmart only</summary>
 <div class="disclosure-body"><p class="trust-line"><b>eBay and Walmart only.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged.</p></div>
 </details>
-<p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
-
 <details class="disclosure">
 <summary>Affiliate disclosure &amp; how this page is built</summary>
 <div class="disclosure-body">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first.</div>
+</details>
+<details class="disclosure">
+<summary>Pricing &amp; how often this updates</summary>
+<div class="disclosure-body">
+<p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
+
+</div>
 </details>
 <p class="footer-legal">Half or Nothing &middot; <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></p>
 </div>
