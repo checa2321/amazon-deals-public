@@ -247,11 +247,6 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
                   font-size:18px;line-height:1;color:var(--ink);z-index:10;
                   transition:all .15s}
 .card .over-menu:hover{background:var(--paper-3);border-color:var(--signal)}
-/* Invisible ring that widens the tap target to ~46px without growing the
-   drawn button: a 28px control is under the 44px minimum for a fingertip, and
-   this card is dense enough that a visibly bigger button would crowd the
-   title. Sits only around the button, never over the dropdown below it. */
-.card .over-menu::before{content:'';position:absolute;inset:-9px;border-radius:8px}
 /* an OPEN menu must out-stack the ⋮ buttons of later cards -- its dropdown
    overlaps the card below, and z-index ties break by DOM order (later wins),
    which made Share unclickable on every card except the last row */
@@ -323,10 +318,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
   .disclosure{font-size:13px;padding:12px}
   .searchwrap{max-width:none;flex-basis:100%}
   .pager{gap:10px}
-  /* was 22px here -- shrinking the one control on the card that fingers have
-     to hit was backwards; keep it full size on phones and let ::before carry
-     the tap area past it */
-  .card .over-menu{width:28px;height:28px;font-size:17px}
+  .card .over-menu{width:22px;height:22px;font-size:16px}
 }
 /* ---- brand motif: the diagonal cut from the logo, echoed in chips + CTAs ---- */
 .pct-pill,.newpill,.src-tag{clip-path:polygon(0 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%)}
@@ -339,9 +331,7 @@ html{scroll-behavior:smooth}
    static file and the Artifact/GitHub Pages copy can't pull a script off a CDN,
    plus native scroll gives touch swipe and keyboard scrolling for free. The
    arrows just call scrollBy() on the same element the finger already drives. */
-.topdeals{margin:28px 0 4px;background:var(--card);border:2px solid var(--signal);
-          padding:20px 22px 22px}
-@media(max-width:640px){.topdeals{padding:16px 14px 18px}}
+.topdeals{margin:30px 0 4px}
 .td-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
 .td-head h2{font-size:clamp(1.25rem,3vw,1.6rem);font-weight:800;letter-spacing:-.015em;margin:0;color:var(--ink)}
 .td-count{font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
@@ -361,11 +351,10 @@ html{scroll-behavior:smooth}
 .td-card:hover,.td-card:focus-visible{transform:translateY(-4px);
          box-shadow:0 10px 22px rgba(0,0,0,.16);border-color:var(--signal);outline:none}
 
-.td-cat{position:absolute;top:8px;left:8px;z-index:2;font:700 9px/1 var(--mono);
-        letter-spacing:.07em;text-transform:uppercase;color:#fff;
-        background:rgba(26,26,26,.78);padding:5px 7px;border-radius:3px;
-        backdrop-filter:blur(2px);max-width:calc(100% - 16px);
-        overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.td-rank{position:absolute;top:8px;left:8px;z-index:2;font:700 10px/1 var(--mono);
+         letter-spacing:.06em;color:#fff;background:rgba(26,26,26,.72);
+         padding:4px 7px;border-radius:3px;backdrop-filter:blur(2px)}
+.td-rank::before{content:"#"}
 
 .td-shot{display:block;height:168px;background:#fff;border-bottom:1px solid var(--rule);
          overflow:hidden;position:relative}
@@ -448,7 +437,7 @@ html{scroll-behavior:smooth}
 <a class="logo" href="index.html" aria-label="Half or Nothing">
 <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 2h26L2 28z" fill="currentColor"/><path d="M30 4v26H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
 <span class="lg-half">HALF</span><span class="lg-or">or</span><span class="lg-nothing">NOTHING</span></a>
-<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>232</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>415</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>581 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (185)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (187)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (72)</a></div></div></li><li><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>37</span></a></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>99</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>240</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>105</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>24</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>19</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>149</span></a></li></ul></div></div>
+<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>232</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>418</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>590 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (185)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (189)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (73)</a></div></div></li><li><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>37</span></a></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>100</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>240</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>105</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>27</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>19</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>154</span></a></li></ul></div></div>
 <div class="links"><a href="index.html">Deals</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
 </div></nav>
 <header class="mast"><span class="mast-ghost" aria-hidden="true">&#189;</span><div class="wrap">
@@ -680,14 +669,10 @@ html{scroll-behavior:smooth}
     var card = menu.closest('.card');
     var pageUrl = location.protocol + '//' + location.host + location.pathname + '#' + (card ? card.id : '');
 
-    // Toggle on the whole button, not just the glyph. The listener used to sit
-    // on the .dots span, which measures 4.8x18px inside a 28x28 button -- 89%
-    // of what looks like a button did nothing when clicked (measured in-page
-    // 2026-08-10). Anything on the button that isn't inside the open dropdown
-    // counts as a press.
-    menu.addEventListener('click', function(e){
-      e.stopPropagation();
-      if (e.target.closest && e.target.closest('.dropdown')) return;
+    menu.addEventListener('click', function(e){ e.stopPropagation(); });
+
+    var dots = menu.querySelector('.dots');
+    if (dots) dots.addEventListener('click', function(){
       var was = menu.classList.contains('active');
       closeAll();
       if (!was) menu.classList.add('active');
