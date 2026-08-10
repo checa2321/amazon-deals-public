@@ -47,11 +47,23 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 @supports(-webkit-text-stroke:1px red){
   .lg-nothing{color:transparent;-webkit-text-stroke:1.1px var(--ink)}
 }
-.topnav .links{display:flex;gap:24px;font-size:13px;font-weight:600;margin-left:auto}
+.topnav .herosearch{flex:1 1 auto;min-width:0;max-width:430px;margin:0}
+.topnav .herosearch input{padding:10px 0;font-size:14px}
+.topnav .hero-hint{font-size:14px;left:44px}
+.topnav .links{display:flex;gap:24px;font-size:13px;font-weight:600;flex-shrink:0}
 .topnav .links a{color:var(--muted);text-decoration:none}
 .topnav .links a:hover{color:var(--ink)}
 .topnav .links a[aria-current]{color:var(--signal);font-weight:700}
 @media(max-width:640px){.topnav .links{display:none}}
+/* Phone: the search moved into the nav, and at 375px the full wordmark plus a
+   usable field do not both fit (measured: logo 172px + padding left 24px of
+   375). The mark alone still identifies the site, and the wordmark is repeated
+   in the hero directly below anyway. */
+@media(max-width:560px){
+  .topnav .inner{gap:12px}
+  .lg-half,.lg-or,.lg-nothing{display:none}
+  .topnav .herosearch{max-width:none}
+}
 
 /* ---- hero: compact. Cut down 2026-08-10 from a full-screen brand statement:
    the visitor already knows the site from the nav logo and the tab title, and
@@ -184,7 +196,8 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 #catClear:hover{border-color:var(--signal)}
 
 /* ---- mega menu (top nav Categories, DealNews-style flyout) ---- */
-.megamenu-wrap{position:relative}
+.megamenu-wrap{position:relative;margin:16px 0 0}
+.mast .megamenu-wrap{display:inline-block}
 #megaBtn{font:600 13px/1 var(--display);color:var(--ink);background:var(--card);
          border:1px solid var(--rule);border-radius:999px;padding:9px 16px;cursor:pointer}
 #megaBtn:hover{border-color:var(--signal);color:var(--signal)}
@@ -344,7 +357,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
   .disclosure{font-size:13px}
   .disclosure>summary{padding:12px 14px}
   .disclosure-body{padding:0 14px 14px}
-  .herosearch{max-width:none;margin-top:14px}
+  .herosearch{max-width:none}
   .pager{gap:10px}
   /* was 22px here -- shrinking the one control on the card that fingers have
      to hit was backwards; keep it full size on phones and let ::before carry
@@ -508,17 +521,22 @@ pointed you there.</p>
 <div class="footer-main">
 <details class="disclosure">
 <summary>Browse</summary>
-<div class="disclosure-body footer-cats"><a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='fashion-men.html'>Men&#x27;s Fashion</a> &middot; <a href='fashion-women.html'>Women&#x27;s Fashion</a> &middot; <a href='fashion-kids.html'>Kids&#x27; Fashion</a></div>
+<div class="disclosure-body footer-cats"><a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='jewelry-watches.html'>Jewelry &amp; Watches</a> &middot; <a href='collectibles-art.html'>Collectibles &amp; Art</a> &middot; <a href='books-music-movies.html'>Books, Music &amp; Movies</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='fashion-men.html'>Men&#x27;s Fashion</a> &middot; <a href='fashion-women.html'>Women&#x27;s Fashion</a> &middot; <a href='fashion-kids.html'>Kids&#x27; Fashion</a></div>
 </details>
 <details class="disclosure">
 <summary>eBay and Walmart only</summary>
 <div class="disclosure-body"><p class="trust-line"><b>eBay and Walmart only.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged.</p></div>
 </details>
-<p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
-
 <details class="disclosure">
 <summary>Affiliate disclosure &amp; how this page is built</summary>
 <div class="disclosure-body">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first.</div>
+</details>
+<details class="disclosure">
+<summary>Pricing &amp; how often this updates</summary>
+<div class="disclosure-body">
+<p>Prices and availability change at the retailer. Whatever the retailer shows at the time of purchase is what applies.</p>
+
+</div>
 </details>
 <p class="footer-legal">Half or Nothing &middot; <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></p>
 </div>
