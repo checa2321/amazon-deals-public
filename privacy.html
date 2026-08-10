@@ -138,6 +138,7 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
       transition:transform .2s ease,box-shadow .2s ease}
 .card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(18,20,15,.12)}
 .card.v{border-top:3px solid var(--gate)}
+.card.linked{outline:3px solid var(--gate-soft);outline-offset:2px}
 
 .card .imgwrap{position:relative;aspect-ratio:1/1;background:var(--paper-3);overflow:hidden}
 .card .imgwrap img{width:100%;height:100%;object-fit:contain;padding:14px;
@@ -224,7 +225,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gate);outline-offse
 
 <div class="trust"><div class="inner">
 <div class="trust-item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
-<div><b>Verified retailers only</b><span>Amazon, eBay and Walmart. No unknown sellers.</span></div></div>
+<div><b>Verified retailers only</b><span>eBay and Walmart. No unknown sellers.</span></div></div>
 <div class="trust-item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
 <div><b>Refreshed hourly</b><span>New deals scanned every hour, not once a day.</span></div></div>
 <div class="trust-item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
@@ -396,6 +397,39 @@ page gets updated <strong>before</strong> that goes live, and the date above cha
   if (pagerNext) pagerNext.addEventListener('click', function(){
     state.page++; render(); window.scrollTo({top: grid.offsetTop - 20, behavior: 'smooth'});
   });
+
+  // Deep-link support: a social post links to #d-<id> for one specific
+  // card. Without this, the browser's native anchor jump lands on a card
+  // that pagination has already display:none'd (everything past the first
+  // PAGE_SIZE is hidden by render() above), which looks like the link is
+  // broken. Find which page the target card falls on, jump state.page
+  // there, re-render, then scroll to it and mark it so it's easy to spot
+  // in a full grid.
+  if (location.hash && location.hash.length > 1) {
+    var targetId = location.hash.slice(1);
+    var targetCard = document.getElementById(targetId);
+    if (targetCard && targetCard.classList.contains('card')) {
+      var filteredNow = allCards.filter(matches);
+      var idx = filteredNow.indexOf(targetCard);
+      if (idx === -1 && state.cat !== 'all') {
+        // the card doesn't match the default category filter (shouldn't
+        // happen since default is 'all', but stay correct if that ever
+        // changes) -- reset to 'all' so the linked deal is reachable
+        state.cat = 'all';
+        filteredNow = allCards.filter(matches);
+        idx = filteredNow.indexOf(targetCard);
+      }
+      if (idx !== -1) {
+        state.page = Math.floor(idx / PAGE_SIZE) + 1;
+        render();
+        targetCard.classList.add('linked');
+        setTimeout(function(){
+          targetCard.scrollIntoView({behavior: 'smooth', block: 'center'});
+        }, 50);
+        return;
+      }
+    }
+  }
 
   render();
 })();
