@@ -65,7 +65,6 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
   /* 44px minimum on the two controls a thumb actually aims at */
   .topnav .herosearch{max-width:none}
   .topnav .herosearch input{padding:13px 0}
-  #megaBtn{padding:13px 18px}
 }
 
 /* ---- hero: compact. Cut down 2026-08-10 from a full-screen brand statement:
@@ -356,6 +355,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 @media (max-width:760px){
   .wrap{padding:0 18px}
   .topnav .inner{padding:10px 18px}
+  /* must live here, after #megaBtn's base rule: equal specificity, so source
+     order decides and an override placed earlier silently loses */
+  #megaBtn{padding:14px 18px}
   .mast{padding:20px 0 18px}
   .disclosure{font-size:13px}
   .disclosure>summary{padding:12px 14px}
