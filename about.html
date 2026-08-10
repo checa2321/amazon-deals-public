@@ -13,11 +13,10 @@
 <meta name="twitter:card" content="summary">
 <style>
 :root{
-  --pine:#0B2A21; --pine-deep:#071C16; --pine-line:#1E4A3C;
-  --paper:#FFFFFF; --paper-2:#F7F7F4; --paper-3:#EFEFEA;
-  --ink:#12140F; --muted:#6E6E66; --rule:#E4E4DE;
-  --signal:#D93A12; --gate:#0E6B49; --gate-soft:#5C9B81;
-  --display:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI Variable Display","Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
+  --paper:#FFFFFF; --paper-2:#F9F9F7; --paper-3:#EFEFEA;
+  --ink:#1a1a1a; --muted:#666; --rule:#E0E0E0;
+  --display:-apple-system,BlinkMacSystemFont,Roboto,"Segoe UI","Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,"Cascadia Mono",Consolas,"Liberation Mono",monospace;
 }
 *{box-sizing:border-box}
@@ -26,191 +25,270 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
      font:400 16px/1.55 var(--display);font-synthesis-weight:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
 
-/* ---- 2026-08-09 redesign: cards replace the table. Visual language merged
-   from three reference templates Che picked (kept as CSS-only, no external
-   deps, per the site's no-third-party-requests privacy promise): rounded
-   cards + hover lift + image zoom, a circular corner discount badge, and
-   clean two-tier price typography. Signature meter bar retired in favor of
-   the badge -- same "how far past 50%" idea, now a number, not a bar. ---- */
+/* ---- 2026-08-10 Tactile Brutalism redesign: sharp corners, thick solid
+   borders (2-4px), hard offset shadows (no blur), dense grid layout, scaled-down
+   badges and icons per DealNews measurements. Real urgency from discount% and
+   freshness signals, not fabricated timers. All data-backed, all real. ---- */
 
-/* ---- sticky top nav: logo + page links, separate from the hero below ---- */
+/* ---- sticky top nav: clean and minimal ---- */
 .topnav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--rule)}
-.topnav .inner{max-width:1180px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:24px}
-.topnav .logo{font-weight:800;letter-spacing:-.04em;font-size:19px;color:var(--ink);text-decoration:none;flex-shrink:0}
-.topnav .logo .half{color:var(--gate)}
-.topnav .links{display:flex;gap:20px;font-size:14px;font-weight:600;margin-left:auto}
+.topnav .inner{max-width:1200px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:32px}
+.topnav .logo{font-weight:800;letter-spacing:-.02em;font-size:20px;color:var(--ink);text-decoration:none;flex-shrink:0}
+.topnav .logo .half{color:var(--signal)}
+.topnav .links{display:flex;gap:24px;font-size:13px;font-weight:600;margin-left:auto}
 .topnav .links a{color:var(--muted);text-decoration:none}
 .topnav .links a:hover{color:var(--ink)}
-.topnav .links a[aria-current]{color:var(--ink)}
+.topnav .links a[aria-current]{color:var(--signal);font-weight:700}
 @media(max-width:640px){.topnav .links{display:none}}
 
-/* ---- hero: the one inverted block on the page ---- */
-.mast{background:var(--pine);color:#fff;padding:48px 0 30px;position:relative;overflow:hidden}
-.mast::after{content:'';position:absolute;right:-100px;top:-100px;width:380px;height:380px;
-             background:radial-gradient(circle,rgba(94,155,129,.22),transparent 70%);pointer-events:none}
-.brand{font-weight:800;letter-spacing:-.045em;line-height:.92;position:relative;
-       font-size:clamp(2.3rem,7.5vw,4.6rem);margin:0}
-.brand .half{color:var(--gate-soft)}
-.rule-line{font-size:clamp(1rem,2.1vw,1.25rem);font-weight:500;margin:14px 0 0;color:#DCE8E2;
-           position:relative;max-width:560px}
-.stats{margin-top:24px;font:500 12px/1 var(--mono);letter-spacing:.09em;
-       text-transform:uppercase;color:#8FB3A5;display:flex;flex-wrap:wrap;gap:10px 24px;position:relative}
-.stats b{color:#fff;font-weight:700;font-size:15px;display:block;margin-bottom:2px;font-variant-numeric:tabular-nums}
+/* ---- hero: clean and focused ---- */
+.mast{background:#fff;color:var(--ink);padding:56px 0;position:relative;border-bottom:1px solid var(--rule)}
+.brand{font-weight:700;letter-spacing:-.02em;line-height:.95;position:relative;
+       font-size:clamp(2.2rem,6vw,3.2rem);margin:0;color:var(--ink)}
+.brand .half{color:var(--signal)}
+.rule-line{font-size:clamp(1rem,2vw,1.2rem);font-weight:400;margin:16px 0 0;color:var(--muted);
+           position:relative;max-width:600px;line-height:1.5}
+.stats{margin-top:28px;font:500 13px/1 var(--mono);letter-spacing:.08em;
+       text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:20px 36px;position:relative}
+.stats b{color:var(--ink);font-weight:700;font-size:16px;display:block;margin-bottom:3px;font-variant-numeric:tabular-nums}
 
-/* ---- trust strip: what the site actually offers, Electro-style icon row ---- */
+/* ---- trust strip: clean and minimal ---- */
 .trust{background:#fff;border-bottom:1px solid var(--rule)}
-.trust .inner{max-width:1180px;margin:0 auto;padding:20px 28px;
-              display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:760px){.trust .inner{grid-template-columns:1fr;padding:16px 18px}}
+.trust .inner{max-width:1200px;margin:0 auto;padding:20px 28px;
+              display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:760px){.trust .inner{grid-template-columns:1fr;padding:16px 28px;gap:16px}}
 .trust-item{display:flex;align-items:center;gap:12px}
-.trust-item .ic{width:36px;height:36px;border-radius:9px;background:var(--paper-3);
-                 display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gate)}
-.trust-item b{display:block;font-size:13px;font-weight:700}
-.trust-item span{font-size:12px;color:var(--muted)}
-.trust-note{max-width:1180px;margin:0 auto;padding:0 28px 14px;font-size:12px;color:var(--muted)}
-.trust-note a{color:var(--muted)}
-@media(max-width:760px){.trust-note{padding:0 18px 14px}}
+.trust-item .ic{width:20px;height:20px;flex-shrink:0;color:var(--gate);opacity:.8}
+.trust-item b{display:block;font-size:13px;font-weight:600;color:var(--ink)}
+.trust-item span{font-size:12px;color:var(--muted);line-height:1.4}
+.trust-note{max-width:1200px;margin:0 auto;padding:12px 28px 0;font-size:12px;color:var(--muted)}
+.trust-note a{color:var(--muted);font-weight:600}
+@media(max-width:760px){.trust-note{padding:12px 28px 0}}
 
-/* ---- disclosure: normal body size, never small grey text ---- */
-.disclosure{margin:26px 0;padding:16px 18px;background:#fff;
-            border:1px solid var(--rule);border-left:3px solid var(--gate);
-            border-radius:4px;font-size:15px;color:#33352E;max-width:76ch}
+/* ---- disclosure: normal body size, left-border accent ---- */
+.disclosure{margin:24px 0;padding:14px 16px;background:#fff;
+            border:1px solid var(--rule);border-left:3px solid var(--signal);
+            border-radius:0px;font-size:14px;color:#333;max-width:76ch}
 
-/* ---- best deal: always on screen, so a first-time visitor always has one
-   product to land on instead of a bare grid. Red border+eyebrow when the
-   top deal is new this run (the rare, notable case); green when it's just
-   the best of what's still active, so the signal color still means "new". */
-.best{margin:26px 0;border:1px solid var(--rule);border-top:3px solid var(--signal);
-      background:#fff;padding:18px 20px;border-radius:12px}
-.best.seen{border-top-color:var(--gate)}
-.best .eyebrow{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
-               color:var(--signal)}
-.best.seen .eyebrow{color:var(--gate)}
-.best .t{display:block;margin-top:10px;font-size:1.15rem;font-weight:600;
-         color:var(--ink);text-decoration:none;line-height:1.35;
-         white-space:normal;overflow-wrap:break-word}
-.best .t:hover{text-decoration:underline}
-.best .figs{margin-top:10px;font:500 15px/1 var(--mono);color:var(--muted);
-            font-variant-numeric:tabular-nums}
-.best .figs b{color:var(--ink);font-size:1.15rem}
+/* ---- best deal hero: large impactful card with image ---- */
+.best-deal-hero{margin:28px 0;background:#fff;border:2px solid var(--signal);border-radius:0px;
+                display:grid;grid-template-columns:280px 1fr;gap:0;overflow:hidden}
+.best-deal-hero.new{border-color:var(--signal);background:rgba(217,58,18,.02)}
+@media(max-width:800px){.best-deal-hero{grid-template-columns:1fr;gap:0}}
+.best-img{aspect-ratio:1/1;background:var(--paper-3);display:flex;align-items:center;
+          justify-content:center;min-height:280px;border-right:2px solid var(--signal)}
+.best-img img{width:100%;height:100%;object-fit:contain;padding:16px}
+@media(max-width:800px){.best-img{border-right:none;border-bottom:2px solid var(--signal)}}
+.best-content{padding:28px 32px;display:flex;flex-direction:column;justify-content:space-between}
+@media(max-width:800px){.best-content{padding:20px}}
+.best-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:12px}
+.best-label{font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+            color:var(--muted)}
+.best-discount{font:900 32px/1 var(--mono);color:var(--signal);letter-spacing:-.02em}
+.best-title{margin:0;font-size:1.4rem;font-weight:700;line-height:1.3;color:var(--ink);margin-bottom:16px}
+.best-prices{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.price-now{font-size:28px;font-weight:900;color:var(--signal);font-family:var(--mono);
+           font-variant-numeric:tabular-nums}
+.price-was{font-size:14px;color:var(--muted);text-decoration:line-through;font-family:var(--mono);
+           font-variant-numeric:tabular-nums}
+.best-meta{font:600 12px/1 var(--mono);color:var(--muted);text-transform:uppercase;
+          letter-spacing:.06em;margin-bottom:16px}
+.best-cta{display:inline-block;background:var(--signal);color:#fff;padding:14px 28px;
+         font-weight:900;font-size:14px;text-decoration:none;border-radius:0px;
+         border:2px solid var(--signal);cursor:pointer;transition:all .15s}
+.best-cta:hover{background:#fff;color:var(--signal)}
 
-/* ---- filter bar: search + sort + category chips ---- */
-.filterbar{margin:30px 0 8px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.searchwrap{position:relative;flex:1 1 320px;max-width:420px}
-.searchwrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);
+/* ---- filter bar: search + category dropdown + sort ---- */
+.filterbar{margin:26px 0 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.searchwrap{position:relative;flex:1 1 300px;max-width:400px}
+.searchwrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);
                 width:16px;height:16px;stroke:var(--muted);pointer-events:none}
-#dealSearch{width:100%;font:500 15px/1 var(--display);color:var(--ink);
-            background:#fff;border:1px solid var(--rule);border-radius:10px;
-            padding:12px 14px 12px 40px;box-sizing:border-box}
-#dealSearch:focus{outline:none;border-color:var(--gate-soft);
-                  box-shadow:0 0 0 3px rgba(14,107,73,.12)}
-#dealSearch::placeholder{color:#A6A69E}
-#dealSort{font:600 13px/1 var(--display);color:var(--ink);background:#fff;
-          border:1px solid var(--rule);border-radius:10px;padding:11px 14px;cursor:pointer}
-.cats{margin-top:2px;width:100%;display:flex;flex-wrap:wrap;gap:8px}
-.cat{font:600 13px/1 var(--display);letter-spacing:.01em;color:var(--ink);
-     background:#fff;border:1px solid var(--rule);border-radius:999px;
-     padding:8px 14px;cursor:pointer}
-.cat:hover{border-color:var(--gate-soft)}
-.cat.active{background:var(--pine);border-color:var(--pine);color:#fff}
-.cat .n{color:var(--muted);font-family:var(--mono);font-size:11px;margin-left:5px}
-.cat.active .n{color:#9FC2B3}
+#dealSearch{width:100%;font:400 14px/1 var(--display);color:var(--ink);
+            background:#fff;border:1px solid var(--rule);border-radius:4px;
+            padding:10px 12px 10px 38px;box-sizing:border-box}
+#dealSearch:focus{outline:none;border-color:var(--signal);
+                  box-shadow:0 0 0 3px rgba(217,58,18,.12)}
+#dealSearch::placeholder{color:#AAA}
+#dealSort{font:500 13px/1 var(--display);color:var(--ink);background:#fff;
+          border:1px solid var(--rule);border-radius:4px;padding:10px 12px;cursor:pointer}
 .no-results{padding:40px 12px;color:var(--muted);text-align:center;
-            border:1px dashed var(--rule);border-radius:10px;display:none}
+            border:1px dashed var(--rule);border-radius:4px;display:none}
 
-/* ---- pager: caps the grid at PAGE_SIZE cards instead of an endless scroll ---- */
-.pager{display:flex;align-items:center;justify-content:center;gap:18px;
-      margin:28px 0 8px;font:500 13px/1 var(--display)}
+/* ---- category filter dropdown (checkbox panel, DealNews-style) ---- */
+.catfilter-wrap{position:relative}
+#catFilterBtn{font:500 13px/1 var(--display);color:var(--ink);background:#fff;
+              border:1px solid var(--rule);border-radius:4px;padding:10px 14px;cursor:pointer}
+#catFilterBtn:hover{border-color:var(--signal)}
+.catfilter-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:40;
+                 background:#fff;border:1px solid var(--rule);border-radius:6px;
+                 box-shadow:0 8px 24px rgba(0,0,0,.15);width:290px}
+.catfilter-panel.open{display:block;animation:menufade .12s ease}
+.catfilter-list{max-height:320px;overflow-y:auto;padding:10px 14px}
+.catfilter-list label{display:flex;gap:9px;align-items:center;padding:6px 0;
+                      font-size:13px;cursor:pointer;color:var(--ink)}
+.catfilter-list label:hover{color:var(--signal)}
+.catfilter-list label.sub{padding-left:26px;font-size:12.5px;color:#444}
+.catfilter-list .cnt{color:var(--muted);font-family:var(--mono);font-size:11px;margin-left:auto}
+.catfilter-list input{accent-color:var(--signal);width:15px;height:15px;flex-shrink:0}
+.catfilter-actions{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--rule)}
+#catApply{flex:1;background:var(--signal);color:#fff;border:none;border-radius:4px;
+          padding:9px 0;font-weight:700;font-size:13px;cursor:pointer}
+#catApply:hover{background:var(--signal-dark)}
+#catClear{background:#fff;color:var(--ink);border:1px solid var(--rule);border-radius:4px;
+          padding:9px 14px;font-size:13px;cursor:pointer}
+#catClear:hover{border-color:var(--signal)}
+
+/* ---- mega menu (top nav Categories, DealNews-style flyout) ---- */
+.megamenu-wrap{position:relative}
+#megaBtn{font:600 13px/1 var(--display);color:var(--ink);background:#fff;
+         border:1px solid var(--rule);border-radius:4px;padding:9px 14px;cursor:pointer}
+#megaBtn:hover{border-color:var(--signal);color:var(--signal)}
+.megamenu{display:none;position:absolute;top:calc(100% + 10px);left:0;z-index:50;
+          background:#fff;border:1px solid var(--rule);border-radius:6px;
+          box-shadow:0 10px 30px rgba(0,0,0,.16);min-width:270px}
+.megamenu.open{display:block;animation:menufade .12s ease}
+.mega-left{list-style:none;margin:0;padding:6px 0}
+.mega-left>li{position:relative;margin:0}
+.mega-left>li>a{display:flex;justify-content:space-between;align-items:center;gap:18px;
+                padding:9px 16px;font-size:13px;font-weight:500;color:var(--ink);
+                text-decoration:none;cursor:pointer}
+.mega-left>li>a:hover{background:var(--paper-3);color:var(--signal)}
+.mega-left .cnt{color:var(--muted);font-family:var(--mono);font-size:11px;font-weight:400}
+.mega-left .arr{color:var(--muted);font-size:10px;margin-left:4px}
+.flyout{display:none;position:absolute;left:100%;top:-1px;z-index:51;
+        background:#fff;border:1px solid var(--rule);border-radius:6px;
+        box-shadow:0 10px 30px rgba(0,0,0,.16);padding:16px 20px;
+        grid-auto-flow:column;gap:26px;white-space:nowrap}
+.mega-left>li.has-fly:hover>.flyout{display:grid}
+.fly-col h4{margin:0 0 8px;font:700 11px/1 var(--mono);letter-spacing:.1em;
+            color:var(--muted);text-transform:uppercase}
+.fly-col a{display:block;padding:5px 0;font-size:13px;color:var(--ink);
+           text-decoration:none;cursor:pointer}
+.fly-col a:hover{color:var(--signal)}
+@media(max-width:800px){
+  .flyout{position:static;border:none;box-shadow:none;padding:0 16px 10px;grid-auto-flow:row;gap:4px}
+  .mega-left>li.has-fly:hover>.flyout{display:none}
+  .mega-left>li.has-fly.open>.flyout{display:grid}
+  .megamenu{min-width:230px}
+}
+@keyframes menufade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* ---- pager: hard-edged buttons ---- */
+.pager{display:flex;align-items:center;justify-content:center;gap:12px;
+      margin:24px 0 8px;font:500 13px/1 var(--display)}
 .pager button{font:600 13px/1 var(--mono);letter-spacing:.04em;color:var(--ink);
-              background:#fff;border:1px solid var(--rule);border-radius:999px;
-              padding:9px 16px;cursor:pointer}
-.pager button:hover:not(:disabled){border-color:var(--gate-soft)}
-.pager button:disabled{color:#C6C6BE;cursor:default}
+              background:#fff;border:1px solid var(--rule);border-radius:0px;
+              padding:8px 14px;cursor:pointer;font-weight:700}
+.pager button:hover:not(:disabled){border-color:var(--signal);background:#FFF9F5}
+.pager button:disabled{color:#CCC;cursor:default}
 .pager-status{color:var(--muted);font:500 12px/1 var(--mono)}
 
-/* ---- the grid ---- */
-.divider-banner{grid-column:1/-1;padding:10px 2px;font:600 11px/1 var(--mono);
+/* ---- the grid: dense layout, cards with hard borders and shadows ---- */
+.divider-banner{grid-column:1/-1;padding:8px 2px;font:600 11px/1 var(--mono);
                 letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
-                border-bottom:1px solid var(--ink);margin-bottom:4px}
-.grid{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.grid{grid-template-columns:1fr}}
+                border-bottom:2px solid var(--ink);margin-bottom:8px}
+/* ---- horizontal deal cards: fixed 120x120 thumbnail left, details right ---- */
+.grid{margin-top:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
 
-.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--rule);
-      box-shadow:0 1px 2px rgba(18,20,15,.04);
-      transition:transform .2s ease,box-shadow .2s ease}
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(18,20,15,.12)}
-.card.v{border-top:3px solid var(--gate)}
-.card.linked{outline:3px solid var(--gate-soft);outline-offset:2px}
+.card{background:#fff;border-radius:4px;border:1px solid var(--rule);
+      box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;align-items:stretch;
+      transition:box-shadow .15s ease;position:relative}
+.card:hover{box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.card.v{border-left:3px solid var(--gate)}
+.card.linked{box-shadow:0 0 0 3px rgba(0,168,99,.25)}
 
-.card .imgwrap{position:relative;aspect-ratio:1/1;background:var(--paper-3);overflow:hidden}
-.card .imgwrap img{width:100%;height:100%;object-fit:contain;padding:14px;
-                    transition:transform .3s ease}
-.card:hover .imgwrap img{transform:scale(1.06)}
-.card .imgwrap.noimg{display:flex;align-items:center;justify-content:center;
-                      color:#A6A69E;font-size:12px;font-family:var(--mono)}
+.thumb{width:120px;height:120px;flex-shrink:0;margin:12px;border-radius:4px;
+       overflow:hidden;background:var(--paper-3);align-self:center;display:block;
+       border:1px solid var(--rule)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s ease}
+.card:hover .thumb img{transform:scale(1.05)}
+.thumb.noimg{display:flex;align-items:center;justify-content:center;
+             color:#bbb;font-size:11px;font-family:var(--mono)}
 
-.badge{position:absolute;top:10px;left:10px;background:var(--signal);color:#fff;
-       font-weight:800;line-height:1;width:52px;height:52px;border-radius:50%;
-       display:flex;align-items:center;justify-content:center;flex-direction:column;
-       box-shadow:0 4px 10px rgba(217,58,18,.35)}
-.badge .pct{font-size:15px;font-variant-numeric:tabular-nums}
-.badge .off{font-size:7.5px;letter-spacing:.05em;text-transform:uppercase;opacity:.9}
+.pct-pill{background:var(--signal);color:#fff;font:800 11px/1 var(--mono);
+          padding:4px 7px;border-radius:3px;letter-spacing:.03em;white-space:nowrap}
+.src-tag{background:#555;color:#fff;font-size:9px;font-weight:700;letter-spacing:.05em;
+         text-transform:uppercase;padding:2px 6px;border-radius:3px}
+.newpill{background:var(--gate);color:#fff;font-size:9px;font-weight:700;
+         letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:3px}
 
-.source{position:absolute;top:10px;right:10px;background:rgba(11,42,33,.85);color:#fff;
-        font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-        padding:4px 9px;border-radius:20px}
-.newpill{position:absolute;bottom:10px;left:10px;background:var(--gate);color:#fff;
-         font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-         padding:4px 9px;border-radius:20px}
+.card .body{padding:14px 16px 14px 4px;position:relative;flex:1;min-width:0;
+            display:flex;flex-direction:column;gap:7px;justify-content:center}
+.card .over-menu{position:absolute;top:10px;right:12px;width:28px;height:28px;
+                  background:#fff;border:1px solid var(--rule);border-radius:4px;
+                  display:flex;align-items:center;justify-content:center;cursor:pointer;
+                  font-size:18px;line-height:1;color:var(--ink);z-index:10;
+                  transition:all .15s}
+.card .over-menu:hover{background:var(--paper-3);border-color:var(--signal)}
+.card .over-menu .dropdown{display:none;position:absolute;top:100%;right:0;
+                            background:#fff;border:1px solid var(--rule);border-radius:4px;
+                            min-width:180px;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.12);
+                            z-index:20}
+.card .over-menu.active .dropdown{display:block;animation:menufade .12s ease}
+.card .over-menu .dropdown a{display:flex;align-items:center;gap:10px;padding:11px 14px;
+                              color:var(--ink);text-decoration:none;font-size:13px;
+                              font-weight:500;border-bottom:1px solid var(--rule);cursor:pointer;
+                              transition:all .15s}
+.card .over-menu .dropdown>a:last-of-type{border-bottom:none}
+.card .over-menu .dropdown a:hover{background:var(--paper-3);color:var(--signal)}
+.card .over-menu .has-sub{position:relative}
+.card .over-menu .has-sub>a{border-bottom:none}
+.card .over-menu .subdrop{display:none;position:absolute;right:100%;top:0;margin-right:4px;
+                          background:#fff;border:1px solid var(--rule);border-radius:4px;
+                          min-width:130px;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:30}
+.card .over-menu .has-sub:hover .subdrop,
+.card .over-menu .has-sub.open .subdrop{display:block;animation:menufade .12s ease}
 
-.card .body{padding:14px 16px 16px}
-.card h3{font-size:14px;line-height:1.35;font-weight:600;margin:0 0 10px;color:var(--ink)}
+.card h3{font-size:14px;line-height:1.4;font-weight:600;margin:0;color:var(--ink);padding-right:34px}
 .card h3 a{color:inherit;text-decoration:none}
-.card h3 a:hover{text-decoration:underline;text-decoration-color:var(--gate-soft);text-underline-offset:2px}
-.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:2.7em}
+.card h3 a:hover{color:var(--signal)}
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.8em}
 
-.prices{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
-.price-now{font-size:20px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.price-was{font-size:12.5px;color:var(--muted);text-decoration:line-through;font-variant-numeric:tabular-nums}
-.card .meta{font-size:11px;color:var(--muted);font-family:var(--mono);margin-bottom:12px}
+.prices{display:flex;align-items:center;gap:8px;margin:0;flex-wrap:wrap}
+.price-now{font-size:18px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;color:var(--signal)}
+.price-was{font-size:12px;color:var(--muted);text-decoration:line-through;font-variant-numeric:tabular-nums;font-weight:500}
+.card .meta{font-size:11px;color:var(--muted);font-family:var(--mono);margin:0;font-weight:500;
+            display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-.cta{display:block;width:100%;text-align:center;padding:10px 0;border-radius:9px;
-     background:var(--pine);color:#fff;font-weight:700;font-size:13px;text-decoration:none}
-.cta:hover{background:var(--pine-deep)}
+.cta{display:inline-block;align-self:flex-start;text-align:center;padding:8px 18px;border-radius:4px;
+     background:var(--signal);color:#fff;font-weight:700;font-size:12.5px;text-decoration:none;
+     border:none;cursor:pointer;transition:all .15s;margin-top:2px}
+.cta:hover{background:var(--signal-dark)}
 
 .empty-state{padding:60px 12px;color:var(--muted);text-align:center;grid-column:1/-1}
 
-footer.site{margin:56px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+footer.site{margin:48px 0 0;border-top:2px solid var(--ink);padding:24px 0 56px;
             font-size:14px;color:var(--muted)}
-footer.site a{color:var(--muted)}
-footer.site .runline{font:400 12px/1.6 var(--mono);color:#8C8C84;margin-top:14px}
+footer.site a{color:var(--gate);font-weight:600}
+footer.site .runline{font:400 12px/1.6 var(--mono);color:#888;margin-top:12px}
 
 /* ---- prose pages ---- */
 .prose{max-width:68ch;padding:44px 0 0}
-.prose h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:800;letter-spacing:-.035em;
+.prose h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:900;letter-spacing:-.035em;
           line-height:1.05;margin:0 0 8px}
-.prose .lede{font-size:1.15rem;color:#43453D;margin:0 0 30px}
+.prose .lede{font-size:1.15rem;color:#333;margin:0 0 30px}
 .prose h2{font-size:1.28rem;font-weight:700;letter-spacing:-.015em;margin:38px 0 10px;
-          padding-top:18px;border-top:1px solid var(--rule)}
+          padding-top:18px;border-top:2px solid var(--ink)}
 .prose p{margin:0 0 16px}
 .prose ul{margin:0 0 16px;padding-left:0;list-style:none}
-.prose li{position:relative;padding-left:22px;margin-bottom:10px}
-.prose li::before{content:'';position:absolute;left:0;top:.62em;width:9px;height:3px;
-                  border-radius:2px;background:var(--gate-soft)}
-.prose strong{font-weight:650}
-.prose a{color:var(--gate);text-underline-offset:3px}
+.prose li{position:relative;padding-left:20px;margin-bottom:10px}
+.prose li::before{content:'';position:absolute;left:0;top:.62em;width:12px;height:2px;
+                  border-radius:0px;background:var(--signal)}
+.prose strong{font-weight:700}
+.prose a{color:var(--gate);text-underline-offset:3px;font-weight:600}
 .prose .stat{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-a:focus-visible,button:focus-visible{outline:2px solid var(--gate);outline-offset:3px;border-radius:2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:0px}
 
 @media (max-width:760px){
   .wrap{padding:0 18px}
-  .topnav .inner{padding:12px 18px}
-  .mast{padding:34px 0 22px}
-  .disclosure{font-size:14px;padding:14px}
+  .topnav .inner{padding:10px 18px}
+  .mast{padding:30px 0 20px}
+  .disclosure{font-size:13px;padding:12px}
   .searchwrap{max-width:none;flex-basis:100%}
-  .pager{gap:12px}
+  .pager{gap:10px}
+  .card .over-menu{width:22px;height:22px;font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important}
@@ -218,6 +296,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gate);outline-offse
 </style></head><body>
 <nav class="topnav"><div class="inner">
 <a class="logo" href="index.html">Half or <span class="half">Nothing</span></a>
+
 <div class="links"><a href="index.html">Deals</a><a href="about.html" aria-current="page">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
 </div></nav>
 <header class="mast"><div class="wrap">
@@ -316,7 +395,47 @@ link, that covers what I need to keep the page running and to keep improving it.
 </main>
 <script>
 (function(){
+  function closeAll(){
+    var open = document.querySelectorAll('.over-menu.active,.megamenu.open,.catfilter-panel.open,.has-sub.open,.mega-left>li.open');
+    Array.prototype.forEach.call(open, function(el){
+      el.classList.remove('active');
+      el.classList.remove('open');
+    });
+  }
+  document.addEventListener('click', closeAll);
+
   var grid = document.querySelector('.grid');
+
+  // ---- top-nav Categories mega menu (all pages) ----
+  var megaBtn = document.getElementById('megaBtn');
+  var megaPanel = document.getElementById('megaPanel');
+  if (megaBtn && megaPanel) {
+    megaBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var was = megaPanel.classList.contains('open');
+      closeAll();
+      if (!was) megaPanel.classList.add('open');
+    });
+    megaPanel.addEventListener('click', function(e){ e.stopPropagation(); });
+    Array.prototype.forEach.call(megaPanel.querySelectorAll('.has-fly > a'), function(a){
+      a.addEventListener('click', function(){
+        if (window.matchMedia('(max-width: 800px)').matches) a.parentElement.classList.toggle('open');
+      });
+    });
+    Array.prototype.forEach.call(megaPanel.querySelectorAll('.mega-link'), function(a){
+      a.addEventListener('click', function(){
+        var val = a.getAttribute('data-val');
+        if (!val) return;
+        var isFlyParent = a.parentElement && a.parentElement.classList.contains('has-fly');
+        if (isFlyParent && window.matchMedia('(max-width: 800px)').matches) return;
+        if (!grid) { location.href = 'index.html'; return; }
+        applyCats([val]);
+        closeAll();
+        grid.scrollIntoView({behavior: 'smooth', block: 'start'});
+      });
+    });
+  }
+
   if (!grid) return;
   var PAGE_SIZE = 40;
 
@@ -328,25 +447,37 @@ link, that covers what I need to keep the page running and to keep improving it.
 
   var searchEl = document.getElementById('dealSearch');
   var sortEl = document.getElementById('dealSort');
-  var catButtons = document.querySelectorAll('.cat');
   var pagerEl = document.getElementById('pager');
   var pagerPrev = document.getElementById('pagerPrev');
   var pagerNext = document.getElementById('pagerNext');
   var pagerStatus = document.getElementById('pagerStatus');
   var emptyEl = document.getElementById('filterEmpty');
+  var catBtn = document.getElementById('catFilterBtn');
+  var catPanel = document.getElementById('catFilterPanel');
 
-  var state = { search: '', cat: 'all', page: 1, sort: 'default' };
+  var state = { search: '', cats: [], page: 1, sort: 'default' };
 
   function num(card, attr){
     var n = parseFloat(card.getAttribute(attr));
     return isNaN(n) ? -Infinity : n;
   }
   function matches(card){
-    if (state.cat !== 'all' && card.getAttribute('data-cat') !== state.cat) return false;
+    if (state.cats.length) {
+      var cat = card.getAttribute('data-cat');
+      var sub = card.getAttribute('data-subcat');
+      var hit = false;
+      for (var i = 0; i < state.cats.length; i++) {
+        var v = state.cats[i];
+        if (v === cat || (sub && v === cat + ':' + sub)) { hit = true; break; }
+      }
+      if (!hit) return false;
+    }
     if (state.search && card.getAttribute('data-title').indexOf(state.search) === -1) return false;
     return true;
   }
   function sortCompare(a, b){
+    if (state.sort === 'name-asc') return a.getAttribute('data-title').localeCompare(b.getAttribute('data-title'));
+    if (state.sort === 'name-desc') return b.getAttribute('data-title').localeCompare(a.getAttribute('data-title'));
     if (state.sort === 'price-asc') return num(a, 'data-price') - num(b, 'data-price');
     if (state.sort === 'price-desc') return num(b, 'data-price') - num(a, 'data-price');
     if (state.sort === 'newest') return num(a, 'data-age') - num(b, 'data-age');
@@ -380,6 +511,20 @@ link, that covers what I need to keep the page running and to keep improving it.
     if (pagerNext) pagerNext.disabled = state.page >= totalPages;
   }
 
+  function applyCats(vals){
+    state.cats = vals;
+    state.page = 1;
+    if (catPanel) {
+      Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]'), function(b){
+        b.checked = vals.indexOf(b.value) !== -1;
+      });
+    }
+    if (catBtn) {
+      catBtn.textContent = vals.length ? ('Category (' + vals.length + ') \u25be') : 'Category \u25be';
+    }
+    render();
+  }
+
   if (searchEl) {
     searchEl.addEventListener('input', function(){
       state.search = searchEl.value.trim().toLowerCase();
@@ -396,19 +541,36 @@ link, that covers what I need to keep the page running and to keep improving it.
     });
   }
 
-  Array.prototype.forEach.call(catButtons, function(btn){
-    btn.addEventListener('click', function(){
-      Array.prototype.forEach.call(catButtons, function(b){
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
-      state.cat = btn.getAttribute('data-cat');
-      state.page = 1;
-      render();
+  // ---- category filter dropdown (checkbox panel + Apply) ----
+  if (catBtn && catPanel) {
+    catBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var was = catPanel.classList.contains('open');
+      closeAll();
+      if (!was) {
+        Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]'), function(b){
+          b.checked = state.cats.indexOf(b.value) !== -1;
+        });
+        catPanel.classList.add('open');
+      }
     });
-  });
+    catPanel.addEventListener('click', function(e){ e.stopPropagation(); });
+    var applyBtn = document.getElementById('catApply');
+    var clearBtn = document.getElementById('catClear');
+    if (applyBtn) applyBtn.addEventListener('click', function(){
+      var vals = [];
+      Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]:checked'), function(b){
+        vals.push(b.value);
+      });
+      applyCats(vals);
+      catPanel.classList.remove('open');
+    });
+    if (clearBtn) clearBtn.addEventListener('click', function(){
+      Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]'), function(b){
+        b.checked = false;
+      });
+    });
+  }
 
   if (pagerPrev) pagerPrev.addEventListener('click', function(){
     if (state.page > 1) { state.page--; render(); window.scrollTo({top: grid.offsetTop - 20, behavior: 'smooth'}); }
@@ -417,24 +579,94 @@ link, that covers what I need to keep the page running and to keep improving it.
     state.page++; render(); window.scrollTo({top: grid.offsetTop - 20, behavior: 'smooth'});
   });
 
-  // Deep-link support: a social post links to #d-<id> for one specific
-  // card. Without this, the browser's native anchor jump lands on a card
-  // that pagination has already display:none'd (everything past the first
-  // PAGE_SIZE is hidden by render() above), which looks like the link is
-  // broken. Find which page the target card falls on, jump state.page
-  // there, re-render, then scroll to it and mark it so it's easy to spot
-  // in a full grid.
+  // ---- per-card overflow menu: open in new tab / report / share flyout ----
+  function copyToClipboard(text){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text);
+      return;
+    }
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (err) {}
+    document.body.removeChild(ta);
+  }
+  function shareTarget(net, pageUrl, title){
+    var u = encodeURIComponent(pageUrl);
+    var t = encodeURIComponent(title);
+    if (net === 'email') return 'mailto:?subject=' + t + '&body=' + u;
+    if (net === 'facebook') return 'https://www.facebook.com/sharer/sharer.php?u=' + u;
+    if (net === 'twitter') return 'https://twitter.com/intent/tweet?url=' + u + '&text=' + t;
+    if (net === 'pinterest') return 'https://pinterest.com/pin/create/button/?url=' + u + '&description=' + t;
+    return '';
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.over-menu'), function(menu){
+    var url = menu.getAttribute('data-url');
+    var title = menu.getAttribute('data-title') || 'Deal';
+    var card = menu.closest('.card');
+    var pageUrl = location.protocol + '//' + location.host + location.pathname + '#' + (card ? card.id : '');
+
+    menu.addEventListener('click', function(e){ e.stopPropagation(); });
+
+    var dots = menu.querySelector('.dots');
+    if (dots) dots.addEventListener('click', function(){
+      var was = menu.classList.contains('active');
+      closeAll();
+      if (!was) menu.classList.add('active');
+    });
+
+    var openBtn = menu.querySelector('.menu-open');
+    if (openBtn) openBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      window.open(url, '_blank', 'noopener');
+      menu.classList.remove('active');
+    });
+
+    var shareLbl = menu.querySelector('.menu-share-lbl');
+    if (shareLbl) shareLbl.addEventListener('click', function(e){
+      e.preventDefault();
+      shareLbl.parentElement.classList.toggle('open');
+    });
+
+    Array.prototype.forEach.call(menu.querySelectorAll('.sh'), function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        var net = btn.getAttribute('data-net');
+        if (net === 'copy') {
+          copyToClipboard(pageUrl);
+          btn.textContent = 'Copied!';
+          setTimeout(function(){
+            btn.textContent = 'Copy Link';
+            menu.classList.remove('active');
+          }, 900);
+          return;
+        }
+        var target = shareTarget(net, pageUrl, title);
+        if (!target) return;
+        if (net === 'email') {
+          location.href = target;
+        } else {
+          window.open(target, '_blank', 'noopener');
+        }
+        menu.classList.remove('active');
+      });
+    });
+  });
+
+  // ---- deep-link: #d-<id> from social posts must survive pagination ----
   if (location.hash && location.hash.length > 1) {
     var targetId = location.hash.slice(1);
     var targetCard = document.getElementById(targetId);
     if (targetCard && targetCard.classList.contains('card')) {
       var filteredNow = allCards.filter(matches);
       var idx = filteredNow.indexOf(targetCard);
-      if (idx === -1 && state.cat !== 'all') {
-        // the card doesn't match the default category filter (shouldn't
-        // happen since default is 'all', but stay correct if that ever
-        // changes) -- reset to 'all' so the linked deal is reachable
-        state.cat = 'all';
+      if (idx === -1 && state.cats.length) {
+        state.cats = [];
         filteredNow = allCards.filter(matches);
         idx = filteredNow.indexOf(targetCard);
       }
