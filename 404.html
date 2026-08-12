@@ -585,6 +585,7 @@ html{scroll-behavior:smooth}
 <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">&#9650;</button>
 <script>
 (function(){
+  var SOCIAL_CUSTOM_ID = 'honsocial';
   function closeAll(){
     var open = document.querySelectorAll('.over-menu.active,.megamenu.open,.catfilter-panel.open,.has-sub.open,.mega-left>li.open');
     Array.prototype.forEach.call(open, function(el){
@@ -996,6 +997,20 @@ html{scroll-behavior:smooth}
     state.page = Math.floor(idx / PAGE_SIZE) + 1;
     render();
     targetCard.classList.add('linked');
+    // Re-tag just this card's outbound links as social traffic. Only this
+    // card, not the whole grid: the visitor followed a post to this specific
+    // deal, so this is the click whose commission answers "does posting
+    // actually sell anything". Retagging all 13,000 links would both cost a
+    // long main-thread pass and blur the answer, since anything else they
+    // browse to afterwards is ordinary on-site discovery.
+    Array.prototype.forEach.call(targetCard.querySelectorAll('a[href*="campid="]'), function(a){
+      a.href = a.href.replace(/([?&]customid=)[^&]*/, '$1' + SOCIAL_CUSTOM_ID);
+    });
+    var m = targetCard.querySelector('.over-menu');
+    if (m) {
+      m.setAttribute('data-url',
+        (m.getAttribute('data-url') || '').replace(/([?&]customid=)[^&]*/, '$1' + SOCIAL_CUSTOM_ID));
+    }
     setTimeout(function(){
       targetCard.scrollIntoView({behavior: 'smooth', block: 'center'});
     }, 50);
