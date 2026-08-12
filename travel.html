@@ -2,21 +2,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travel & Experiences Deals, 50% Off or More | Half or Nothing</title>
-<meta name="description" content="1 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
+<meta name="description" content="0 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
 <meta name="impact-site-verification" value="af49e245-f07a-4b19-a67e-c1898e402a49">
 <meta name="fo-verify" content="36141c38-378c-45b6-b864-23d8c13b94c4">
 <meta name="google-site-verification" content="f7g1-1eLILyzP5F5ZoIs4WsJXi_sfJB0Rm3-kYCop9w" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 2h26L2 28z' fill='%23D93A12'/><path d='M30 4v26H4z' fill='none' stroke='%23D93A12' stroke-width='2.6' stroke-linejoin='round'/></svg>">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#D93A12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Half or Nothing">
+<meta property="og:site_name" content="Half or Nothing">
 <meta property="og:title" content="Travel & Experiences Deals, 50% Off or More | Half or Nothing">
-<meta property="og:description" content="1 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
+<meta property="og:description" content="0 live Travel & Experiences deals at 50% off or more across eBay and Walmart. Refreshed hourly. Under 50% never makes the page.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://halfornothing.com/travel.html">
 <link rel="canonical" href="https://halfornothing.com/travel.html">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:image" content="https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg">
+<meta property="og:image" content="https://halfornothing.com/logo-og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Travel & Experiences","item":"https://halfornothing.com/travel.html"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","numberOfItems":1,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Travel Wallet Family Passport Holder Accessories Document Organizer Bag Case US","description":"60% off -- was $12.48, now $4.99 at Ebay.","image":"https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg","offers":{"@type":"Offer","price":"4.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/travel.html#d-ebay-id-401767477635"}}}]}</script>
+<meta name="twitter:image" content="https://halfornothing.com/logo-og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Travel & Experiences","item":"https://halfornothing.com/travel.html"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","numberOfItems":0,"itemListElement":[]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -296,6 +302,13 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
    this card is dense enough that a visibly bigger button would crowd the
    title. Sits only around the button, never over the dropdown below it. */
 .card .over-menu::before{content:'';position:absolute;inset:-9px;border-radius:8px}
+/* .dots is a real <button> so the menu is keyboard-operable; it fills the
+   .over-menu box and inherits its look rather than drawing a second one. */
+.card .over-menu .dots{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;
+                        background:none;border:0;font:inherit;color:inherit;line-height:1;
+                        cursor:pointer;display:flex;align-items:center;justify-content:center}
+.card .over-menu .dots:focus-visible,.card .over-menu .dropdown a:focus-visible,
+.card .over-menu .dropdown button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 /* an OPEN menu must out-stack the ⋮ buttons of later cards -- its dropdown
    overlaps the card below, and z-index ties break by DOM order (later wins),
    which made Share unclickable on every card except the last row */
@@ -305,14 +318,17 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
                             min-width:180px;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.12);
                             z-index:20}
 .card .over-menu.active .dropdown{display:block;animation:menufade .12s ease}
-.card .over-menu .dropdown a{display:flex;align-items:center;gap:10px;padding:11px 14px;
-                              color:var(--ink);text-decoration:none;font-size:13px;
+.card .over-menu .dropdown a,.card .over-menu .dropdown button{
+                              display:flex;align-items:center;gap:10px;padding:11px 14px;
+                              width:100%;background:none;font-family:inherit;text-align:left;
+                              border:0;color:var(--ink);text-decoration:none;font-size:13px;
                               font-weight:500;border-bottom:1px solid var(--rule);cursor:pointer;
                               transition:all .15s}
-.card .over-menu .dropdown>a:last-of-type{border-bottom:none}
-.card .over-menu .dropdown a:hover{background:var(--paper-3);color:var(--signal)}
+.card .over-menu .dropdown>*:last-child{border-bottom:none}
+.card .over-menu .dropdown a:hover,.card .over-menu .dropdown button:hover{
+                              background:var(--paper-3);color:var(--signal)}
 .card .over-menu .has-sub{position:relative}
-.card .over-menu .has-sub>a{border-bottom:none}
+.card .over-menu .has-sub>button{border-bottom:none}
 .card .over-menu .subdrop{display:none;position:absolute;right:100%;top:0;margin-right:4px;
                           background:var(--card);border:1px solid var(--rule);border-radius:12px;
                           min-width:130px;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:30}
@@ -518,11 +534,11 @@ html{scroll-behavior:smooth}
 <header class="mast"><span class="mast-ghost" id="mastGhost" aria-hidden="true">&#189;</span><div class="wrap">
 <h1 class="brand"><span class="half">Half</span> <span class="brand-or">or</span> <span class="brand-nothing">Nothing</span></h1>
 <p class="rule-line">50% off or it doesn't make the page.</p>
-<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>477</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>1027</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>1731 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (532)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (551)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (145)</a></div></div></li><li class='has-fly'><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>210 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Fragrances</h4><a class='mega-link' href='beauty-fragrances.html'>All Fragrances (114)</a></div></div></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>176</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>276</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>409</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>43</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>17</span></a></li><li><a class='mega-link' href='jewelry-watches.html'>Jewelry &amp; Watches<span class='cnt'>410</span></a></li><li><a class='mega-link' href='collectibles-art.html'>Collectibles &amp; Art<span class='cnt'>1379</span></a></li><li><a class='mega-link' href='books-music-movies.html'>Books, Music &amp; Movies<span class='cnt'>155</span></a></li><li><a class='mega-link' href='travel.html'>Travel &amp; Experiences<span class='cnt'>1</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>31</span></a></li></ul></div></div>
-<div class='stats'><span><b>1</b><span>Live Travel &amp; Experiences listings</span></span></div>
+<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>160</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>304</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>1007 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (281)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (329)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (62)</a></div></div></li><li class='has-fly'><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>112 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Fragrances</h4><a class='mega-link' href='beauty-fragrances.html'>All Fragrances (79)</a></div></div></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>59</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>84</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>139</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>9</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>8</span></a></li><li><a class='mega-link' href='jewelry-watches.html'>Jewelry &amp; Watches<span class='cnt'>308</span></a></li><li><a class='mega-link' href='collectibles-art.html'>Collectibles &amp; Art<span class='cnt'>1112</span></a></li><li><a class='mega-link' href='books-music-movies.html'>Books, Music &amp; Movies<span class='cnt'>165</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>13</span></a></li></ul></div></div>
+<div class='stats'><span><b>0</b><span>Live Travel &amp; Experiences listings</span></span></div>
 </div></header>
 <main class="wrap">
-<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <b>Travel &amp; Experiences</b></nav><div class='filterbar'><select id='dealSort' aria-label='Sort deals'><option value='default'>Highest discount</option><option value='realdrop'>Biggest drop we tracked</option><option value='name-asc'>Name: A to Z</option><option value='name-desc'>Name: Z to A</option><option value='newest'>Newest first</option><option value='price-asc'>Price: low to high</option><option value='price-desc'>Price: high to low</option></select></div><div class='grid'><div class='card z' id='d-ebay-id-401767477635' data-cat='travel' data-subcat='' data-title='travel wallet family passport holder accessories document organizer bag case us' data-price='4.99' data-discount='60.0' data-age='541' data-realdrop='-1.0'><a class='thumb' href='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' target='_blank' rel='noopener sponsored'><img src="https://i.ebayimg.com/images/g/F6gAAOSwHDpc27M7/s-l500.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></a><div class='body'><div class='over-menu' data-url='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' data-title='Travel Wallet Family Passport Holder Accessories Document Organizer Bag Case US'><span class='dots'>&#8942;</span><div class='dropdown'><a class='menu-open'>Open in New Tab</a><a class='menu-report' href='contact.html'>Report an Error</a><div class='has-sub'><a class='menu-share-lbl'>&#9666; Share</a><div class='subdrop'><a class='sh' data-net='copy'>Copy Link</a><a class='sh' data-net='email'>Email</a><a class='sh' data-net='facebook'>Facebook</a><a class='sh' data-net='twitter'>Twitter / X</a><a class='sh' data-net='pinterest'>Pinterest</a></div></div></div></div><h3 class='clamp2'><a href='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' target='_blank' rel='noopener sponsored'>Travel Wallet Family Passport Holder Accessories Document Organizer Bag Case US</a></h3><div class='prices'><span class='price-now'>$4.99</span><span class='price-was'>$12.48</span><span class='pct-pill'>60% off</span></div><div class='meta'><span class='src-tag'>eBay</span><span>Seen 9h ago</span></div><a class='cta' href='https://www.ebay.com/itm/401767477635?_skw=Travel+Accessories&amp;hash=item5d8b353183%3Ag%3AF6gAAOSwHDpc27M7&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0' target='_blank' rel='noopener sponsored'>View Deal</a></div></div></div><div class='pager' id='pager' style='display:none'><span class='pager-status' id='pagerStatus'></span><button type='button' id='loadMore'>Load more</button></div><div class='no-results' id='filterEmpty'>No deals match that search or category.</div>
+<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <b>Travel &amp; Experiences</b></nav><div class='filterbar'><select id='dealSort' aria-label='Sort deals'><option value='default'>Highest discount</option><option value='realdrop'>Biggest drop we tracked</option><option value='name-asc'>Name: A to Z</option><option value='name-desc'>Name: Z to A</option><option value='newest'>Newest first</option><option value='price-asc'>Price: low to high</option><option value='price-desc'>Price: high to low</option></select></div><div class='grid'><div class='empty-state'>No Travel &amp; Experiences deals cleared 50% this hour. New scans run hourly.</div></div><div class='pager' id='pager' style='display:none'><span class='pager-status' id='pagerStatus'></span><button type='button' id='loadMore'>Load more</button></div><div class='no-results' id='filterEmpty'>No deals match that search or category.</div>
 <footer class="site"><div class="footer-grid">
 <div class="footer-main">
 <details class="disclosure">
@@ -567,9 +583,18 @@ html{scroll-behavior:smooth}
     Array.prototype.forEach.call(open, function(el){
       el.classList.remove('active');
       el.classList.remove('open');
+      // The trigger's aria-expanded has to come back down with the panel, or
+      // assistive tech keeps announcing a menu that is no longer on screen.
+      var trig = el.querySelector(':scope > [aria-expanded]');
+      if (trig) trig.setAttribute('aria-expanded', 'false');
     });
   }
   document.addEventListener('click', closeAll);
+  // Escape closes whatever is open, the behaviour every menu widget is
+  // expected to have and the only way out for a keyboard user.
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeAll();
+  });
 
   var grid = document.querySelector('.grid');
 
@@ -608,9 +633,13 @@ html{scroll-behavior:smooth}
 
   var state = { search: '', cats: [], page: 1, sort: 'default' };
 
-  function num(card, attr){
+  // `missing` decides which end an unparseable attribute lands on. It used to
+  // always be -Infinity, which is right for a descending sort (unknown goes
+  // last) and exactly wrong for an ascending one: a card with no data-price
+  // sorted to the very top of "Price: low to high" as if it were free.
+  function num(card, attr, missing){
     var n = parseFloat(card.getAttribute(attr));
-    return isNaN(n) ? -Infinity : n;
+    return isNaN(n) ? (missing === undefined ? -Infinity : missing) : n;
   }
   function matches(card){
     if (state.cats.length) {
@@ -629,9 +658,11 @@ html{scroll-behavior:smooth}
   function sortCompare(a, b){
     if (state.sort === 'name-asc') return a.getAttribute('data-title').localeCompare(b.getAttribute('data-title'));
     if (state.sort === 'name-desc') return b.getAttribute('data-title').localeCompare(a.getAttribute('data-title'));
-    if (state.sort === 'price-asc') return num(a, 'data-price') - num(b, 'data-price');
+    if (state.sort === 'price-asc') return num(a, 'data-price', Infinity) - num(b, 'data-price', Infinity);
     if (state.sort === 'price-desc') return num(b, 'data-price') - num(a, 'data-price');
-    if (state.sort === 'newest') return num(a, 'data-age') - num(b, 'data-age');
+    // data-age is minutes since last seen, so ascending = newest first, and an
+    // unknown age belongs at the bottom (Infinity), not billed as the freshest.
+    if (state.sort === 'newest') return num(a, 'data-age', Infinity) - num(b, 'data-age', Infinity);
     if (state.sort === 'realdrop') {
       // Listings we have no history for carry -1 and go last, in discount
       // order among themselves, rather than being ranked as 0% drops.
@@ -773,19 +804,28 @@ html{scroll-behavior:smooth}
     var url = menu.getAttribute('data-url');
     var title = menu.getAttribute('data-title') || 'Deal';
     var card = menu.closest('.card');
-    var pageUrl = location.protocol + '//' + location.host + location.pathname + '#' + (card ? card.id : '');
+    // ?deal= rather than #, matching the deep-link handler further down. The
+    // "#" form is what these buttons handed out until 2026-08-11, and it is
+    // the form confirmed to break when pasted into an Instagram/TikTok/
+    // Facebook caption -- the caption parser reads "#d" as the start of a
+    // hashtag and swallows the rest of the URL. Every Share and Copy Link on
+    // the site was emitting the broken form.
+    var pageUrl = location.protocol + '//' + location.host + location.pathname
+                  + (card && card.id ? '?deal=' + encodeURIComponent(card.id) : '');
 
     // Toggle on the whole button, not just the glyph. The listener used to sit
     // on the .dots span, which measures 4.8x18px inside a 28x28 button -- 89%
     // of what looks like a button did nothing when clicked (measured in-page
     // 2026-08-10). Anything on the button that isn't inside the open dropdown
     // counts as a press.
+    var dots = menu.querySelector('.dots');
     menu.addEventListener('click', function(e){
       e.stopPropagation();
       if (e.target.closest && e.target.closest('.dropdown')) return;
       var was = menu.classList.contains('active');
       closeAll();
       if (!was) menu.classList.add('active');
+      if (dots) dots.setAttribute('aria-expanded', was ? 'false' : 'true');
     });
 
     var openBtn = menu.querySelector('.menu-open');
@@ -798,7 +838,8 @@ html{scroll-behavior:smooth}
     var shareLbl = menu.querySelector('.menu-share-lbl');
     if (shareLbl) shareLbl.addEventListener('click', function(e){
       e.preventDefault();
-      shareLbl.parentElement.classList.toggle('open');
+      var nowOpen = shareLbl.parentElement.classList.toggle('open');
+      shareLbl.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
     });
 
     Array.prototype.forEach.call(menu.querySelectorAll('.sh'), function(btn){
