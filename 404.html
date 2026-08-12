@@ -352,6 +352,13 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 .cta:hover{background:var(--signal-dark)}
 
 .empty-state{padding:60px 12px;color:var(--muted);text-align:center;grid-column:1/-1}
+/* Shown when a ?deal= link from a social post outlives its listing. Uses the
+   signal colour because it is answering a question the visitor actually
+   asked, not decorating the page. */
+.deal-gone{margin:0 0 18px;padding:14px 16px;border:2px solid var(--signal);
+           border-left-width:6px;background:var(--card);color:var(--ink);
+           font-size:14px;line-height:1.5}
+.deal-gone b{display:block;margin-bottom:2px}
 
 footer.site{margin:48px 0 0;border-top:2px solid var(--ink);padding:24px 0 56px;
             font-size:14px;color:var(--muted)}
@@ -950,6 +957,28 @@ html{scroll-behavior:smooth}
   // id-..." rendered with "#d" as a blue hashtag, garbling the rest) --
   // ?deal= has no "#" for the caption parser to trip on, same target either
   // way since both just resolve to the card's DOM id.
+  // A ?deal= link that resolves to nothing used to fail silently: the visitor
+  // landed on an ordinary front page with no hint that the thing they clicked
+  // for was gone, and no way to tell that from "the site is broken". These
+  // links live in social posts and outlive the listings they point at, so the
+  // miss case is normal traffic, not an edge case, and it needs an answer.
+  function wantedDeal(){
+    return !!(new URLSearchParams(location.search).get('deal')
+              || (location.hash && location.hash.length > 1));
+  }
+
+  function dealGoneNotice(){
+    if (document.getElementById('dealGone')) return;
+    var box = document.createElement('div');
+    box.id = 'dealGone';
+    box.className = 'deal-gone';
+    box.innerHTML = "<b>That deal has ended.</b> The listing you followed sold out or "
+      + "was taken down at the retailer. Everything below is live right now, "
+      + "at 50% off or better.";
+    var main = document.querySelector('main.wrap');
+    if (main) main.insertBefore(box, main.firstChild);
+  }
+
   function gotoDeepLink(){
     var dealParam = new URLSearchParams(location.search).get('deal');
     if (!dealParam && !(location.hash && location.hash.length > 1)) return false;
@@ -983,6 +1012,8 @@ html{scroll-behavior:smooth}
   // failed or blocked fetch degrades to "the first 60 deals work" rather
   // than to an empty page.
   var feedUrl = grid.getAttribute('data-feed');
+  // No feed to wait for (the local view), so a miss is already conclusive.
+  if ((!feedUrl || !window.fetch) && !deepLinked && wantedDeal()) dealGoneNotice();
   if (feedUrl && window.fetch) {
     var wantCat = grid.getAttribute('data-feed-cat');
     var wantSub = grid.getAttribute('data-feed-subcat');
@@ -1015,7 +1046,13 @@ html{scroll-behavior:smooth}
         // A deep link may point at a card that only just arrived, so try it
         // again now that the full set is present.
         if (!deepLinked) { deepLinked = gotoDeepLink(); }
-        if (!deepLinked) render();
+        if (!deepLinked) {
+          render();
+          // Only now, with the whole catalogue loaded, is a miss really a
+          // miss. Saying so before the fetch resolved would cry wolf at
+          // every deep link to a card that simply hadn't arrived yet.
+          if (wantedDeal()) dealGoneNotice();
+        }
       })
       .catch(function(){
         // Silent by design: the page is already usable. Surfacing a fetch
