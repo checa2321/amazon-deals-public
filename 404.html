@@ -645,7 +645,7 @@ html{scroll-behavior:smooth}
       : "<span class='thumb noimg'>No image</span>";
     var pills = '';
     if (d.is_new) pills += "<span class='newpill'>New</span>";
-    // low-pill / price-range intentionally not rendered -- see html_output.py _card()
+    // (pills intentionally minimal here -- see _card() in the generator)
     var menu =
       "<div class='over-menu' data-url='" + url + "' data-title='" + title + "'>"
       + "<button type='button' class='dots' aria-haspopup='true' aria-expanded='false'"
