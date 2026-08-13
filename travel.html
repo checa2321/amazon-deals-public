@@ -481,6 +481,14 @@ html{scroll-behavior:smooth}
   .td-viewport{scroll-snap-type:x proximity}
 }
 
+/* ---- price history range + lowest-tracked pill ---- */
+.low-pill{border:1px solid var(--gate);color:var(--gate);background:transparent;
+          font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+          padding:2px 8px;border-radius:999px}
+/* Printed $lo-$hi range -- always visible, no hover/tap needed (a hover-only
+   SVG sparkline used to carry this and was unreachable on touch devices). */
+.price-range{font-size:11px;color:var(--gate);font-weight:600;white-space:nowrap}
+
 /* ---- category landing pages: breadcrumb + fashion subnav ---- */
 .crumbs{margin:26px 0 2px;font-size:13px;color:var(--muted)}
 .crumbs a{color:var(--muted);text-decoration:none}
@@ -533,11 +541,11 @@ html{scroll-behavior:smooth}
 <header class="mast"><span class="mast-ghost" id="mastGhost" aria-hidden="true">&#189;</span><div class="wrap">
 <h1 class="brand"><span class="half">Half</span> <span class="brand-or">or</span> <span class="brand-nothing">Nothing</span></h1>
 <p class="rule-line">50% off or it doesn't make the page.</p>
-<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>1462</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>478</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>4855 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (873)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (1436)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (78)</a></div><div class='fly-col'><h4>Sunglasses</h4><a class='mega-link' href='fashion-sunglasses.html'>All Sunglasses (2147)</a></div></div></li><li class='has-fly'><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>81 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Fragrances</h4><a class='mega-link' href='beauty-fragrances.html'>All Fragrances (5880)</a></div><div class='fly-col'><h4>Eyewear</h4><a class='mega-link' href='beauty-eyewear.html'>All Eyewear (27)</a></div><div class='fly-col'><h4>Vitamins &amp; Supplements</h4><a class='mega-link' href='beauty-supplements.html'>All Vitamins &amp; Supplements (5)</a></div></div></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>50</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>77</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>393</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>2</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>6</span></a></li><li><a class='mega-link' href='jewelry-watches.html'>Jewelry &amp; Watches<span class='cnt'>407</span></a></li><li><a class='mega-link' href='collectibles-art.html'>Collectibles &amp; Art<span class='cnt'>533</span></a></li><li><a class='mega-link' href='books-music-movies.html'>Books, Music &amp; Movies<span class='cnt'>1847</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>9</span></a></li></ul></div></div>
+<div class='megamenu-wrap'><button type='button' id='megaBtn' aria-haspopup='true'>Categories &#9662;</button><div class='megamenu' id='megaPanel'><ul class='mega-left'><li><a class='mega-link' href='electronics.html'>Electronics &amp; Tech<span class='cnt'>1458</span></a></li><li><a class='mega-link' href='home-kitchen.html'>Home &amp; Kitchen<span class='cnt'>476</span></a></li><li class='has-fly'><a class='mega-link' href='fashion.html'>Fashion &amp; Accessories<span class='cnt'>4863 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Men</h4><a class='mega-link' href='fashion-men.html'>All Men (871)</a></div><div class='fly-col'><h4>Women</h4><a class='mega-link' href='fashion-women.html'>All Women (1449)</a></div><div class='fly-col'><h4>Kids</h4><a class='mega-link' href='fashion-kids.html'>All Kids (72)</a></div><div class='fly-col'><h4>Sunglasses</h4><a class='mega-link' href='fashion-sunglasses.html'>All Sunglasses (2147)</a></div></div></li><li class='has-fly'><a class='mega-link' href='beauty-health.html'>Beauty &amp; Health<span class='cnt'>81 <span class='arr'>&#9656;</span></span></a><div class='flyout'><div class='fly-col'><h4>Fragrances</h4><a class='mega-link' href='beauty-fragrances.html'>All Fragrances (5880)</a></div><div class='fly-col'><h4>Eyewear</h4><a class='mega-link' href='beauty-eyewear.html'>All Eyewear (26)</a></div><div class='fly-col'><h4>Vitamins &amp; Supplements</h4><a class='mega-link' href='beauty-supplements.html'>All Vitamins &amp; Supplements (5)</a></div></div></li><li><a class='mega-link' href='baby-kids.html'>Baby &amp; Kids<span class='cnt'>46</span></a></li><li><a class='mega-link' href='outdoor-sports.html'>Outdoor &amp; Sports<span class='cnt'>73</span></a></li><li><a class='mega-link' href='tools-auto.html'>Tools &amp; Auto<span class='cnt'>395</span></a></li><li><a class='mega-link' href='pets.html'>Pets<span class='cnt'>3</span></a></li><li><a class='mega-link' href='office-more.html'>Office &amp; More<span class='cnt'>6</span></a></li><li><a class='mega-link' href='jewelry-watches.html'>Jewelry &amp; Watches<span class='cnt'>488</span></a></li><li><a class='mega-link' href='collectibles-art.html'>Collectibles &amp; Art<span class='cnt'>602</span></a></li><li><a class='mega-link' href='books-music-movies.html'>Books, Music &amp; Movies<span class='cnt'>1854</span></a></li><li><a class='mega-link' href='other-finds.html'>Other Finds<span class='cnt'>7</span></a></li></ul></div></div>
 <div class='stats'><span><b>0</b><span>Live Travel &amp; Experiences listings</span></span></div>
 </div></header>
 <main class="wrap">
-<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <b>Travel &amp; Experiences</b></nav><div class='filterbar'><select id='dealSort' aria-label='Sort deals'><option value='default'>Highest discount</option><option value='name-asc'>Name: A to Z</option><option value='name-desc'>Name: Z to A</option><option value='newest'>Newest first</option><option value='price-asc'>Price: low to high</option><option value='price-desc'>Price: high to low</option></select></div><div class='grid' data-feed='/deals-travel.json'><div class='empty-state'>No Travel &amp; Experiences deals cleared 50% this hour. New scans run hourly.</div></div><div class='pager' id='pager' style='display:none'><span class='pager-status' id='pagerStatus'></span><button type='button' id='loadMore'>Load more</button></div><div class='no-results' id='filterEmpty'>No deals match that search or category.</div>
+<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <b>Travel &amp; Experiences</b></nav><div class='filterbar'><select id='dealSort' aria-label='Sort deals'><option value='default'>Highest discount</option><option value='realdrop'>Biggest drop we tracked</option><option value='name-asc'>Name: A to Z</option><option value='name-desc'>Name: Z to A</option><option value='newest'>Newest first</option><option value='price-asc'>Price: low to high</option><option value='price-desc'>Price: high to low</option></select></div><div class='grid' data-feed='/deals-travel.json'><div class='empty-state'>No Travel &amp; Experiences deals cleared 50% this hour. New scans run hourly.</div></div><div class='pager' id='pager' style='display:none'><span class='pager-status' id='pagerStatus'></span><button type='button' id='loadMore'>Load more</button></div><div class='no-results' id='filterEmpty'>No deals match that search or category.</div>
 <footer class="site"><div class="footer-grid">
 <div class="footer-main">
 <details class="disclosure">
@@ -645,7 +653,10 @@ html{scroll-behavior:smooth}
       : "<span class='thumb noimg'>No image</span>";
     var pills = '';
     if (d.is_new) pills += "<span class='newpill'>New</span>";
-    // (pills intentionally minimal here -- see _card() in the generator)
+    if (d.lowest_tracked) pills += "<span class='low-pill'>Lowest tracked</span>";
+    if (d.price_low != null && d.price_high != null) {
+      pills += "<span class='price-range'>" + money(d.price_low) + '–' + money(d.price_high) + '</span>';
+    }
     var menu =
       "<div class='over-menu' data-url='" + url + "' data-title='" + title + "'>"
       + "<button type='button' class='dots' aria-haspopup='true' aria-expanded='false'"
@@ -672,6 +683,7 @@ html{scroll-behavior:smooth}
     el.setAttribute('data-price', d.price);
     el.setAttribute('data-discount', d.discount_pct);
     el.setAttribute('data-age', d.age_minutes);
+    el.setAttribute('data-realdrop', d.real_drop);
     el.innerHTML = thumb
       + "<div class='body'>" + menu
       + "<h3 class='clamp2'><a href='" + url + "' target='_blank' rel='noopener sponsored'>" + title + '</a></h3>'
@@ -726,6 +738,13 @@ html{scroll-behavior:smooth}
     // data-age is minutes since last seen, so ascending = newest first, and an
     // unknown age belongs at the bottom (Infinity), not billed as the freshest.
     if (state.sort === 'newest') return num(a, 'data-age', Infinity) - num(b, 'data-age', Infinity);
+    if (state.sort === 'realdrop') {
+      // Listings we have no history for carry -1 and go last, in discount
+      // order among themselves, rather than being ranked as 0% drops.
+      var ra = num(a, 'data-realdrop'), rb = num(b, 'data-realdrop');
+      if (ra < 0 && rb < 0) return num(b, 'data-discount') - num(a, 'data-discount');
+      return rb - ra;
+    }
     return num(b, 'data-discount') - num(a, 'data-discount');
   }
 
