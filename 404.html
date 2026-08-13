@@ -83,17 +83,40 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
    mark below doesn't actually need the clip: it's inset a fixed 20px from
    the right edge (can't overflow horizontally) and hidden outright on
    mobile, so nothing was relying on this. */
-.mast{background:var(--card);color:var(--ink);padding:26px 0 24px;position:relative;
-      border-bottom:1px solid var(--rule)}
-/* left is set by JS (see INTERACTION_SCRIPT) to line up with the nav's
-   "Deals" link -- two different rows of the layout, so CSS alone can't
-   express "same x as that other element" once the nav is wide enough to
-   wrap links differently. right:20px is only the pre-JS/no-JS fallback. */
-.mast-ghost{position:absolute;right:20px;top:50%;transform:translateY(-48%);
-            font:900 140px/1 Georgia,serif;color:rgba(0,168,99,.09);
+/* The banner was flat white with a grey rule until 2026-08-13, which made the
+   whole top of the site read as black-and-white (Che: "come on you can do
+   better"). The colour is put in as a bloom weighted to the right, not as a
+   flat fill: the wordmark and tagline live in the left third, so that third
+   stays on plain --card and keeps its full ink-on-white contrast, while the
+   empty right half of the band (which carried nothing but the ghost mark)
+   does the work of looking alive. Three radial washes rather than one
+   gradient so the hues meet at soft edges instead of a visible seam. */
+.mast{color:var(--ink);padding:30px 0 28px;position:relative;border-bottom:0;
+      background:
+        radial-gradient(900px 340px at 86% 14%, rgba(217,58,18,.26), transparent 62%),
+        radial-gradient(720px 320px at 62% 104%, rgba(240,165,0,.32), transparent 60%),
+        radial-gradient(700px 320px at 104% 86%, rgba(0,168,99,.24), transparent 62%),
+        linear-gradient(100deg, var(--card) 0%, var(--card) 32%, #FFF2E4 68%, #FFE6D2 100%)}
+/* Same gradient hairline that closes the Amazon Picks band, so the two
+   coloured edges on the page read as one motif rather than two accidents. */
+.mast::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+             background:linear-gradient(90deg,var(--signal),#E8890C 42%,#F0A500 62%,var(--gate))}
+/* Sits at the content column's right edge -- the x where the Top Deals
+   carousel ends -- which is Che's call (2026-08-13) and pure arithmetic off
+   .wrap's own max-width and padding, so the JS that used to measure the nav's
+   "Deals" link and place this by hand is gone. */
+.mast-ghost{position:absolute;top:50%;transform:translateY(-48%);
+            right:max(28px, calc((100% - 1180px) / 2 + 28px));
+            font:900 clamp(130px,14vw,178px)/1 Georgia,serif;
+            color:rgba(0,168,99,.1);
             pointer-events:none;user-select:none;z-index:0}
-@supports(-webkit-text-stroke:2px red){
-  .mast-ghost{color:transparent;-webkit-text-stroke:2px rgba(0,168,99,.26)}
+/* Gradient-filled rather than outlined: at this size an outline reads as a
+   stray hairline, a fill reads as brand colour. Kept low-alpha so it stays
+   behind the stats line it overlaps. */
+@supports((-webkit-background-clip:text) or (background-clip:text)){
+  .mast-ghost{color:transparent;-webkit-text-stroke:0;
+              background:linear-gradient(150deg,var(--signal),#F0A500 55%,var(--gate));
+              -webkit-background-clip:text;background-clip:text;opacity:.3}
 }
 @media(max-width:760px){.mast-ghost{display:none}}
 .brand{font-weight:800;letter-spacing:-.02em;line-height:.95;position:relative;
@@ -642,6 +665,15 @@ html{scroll-behavior:smooth}
      drops below the contrast floor, so it lightens rather than inverts. */
   .picks-eyebrow{color:#E8A33A}
   .picks-eyebrow::before{background:#E8A33A}
+  /* The banner's warm paper tint would glow grey-white here, so the base
+     ramps into a warm near-black instead and the washes carry more alpha to
+     stay visible against it. Same three hues, same right-weighted bloom. */
+  .mast{background:
+        radial-gradient(900px 340px at 86% 14%, rgba(255,79,41,.20), transparent 62%),
+        radial-gradient(720px 320px at 62% 104%, rgba(240,165,0,.16), transparent 60%),
+        radial-gradient(700px 320px at 104% 86%, rgba(31,191,127,.15), transparent 62%),
+        linear-gradient(100deg, var(--card) 0%, var(--card) 34%, #241B17 72%, #2B1F19 100%)}
+  .mast-ghost{opacity:.38}
   footer.site{border-top-color:var(--rule)}
 }
 
@@ -1205,29 +1237,11 @@ html{scroll-behavior:smooth}
   }
 })();
 
-// ---- ghost mark: align under the "Deals" nav link ----
-// "Deals" lives in the sticky topnav, the ghost lives in the hero below it --
-// two different rows, so this is a real "match that other element's x
-// position" problem, not something a single CSS rule can express once the
-// nav's own width (and therefore where "Deals" lands) depends on viewport.
-// Recomputed on load and resize; the CSS right:20px stays as the fallback
-// for the instant before this runs (and for no-JS).
-(function(){
-  var ghost = document.getElementById('mastGhost');
-  var deals = document.querySelector('.topnav .links a[aria-current="page"]');
-  var mast = document.querySelector('header.mast');
-  if (!ghost || !deals || !mast) return;
-
-  function place(){
-    if (getComputedStyle(ghost).display === 'none') return; // hidden on mobile
-    var dealsLeft = deals.getBoundingClientRect().left;
-    var mastLeft = mast.getBoundingClientRect().left;
-    ghost.style.left = (dealsLeft - mastLeft) + 'px';
-    ghost.style.right = 'auto';
-  }
-  place();
-  window.addEventListener('resize', place);
-})();
+// The ghost mark used to be positioned here, measured against the nav's
+// "Deals" link on load and resize. It now sits at the content column's right
+// edge instead (Che, 2026-08-13), which .mast-ghost expresses in CSS off
+// .wrap's own max-width -- no measuring, and no flash of fallback position
+// before the script runs.
 
 // ---- hero search: rotating "Search for <term>" hint ----
 // A layered span rather than the placeholder attribute, so the lead-in stays
