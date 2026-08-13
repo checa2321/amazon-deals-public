@@ -269,7 +269,7 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 .flyout{display:none;position:absolute;left:100%;top:-1px;z-index:51;
         background:var(--card);border:1px solid var(--rule);border-radius:6px;
         box-shadow:0 10px 30px rgba(0,0,0,.16);padding:14px 18px;
-        grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row;
+        grid-template-columns:repeat(2,minmax(max-content,1fr));grid-auto-flow:row;
         column-gap:26px;row-gap:1px;white-space:nowrap;max-width:min(460px,60vw)}
 .mega-left>li.has-fly:hover>.flyout{display:grid}
 /* The "All X" row heads the list and spans both columns, so the flyout still
@@ -585,12 +585,14 @@ html{scroll-behavior:smooth}
 <p class="lede">One rule: <strong>50% off or it doesn't make the page.</strong></p>
 
 <h2>Why this exists</h2>
-<p>My name is Checarlos. This whole thing started because, I don't know about you, but I'm
-tired of buying something and then realizing afterwards that I paid the "expensive" price for
-it. At some point I got one of those deals apps, and it was useful, but I always felt like it
-wasn't really giving me the best of the best. So I decided to build my own system, where I
-know it's the best offer available because my own system is the one finding it, and I don't
-have to depend on anybody else.</p>
+<p>My name is Checarlos. This whole thing started because a friend of mine kept complaining
+that the deals she found on the app she used never turned out to be the ones she was actually
+looking for. That got me thinking. I don't know about you, but I'm tired of buying something
+and then realizing afterwards that I paid the "expensive" price for it. So I decided to build
+my own system, one where I know it's the best offer available because my own system is the one
+finding it, and I don't have to depend on anybody else's app to actually deliver.</p>
+<p>Credit where credit's due though. Who she is stays between us for now, but knowing her, this
+probably isn't the last chapter of this story.</p>
 
 <h2>What counts as a deal here</h2>
 <p>Everything on this page is at least <strong>50% off</strong> its listed price. That's not a
@@ -674,8 +676,8 @@ link, that covers what I need to keep the page running and to keep improving it.
 <div class="disclosure-body footer-cats"><a href='electronics.html'>Electronics &amp; Tech</a> &middot; <a href='home-kitchen.html'>Home &amp; Kitchen</a> &middot; <a href='fashion.html'>Fashion &amp; Accessories</a> &middot; <a href='beauty-health.html'>Beauty &amp; Health</a> &middot; <a href='baby-kids.html'>Baby &amp; Kids</a> &middot; <a href='outdoor-sports.html'>Outdoor &amp; Sports</a> &middot; <a href='tools-auto.html'>Tools &amp; Auto</a> &middot; <a href='pets.html'>Pets</a> &middot; <a href='office-more.html'>Office &amp; More</a> &middot; <a href='jewelry-watches.html'>Jewelry &amp; Watches</a> &middot; <a href='collectibles-art.html'>Collectibles &amp; Art</a> &middot; <a href='books-music-movies.html'>Books, Music &amp; Movies</a> &middot; <a href='musical-instruments.html'>Musical Instruments &amp; Gear</a> &middot; <a href='travel.html'>Travel &amp; Experiences</a> &middot; <a href='other-finds.html'>Other Finds</a> &middot; <a href='beauty-fragrances.html'>Fragrances</a></div>
 </details>
 <details class="disclosure">
-<summary>eBay and Walmart only</summary>
-<div class="disclosure-body"><p class="trust-line"><b>eBay and Walmart only.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged.</p></div>
+<summary>eBay, Walmart &amp; Amazon</summary>
+<div class="disclosure-body"><p class="trust-line"><b>eBay and Walmart.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged.</p><p class="trust-line"><b>Amazon works differently.</b> The Amazon Picks section is hand-picked by Che, one at a time, with no price or discount number attached -- see <a href="about.html">About</a> for why.</p></div>
 </details>
 <details class="disclosure">
 <summary>Affiliate disclosure &amp; how this page is built</summary>
@@ -1323,5 +1325,12 @@ link, that covers what I need to keep the page running and to keep improving it.
   relative();
   setInterval(relative, 30000);
 })();
+</script>
+<script type="text/javascript" src="https://js.codedrink.com/snippet.min.js" defer></script>
+<script type="text/javascript" defer>
+  document.addEventListener("LSAFFEventLoaded",
+    function(e) {
+      e.detail.init();
+    });
 </script>
 </body></html>
