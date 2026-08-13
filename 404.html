@@ -481,14 +481,6 @@ html{scroll-behavior:smooth}
   .td-viewport{scroll-snap-type:x proximity}
 }
 
-/* ---- price history range + lowest-tracked pill ---- */
-.low-pill{border:1px solid var(--gate);color:var(--gate);background:transparent;
-          font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-          padding:2px 8px;border-radius:999px}
-/* Printed $lo-$hi range -- always visible, no hover/tap needed (a hover-only
-   SVG sparkline used to carry this and was unreachable on touch devices). */
-.price-range{font-size:11px;color:var(--gate);font-weight:600;white-space:nowrap}
-
 /* ---- category landing pages: breadcrumb + fashion subnav ---- */
 .crumbs{margin:26px 0 2px;font-size:13px;color:var(--muted)}
 .crumbs a{color:var(--muted);text-decoration:none}
@@ -653,10 +645,7 @@ html{scroll-behavior:smooth}
       : "<span class='thumb noimg'>No image</span>";
     var pills = '';
     if (d.is_new) pills += "<span class='newpill'>New</span>";
-    if (d.lowest_tracked) pills += "<span class='low-pill'>Lowest tracked</span>";
-    if (d.price_low != null && d.price_high != null) {
-      pills += "<span class='price-range'>" + money(d.price_low) + '–' + money(d.price_high) + '</span>';
-    }
+    // low-pill / price-range intentionally not rendered -- see html_output.py _card()
     var menu =
       "<div class='over-menu' data-url='" + url + "' data-title='" + title + "'>"
       + "<button type='button' class='dots' aria-haspopup='true' aria-expanded='false'"
@@ -683,7 +672,6 @@ html{scroll-behavior:smooth}
     el.setAttribute('data-price', d.price);
     el.setAttribute('data-discount', d.discount_pct);
     el.setAttribute('data-age', d.age_minutes);
-    el.setAttribute('data-realdrop', d.real_drop);
     el.innerHTML = thumb
       + "<div class='body'>" + menu
       + "<h3 class='clamp2'><a href='" + url + "' target='_blank' rel='noopener sponsored'>" + title + '</a></h3>'
@@ -738,13 +726,6 @@ html{scroll-behavior:smooth}
     // data-age is minutes since last seen, so ascending = newest first, and an
     // unknown age belongs at the bottom (Infinity), not billed as the freshest.
     if (state.sort === 'newest') return num(a, 'data-age', Infinity) - num(b, 'data-age', Infinity);
-    if (state.sort === 'realdrop') {
-      // Listings we have no history for carry -1 and go last, in discount
-      // order among themselves, rather than being ranked as 0% drops.
-      var ra = num(a, 'data-realdrop'), rb = num(b, 'data-realdrop');
-      if (ra < 0 && rb < 0) return num(b, 'data-discount') - num(a, 'data-discount');
-      return rb - ra;
-    }
     return num(b, 'data-discount') - num(a, 'data-discount');
   }
 
