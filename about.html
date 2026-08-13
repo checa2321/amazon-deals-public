@@ -226,6 +226,25 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
           padding:9px 14px;font-size:13px;cursor:pointer}
 #catClear:hover{border-color:var(--signal)}
 
+/* ---- Amazon picks: hand-curated, deliberately NOT a deal card ----
+   No price, no %-off badge, no product image, by policy (see
+   _amazon_picks_html). So the card leans on type instead: the title does the
+   work a product photo does elsewhere, and Che's note is the reason to click.
+   Dotted border rather than the deal card's solid one, so at a glance the eye
+   reads "different kind of thing" before it reads a word. */
+.picks{margin:30px 0 6px;padding:22px 0 4px;border-top:1px solid var(--rule)}
+.picks-head h2{margin:0;font:800 1.05rem/1.2 var(--display);letter-spacing:-.01em;color:var(--ink)}
+.picks-head p{margin:5px 0 16px;font-size:13px;color:var(--muted);max-width:60ch}
+.picks-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.pick{display:flex;flex-direction:column;gap:7px;padding:15px 16px;text-decoration:none;
+      background:var(--card);border:1.5px dashed var(--rule);border-radius:6px;
+      transition:border-color .15s ease,transform .15s ease}
+.pick:hover{border-color:var(--signal);transform:translateY(-2px)}
+.pick-title{font:700 14px/1.35 var(--display);color:var(--ink)}
+.pick-note{font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
+.pick-cta{margin-top:auto;padding-top:4px;font:600 12px/1 var(--mono);color:var(--signal)}
+@media(max-width:560px){.picks-grid{grid-template-columns:1fr}}
+
 /* ---- mega menu (top nav Categories, DealNews-style flyout) ---- */
 .megamenu-wrap{position:relative;margin:16px 0 0}
 .mast .megamenu-wrap{display:inline-block}
@@ -642,7 +661,7 @@ link, that covers what I need to keep the page running and to keep improving it.
 </details>
 <details class="disclosure">
 <summary>Affiliate disclosure &amp; how this page is built</summary>
-<div class="disclosure-body">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first.</div>
+<div class="disclosure-body">Some links on this site are affiliate links. This site is a member of the eBay Partner Network. If you buy through one, I may earn a commission at no extra cost to you. Commission never affects which deals are listed or the order they appear in. Listings are sorted by discount percentage, highest first. As an Amazon Associate I earn from qualifying purchases.</div>
 </details>
 <details class="disclosure">
 <summary>Pricing &amp; how often this updates</summary>
