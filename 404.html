@@ -830,6 +830,7 @@ html{scroll-behavior:smooth}
     el.setAttribute('data-price', d.price);
     el.setAttribute('data-discount', d.discount_pct);
     el.setAttribute('data-age', d.age_minutes);
+    el.setAttribute('data-first-seen-min', d.first_seen_minutes);
     el.innerHTML = thumb
       + "<div class='body'>" + menu
       + "<h3 class='clamp2'><a href='" + url + "' target='_blank' rel='noopener sponsored'>" + title + '</a></h3>'
@@ -881,9 +882,13 @@ html{scroll-behavior:smooth}
     if (state.sort === 'name-desc') return b.getAttribute('data-title').localeCompare(a.getAttribute('data-title'));
     if (state.sort === 'price-asc') return num(a, 'data-price', Infinity) - num(b, 'data-price', Infinity);
     if (state.sort === 'price-desc') return num(b, 'data-price') - num(a, 'data-price');
-    // data-age is minutes since last seen, so ascending = newest first, and an
-    // unknown age belongs at the bottom (Infinity), not billed as the freshest.
-    if (state.sort === 'newest') return num(a, 'data-age', Infinity) - num(b, 'data-age', Infinity);
+    // data-age is minutes since LAST seen, which gets refreshed every run a
+    // deal is merely re-confirmed still active -- so it reads ~0 for nearly
+    // the whole catalogue every hour and can't tell new from long-since-found.
+    // data-first-seen-min is minutes since it was truly first discovered;
+    // ascending = newest first, and an unknown value belongs at the bottom
+    // (Infinity), not billed as the freshest.
+    if (state.sort === 'newest') return num(a, 'data-first-seen-min', Infinity) - num(b, 'data-first-seen-min', Infinity);
     return num(b, 'data-discount') - num(a, 'data-discount');
   }
 
