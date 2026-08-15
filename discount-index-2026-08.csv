@@ -1,26 +1,26 @@
 # Half or Nothing Discount Index -- August 2026
-"# generated_at,2026-08-15T17:07:03.123434+00:00"
-"# total_live_listings,17765"
+"# generated_at,2026-08-15T18:08:15.251369+00:00"
+"# total_live_listings,17583"
 
 section,discount_bucket,listing_count,pct_of_catalogue
-distribution,50-59%,7914,44.5
-distribution,60-69%,5235,29.5
-distribution,70-79%,3531,19.9
-distribution,80-89%,1052,5.9
+distribution,50-59%,7823,44.5
+distribution,60-69%,5175,29.4
+distribution,70-79%,3499,19.9
+distribution,80-89%,1053,6.0
 distribution,90%+,33,0.2
 
 section,category,live_listings,median_discount_pct,mean_discount_pct,listings_tracked_across_2plus_checks,avg_real_drop_pct_where_trackable
-category,Beauty & Health,5970,63.2,63.7,693,2.8
-category,Fashion & Accessories,5537,69.4,68.7,261,4.1
-category,Musical Instruments & Gear,1883,53.2,55.4,32,3.8
-category,Electronics & Tech,1605,54.6,57.2,8,2.9
-category,Home & Kitchen,1596,56.0,58.2,78,9.3
-category,Tools & Auto,562,56.0,59.0,8,5.7
-category,Jewelry & Watches,376,64.4,62.6,0,
-category,Outdoor & Sports,127,54.4,56.3,4,23.1
-category,Baby & Kids,36,55.0,55.6,1,15.5
-category,Collectibles & Art,28,50.0,55.5,0,
+category,Beauty & Health,5977,63.2,63.7,692,2.8
+category,Fashion & Accessories,5546,69.4,68.7,261,4.1
+category,Musical Instruments & Gear,1882,53.2,55.4,32,3.8
+category,Electronics & Tech,1602,54.6,57.2,8,2.9
+category,Home & Kitchen,1352,56.0,58.1,74,9.6
+category,Tools & Auto,628,55.8,58.7,8,5.7
+category,Jewelry & Watches,372,64.4,62.6,0,
+category,Outdoor & Sports,120,54.2,56.3,2,6.9
+category,Baby & Kids,31,55.0,56.3,1,15.5
+category,Collectibles & Art,29,50.0,55.3,0,
 category,Pets,17,64.4,64.8,0,
 category,"Books, Music & Movies",13,55.0,54.9,0,
-category,Office & More,11,58.9,59.0,0,
+category,Office & More,10,60.3,59.8,0,
 category,Other Finds,4,56.1,56.0,1,0.0
