@@ -31,7 +31,7 @@ gtag('config', 'G-1R6E61L78L');
 <meta property="og:image" content="https://i.ebayimg.com/images/g/0dIAAOSwSRtd8sUT/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.ebayimg.com/images/g/0dIAAOSwSRtd8sUT/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"(4) Rockville CCL6T White 70V 6\" Commercial Ceiling Speakers 4 Restaurant/Office","description":"86% off -- was $170.00, now $23.57 at Ebay.","image":"https://i.ebayimg.com/images/g/0dIAAOSwSRtd8sUT/s-l500.jpg","offers":{"@type":"Offer","price":"23.57","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-303890797336.html","priceValidUntil":"2026-08-15T10:07:18Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Musical Instruments & Gear","item":"https://halfornothing.com/musical-instruments.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"(4) Rockville CCL6T White 70V 6\" Commercial Ceiling Speakers 4 Restaurant/Office","description":"86% off -- was $170.00, now $23.57 at Ebay.","image":"https://i.ebayimg.com/images/g/0dIAAOSwSRtd8sUT/s-l500.jpg","offers":{"@type":"Offer","price":"23.57","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-303890797336.html","priceValidUntil":"2026-08-15T10:59:04Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Musical Instruments & Gear","item":"https://halfornothing.com/musical-instruments.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -909,7 +909,7 @@ html{scroll-behavior:smooth}
   var catBtn = document.getElementById('catFilterBtn');
   var catPanel = document.getElementById('catFilterPanel');
 
-  var state = { search: '', cats: [], page: 1, sort: 'default' };
+  var state = { search: [], cats: [], page: 1, sort: 'default' };
 
   // `missing` decides which end an unparseable attribute lands on. It used to
   // always be -Infinity, which is right for a descending sort (unknown goes
@@ -930,7 +930,12 @@ html{scroll-behavior:smooth}
       }
       if (!hit) return false;
     }
-    if (state.search && card.getAttribute('data-title').indexOf(state.search) === -1) return false;
+    if (state.search.length) {
+      var title = card.getAttribute('data-title');
+      for (var w = 0; w < state.search.length; w++) {
+        if (title.indexOf(state.search[w]) === -1) return false;
+      }
+    }
     return true;
   }
   function sortCompare(a, b){
@@ -997,7 +1002,7 @@ html{scroll-behavior:smooth}
 
   if (searchEl) {
     searchEl.addEventListener('input', function(){
-      state.search = searchEl.value.trim().toLowerCase();
+      state.search = searchEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
       state.page = 1;
       render();
     });
