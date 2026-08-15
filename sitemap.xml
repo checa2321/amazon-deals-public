@@ -411,8 +411,8 @@
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-125797214887.html</loc>
     <lastmod>2026-08-15</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-127028787802.html</loc>
@@ -524,6 +524,12 @@
   </url>
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-147378491567.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://halfornothing.com/d/d-ebay-id-147385576750.html</loc>
     <lastmod>2026-08-15</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.6</priority>
@@ -723,8 +729,8 @@
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-188776198154.html</loc>
     <lastmod>2026-08-15</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-206474700849.html</loc>
@@ -783,8 +789,8 @@
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-257186388208.html</loc>
     <lastmod>2026-08-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <changefreq>hourly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-266762049694.html</loc>
@@ -825,8 +831,8 @@
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-276791174081.html</loc>
     <lastmod>2026-08-15</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://halfornothing.com/d/d-ebay-id-277413151550.html</loc>
@@ -1207,7 +1213,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://halfornothing.com/d/d-ebay-id-147385576750.html</loc>
+    <loc>https://halfornothing.com/d/d-ebay-id-224019358521.html</loc>
     <lastmod>2026-08-15</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.6</priority>
