@@ -1,0 +1,26 @@
+# Half or Nothing Discount Index -- August 2026
+"# generated_at,2026-08-15T01:54:07.368388+00:00"
+"# total_live_listings,18324"
+
+section,discount_bucket,listing_count,pct_of_catalogue
+distribution,50-59%,8313,45.4
+distribution,60-69%,5308,29.0
+distribution,70-79%,3613,19.7
+distribution,80-89%,1058,5.8
+distribution,90%+,32,0.2
+
+section,category,live_listings,median_discount_pct,mean_discount_pct,listings_tracked_across_2plus_checks,avg_real_drop_pct_where_trackable
+category,Beauty & Health,6210,62.9,63.5,689,2.7
+category,Fashion & Accessories,5638,69.4,68.6,248,4.4
+category,Musical Instruments & Gear,1973,53.2,55.3,32,3.8
+category,Home & Kitchen,1641,55.0,57.6,41,12.1
+category,Electronics & Tech,1539,54.6,57.8,5,5.1
+category,Tools & Auto,636,56.0,58.6,8,7.0
+category,Jewelry & Watches,384,64.3,62.5,0,
+category,Outdoor & Sports,94,54.0,56.3,1,5.4
+category,Office & More,69,50.0,54.5,0,
+category,Baby & Kids,61,52.4,56.3,1,15.5
+category,Collectibles & Art,48,50.0,54.8,0,
+category,"Books, Music & Movies",15,55.7,57.5,0,
+category,Pets,13,66.2,64.9,0,
+category,Other Finds,3,57.0,56.3,1,0.0
