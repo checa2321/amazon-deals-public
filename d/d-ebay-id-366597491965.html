@@ -8,8 +8,8 @@ gtag('js', new Date());
 gtag('config', 'G-1R6E61L78L');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro -- 83% off, $239.99 (was $1399.99) | Half or Nothing</title>
-<meta name="description" content="83% off, $239.99 (was $1399.99)">
+<title>HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro -- Expired -- was 83% off, $239.99 (was $1399.99) | Half or Nothing</title>
+<meta name="description" content="Expired -- was 83% off, $239.99 (was $1399.99)">
 <meta name="impact-site-verification" value="fe006b32-5210-45b2-8b46-90aba1f5bbd3">
 <meta name="fo-verify" content="36141c38-378c-45b6-b864-23d8c13b94c4">
 <meta name="google-site-verification" content="f7g1-1eLILyzP5F5ZoIs4WsJXi_sfJB0Rm3-kYCop9w" />
@@ -22,8 +22,8 @@ gtag('config', 'G-1R6E61L78L');
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Half or Nothing">
 <meta property="og:site_name" content="Half or Nothing">
-<meta property="og:title" content="HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro -- 83% off, $239.99 (was $1399.99) | Half or Nothing">
-<meta property="og:description" content="83% off, $239.99 (was $1399.99)">
+<meta property="og:title" content="HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro -- Expired -- was 83% off, $239.99 (was $1399.99) | Half or Nothing">
+<meta property="og:description" content="Expired -- was 83% off, $239.99 (was $1399.99)">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://halfornothing.com/d/d-ebay-id-366597491965.html">
 <link rel="canonical" href="https://halfornothing.com/d/d-ebay-id-366597491965.html">
@@ -31,7 +31,7 @@ gtag('config', 'G-1R6E61L78L');
 <meta property="og:image" content="https://i.ebayimg.com/images/g/NdoAAeSwPQNqOVfG/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.ebayimg.com/images/g/NdoAAeSwPQNqOVfG/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro","description":"83% off -- was $1399.99, now $239.99 at Ebay.","image":"https://i.ebayimg.com/images/g/NdoAAeSwPQNqOVfG/s-l500.jpg","offers":{"@type":"Offer","price":"239.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-366597491965.html","priceValidUntil":"2026-08-16T02:10:03Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Electronics & Tech","item":"https://halfornothing.com/electronics.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro","description":"83% off -- was $1399.99, now $239.99 at Ebay.","image":"https://i.ebayimg.com/images/g/NdoAAeSwPQNqOVfG/s-l500.jpg","offers":{"@type":"Offer","price":"239.99","priceCurrency":"USD","availability":"https://schema.org/Discontinued","url":"https://halfornothing.com/d/d-ebay-id-366597491965.html"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Electronics & Tech","item":"https://halfornothing.com/electronics.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -354,7 +354,154 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
   .pick{flex:0 0 200px;width:200px}
   .pick-art{height:118px}
   .picks-arrow{display:none}
-  .picks-viewport{scroll-snap-type:x proximity}
+  .picks-viewport,.picks-lasso-viewport{scroll-snap-type:x proximity}
+}
+
+/* ---- Amazon picks: real Lasso embeds (photo, price, Buy button) ----
+   Lasso's own embed lays itself out as a text/image flex split sized for a
+   wide column; forced into the 236px rail alongside the SVG-art picks, the
+   image shrank to a ~36px sliver and the full product description stretched
+   the card past 1500px tall (Che, 2026-08-15: unacceptable). Fixed 120x120
+   photo + grid-templated boxes (below) solved that; these render as their own
+   horizontal scroll-snap rail -- same mechanism as .picks-rail/.td-rail --
+   rather than a 2-col grid, so more of them fit across without pushing the
+   page down a full row per pair (Che, 2026-08-15). initRail('lassoViewport',
+   ...) below drives the arrow buttons. */
+.picks-lasso-rail{position:relative;margin-top:14px}
+.picks-lasso-rail .picks-arrow{top:50%}
+.picks-lasso-viewport{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+                scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;
+                margin:0 -6px;padding:6px}
+.picks-lasso-viewport::-webkit-scrollbar{display:none}
+.picks-lasso-track{display:flex;gap:14px;width:max-content;padding-bottom:2px}
+.pick-lasso{scroll-snap-align:start;flex:0 0 400px;width:400px;background:var(--card);
+            border:1px solid var(--rule);border-radius:14px;padding:16px;position:relative;
+            overflow:hidden;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.pick-lasso:hover{transform:translateY(-4px);border-color:transparent;box-shadow:0 12px 26px rgba(0,0,0,.15)}
+@media(max-width:640px){.pick-lasso{flex:0 0 320px;width:320px}}
+/* Category chip + rank numeral, carried over from the SVG-art picks (same
+   --pk-a/--pk-b/_pick_art() as those cards) so the two rails read as one
+   family. Both sit in the card's own chrome -- absolutely positioned over
+   the *card*, never over the <img> itself -- so nothing here touches,
+   recolors or overlays Amazon's product photo (Che, 2026-08-15: wanted the
+   old carousel's look back without risking Amazon's content-alteration
+   rules; keeping our art off the photo entirely is the line). */
+.pick-lasso-num{position:absolute;top:2px;right:14px;font:800 54px/1 var(--display);
+            letter-spacing:-.03em;color:var(--pk-a,var(--rule));opacity:.16;
+            pointer-events:none;font-variant-numeric:tabular-nums;z-index:0}
+.pick-lasso-cat{position:absolute;top:14px;right:14px;z-index:2;max-width:150px;
+            font:700 9px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+            color:#fff;background:linear-gradient(135deg,var(--pk-a,#52525B),var(--pk-b,#27272A));
+            border-radius:999px;padding:5px 10px;overflow:hidden;text-overflow:ellipsis;
+            white-space:nowrap}
+.pick-lasso .lasso-embed{position:relative;z-index:1}
+/* Lasso's Cutter theme splits box-1 (title/price/desc) and box-2 (image) as a
+   50/50 *proportion* of the card, so the photo shrinks every time the card
+   does -- the opposite of every other product photo on this site, which is a
+   fixed 120x120 .thumb that never shrinks (Che, 2026-08-15: wants the eBay/
+   Walmart card shape, photo pinned at .thumb size, not scaling down). Grid
+   areas take over box placement entirely (ignoring Lasso's own flex
+   percentages, all !important, via a more specific selector -- same
+   technique already proven for the color variables above) so the photo
+   column is a hard 120px like .thumb and only the text column flexes.
+
+   Which box is which is NOT consistent: embeds minted via the Lasso
+   WordPress plugin (the first 20) put title/price in box-1 and the image in
+   box-2, but a "Boosted"/badged product (2026-08-15: caught on Soundcore,
+   which shows a "Limited time deal" ribbon) swaps to box-1=image,
+   box-2=everything-else instead. Targeting by :has() on what's actually
+   inside the box, rather than the box's number, makes this correct either
+   way instead of only for whichever layout happened to get tested. box-4 is
+   Lasso's own always-empty box. box-5 (commission disclosure) and box-6 (the
+   "price accurate as of <date>" stamp) both stay -- Che flagged 2026-08-15
+   that a price served live off Amazon's API needs that "as of" timestamp
+   visible to stay inside Amazon's own pricing-display terms, so this only
+   compacts them to one line each rather than dropping either. Description
+   dropped per the same note -- these are one-line picks now, not blurbs. */
+.pick-lasso .embed-lasso-display{display:grid !important;grid-template-columns:120px 1fr !important;
+            grid-template-areas:"img text" "btn btn" "meta meta" "date date" !important;
+            column-gap:14px !important;row-gap:4px !important;align-items:center !important;
+            margin:0 !important;padding:0 !important}
+.pick-lasso .embed-lasso-box-1:has(.embed-lasso-title),
+.pick-lasso .embed-lasso-box-2:has(.embed-lasso-title){
+            grid-area:text !important;flex:none !important;max-width:none !important;
+            padding:26px 0 0 !important;align-self:center !important}
+.pick-lasso .embed-lasso-box-1:has(.embed-lasso-image),
+.pick-lasso .embed-lasso-box-2:has(.embed-lasso-image){
+            grid-area:img !important;flex:none !important;max-width:none !important;
+            margin:0 !important;padding:0 !important;align-self:start !important}
+.pick-lasso .embed-lasso-box-3{grid-area:btn !important;flex:none !important;max-width:none !important;padding:0 !important}
+.pick-lasso .embed-lasso-box-4{display:none !important}
+.pick-lasso .embed-lasso-box-5{grid-area:meta !important;flex:none !important;
+            max-width:none !important;padding:0 !important;display:block !important}
+.pick-lasso .embed-lasso-box-6{grid-area:date !important;flex:none !important;
+            max-width:none !important;padding:0 !important;display:block !important}
+/* The "boosted"/badged structure (see the :has() comment above) bundles
+   disclosure+date together in one .embed-lasso-end div, nested INSIDE the
+   box that also holds title/price/button -- so on a narrow (mobile) card
+   that div only gets the ~186px text column, not the full card width, and
+   "Half or Nothing may earn commissions..." wrapped into 5+ ragged lines
+   (Che, 2026-08-16: only picks using the OTHER structure, box-5/6, looked
+   right). CSS Grid can't hand a nested element its own grid-area without
+   dissolving every sibling around it too (title/price would need their own
+   areas and start overlapping) -- so retheme() below physically moves
+   .embed-lasso-end out to be a direct child of .embed-lasso-display instead,
+   the same DOM-surgery approach already used there for the title/button
+   text. This rule is just where it lands once moved. */
+.pick-lasso .embed-lasso-end{grid-area:meta !important;width:100% !important}
+.pick-lasso .embed-lasso-image{display:block !important;margin:0 !important;padding:0 !important}
+.pick-lasso .embed-lasso-image-no-lazy{width:120px !important;height:120px !important;
+            object-fit:contain !important;border-radius:12px;border:1px solid var(--rule);
+            background:var(--paper-3)}
+.pick-lasso .embed-lasso-title,.pick-lasso a.embed-lasso-title{font-size:14px !important;
+            line-height:1.4 !important;font-weight:600 !important;margin:0 0 4px !important}
+.pick-lasso .embed-lasso-price{font-size:13px !important;margin:0 !important}
+.pick-lasso .embed-lasso-description{display:none !important}
+.pick-lasso a.embed-lasso-button-1{grid-area:btn !important;padding:9px 14px !important;
+            font-size:12px !important;border-radius:8px !important}
+.pick-lasso .embed-lasso-date,.pick-lasso .embed-lasso-disclosure{font-size:10.5px !important;
+            padding:0 !important;color:var(--muted) !important}
+/* Price gets its own accent (Che, 2026-08-15: bigger, different color if
+   possible) -- reusing --signal, the same red the eBay/Walmart cards use for
+   their own price numbers, so it reads as "the number that matters" rather
+   than introducing a third accent color to the section. Lasso's own price
+   rule hardcodes color:rgb(0,0,0) (not a variable), so it has to be beaten
+   the same specificity way as everything else here, not just relied on to
+   inherit --embed-lasso-title. */
+.pick-lasso .embed-lasso-price{font-size:20px !important;font-weight:800 !important;
+            color:var(--signal) !important;margin:2px 0 8px !important;display:flex !important;
+            align-items:baseline !important;gap:8px !important;flex-wrap:wrap !important}
+/* .price-was/.pct-pill are appended into .embed-lasso-price by the retheme()
+   script below, from a list price Che hand-verified on Amazon itself (Lasso's
+   own base_price field is not reliable enough to trust for this -- caught it
+   reporting "no discount" on items Amazon's own page showed at -50% the same
+   day, 2026-08-15). Reused classes, not new ones, so a real discount here
+   looks exactly like a real discount on every other card on the site.
+   .pick-lasso-coupon is ours: a coupon Amazon offers on top of that price,
+   which nothing else on the page has a slot for. */
+.pick-lasso-coupon{font:700 11px/1.3 var(--mono);color:var(--gate);margin:-4px 0 8px;
+            letter-spacing:.02em}
+/* These 20 embeds were minted through Lasso's WordPress plugin flow, not the
+   Websites/halfornothing.com project Che configures in Lasso's own "Display
+   Settings" -- so the badge/button colors he set and saved there (verified
+   persisted, 2026-08-15) never reach them; each embed carries its own frozen
+   color snapshot from creation, injected as `.lasso-embed{--embed-lasso-*:
+   ... !important}`. Same values, applied here instead: this selector is more
+   specific than Lasso's own, so it wins the cascade regardless of !important
+   on both sides. Update these if Che changes the palette in Lasso again --
+   this does not read from there live. Title is tied to the site's own --ink
+   instead of a fixed hex so it stays legible in whichever theme the visitor
+   has (Che, 2026-08-15: background should follow light/dark, not stay
+   hardcoded white). Background is transparent rather than var(--card): the
+   embed no longer needs to paint its own card surface -- .pick-lasso already
+   does, in the same theme-aware color -- and painting it a second time here
+   opaquely covered the category chip/rank numeral sitting behind it. */
+.pick-lasso .lasso-embed{
+  --embed-lasso-main:#00A863 !important;
+  --embed-lasso-title:var(--ink) !important;
+  --embed-lasso-button:#FF9900 !important;
+  --embed-lasso-button-text:#ffffff !important;
+  --embed-lasso-background:transparent !important;
 }
 
 /* ---- mega menu (top nav Categories, DealNews-style flyout) ---- */
@@ -751,7 +898,7 @@ html{scroll-behavior:smooth}
 
 </div></header>
 <main class="wrap">
-<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='electronics.html'>Electronics &amp; Tech</a> <span>&rsaquo;</span> <b>Deal</b></nav><article class='deal-page'><div class='deal-page-media'><img src='https://i.ebayimg.com/images/g/NdoAAeSwPQNqOVfG/s-l500.jpg' alt='HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro' loading='eager' decoding='async' referrerpolicy='no-referrer'></div><div class='deal-page-body'><h1>HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro</h1><p class='deal-status deal-status-live'>Live now &middot; verified within the last 6 hours.</p><p class='deal-page-price'><b>$239.99</b><s>$1399.99</s><span class='deal-page-pct'>83% off</span></p><a class='deal-cta' href='https://www.ebay.com/itm/366597491965?_skw=Computers&amp;hash=item555ae9ccfd%3Ag%3ANdoAAeSwPQNqOVfG&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;customid=hond' target='_blank' rel='noopener sponsored'>Get this deal at Ebay &rarr;</a></div></article>
+<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='electronics.html'>Electronics &amp; Tech</a> <span>&rsaquo;</span> <b>Deal</b></nav><article class='deal-page'><div class='deal-page-media'><img src='https://i.ebayimg.com/images/g/NdoAAeSwPQNqOVfG/s-l500.jpg' alt='HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro' loading='eager' decoding='async' referrerpolicy='no-referrer'></div><div class='deal-page-body'><h1>HP EliteBook 840 G8 i5-1145G7 16GB RAM 256GB SSD Windows 11 Pro</h1><p class='deal-status deal-status-expired'>Expired 2026-08-16 &middot; ran for 2d at 83% off.</p><p class='deal-page-price'><b>$239.99</b><s>$1399.99</s><span class='deal-page-pct'>83% off</span></p><a class='deal-cta deal-cta-secondary' href='https://halfornothing.com/electronics.html'>See live Electronics &amp; Tech deals &rarr;</a></div></article>
 <footer class="site"><div class="footer-grid">
 <div class="footer-main">
 <details class="disclosure">
@@ -782,8 +929,11 @@ html{scroll-behavior:smooth}
 <li><a href="https://www.instagram.com/halfornothing_" target="_blank" rel="noopener me" aria-label="Half or Nothing on Instagram" title="@halfornothing_">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
 </a></li>
-<li><a href="https://www.facebook.com/profile.php?id=1205000582704641" target="_blank" rel="noopener me" aria-label="Half or Nothing on Facebook" title="Half or Nothing">
+<li><a href="https://www.facebook.com/profile.php?id=61593284395516" target="_blank" rel="noopener me" aria-label="Half or Nothing on Facebook" title="Half or Nothing">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+</a></li>
+<li><a href="https://www.pinterest.com/halfornothing_/" target="_blank" rel="noopener me" aria-label="Half or Nothing on Pinterest" title="@halfornothing_">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.86-2.056-4.861-4.99-4.861-3.399 0-5.393 2.549-5.393 5.184 0 1.027.395 2.127.889 2.726a.36.36 0 0 1 .083.343c-.091.378-.293 1.192-.332 1.36-.053.218-.174.265-.402.159-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.379l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.62 0 11.988-5.367 11.988-11.987C23.997 5.367 18.628 0 12.017 0z"/></svg>
 </a></li>
 </ul>
 </div></footer>
@@ -1372,6 +1522,7 @@ function initRail(viewportId, prevId, nextId, cardSelector, cardGap){
 }
 initRail('tdViewport', 'tdPrev', 'tdNext', '.td-card', 14);
 initRail('pkViewport', 'pkPrev', 'pkNext', '.pick', 14);
+initRail('lassoViewport', 'lassoPrev', 'lassoNext', '.pick-lasso', 14);
 
 (function(){
   var btn = document.getElementById('backToTop');
@@ -1410,5 +1561,90 @@ initRail('pkViewport', 'pkPrev', 'pkNext', '.pick', 14);
     function(e) {
       e.detail.init();
     });
+
+  // Existing picks were embedded under Lasso's "Cactus" theme (70/30
+  // text-vs-image flex split), which reads fine in Lasso's own wide dashboard
+  // preview but collapses the product photo to a ~36px sliver once it's
+  // rendered at the Amazon Picks grid's card width (Che, 2026-08-15:
+  // unacceptable). Lasso ships every theme's CSS on every page regardless of
+  // which one an embed was created with, so swapping the theme class after
+  // their snippet renders it re-flows the same embed into the "Cutter" theme
+  // (50/50 split, image block-centered, full-width button) with no separate
+  // API call -- confirmed against Lasso's own stylesheet rules for
+  // .embed-lasso-cutter. Scoped to .picks-lasso-rail so it can never touch a
+  // Lasso embed elsewhere on the site that was deliberately built as Cactus.
+  // Lasso's title field is the full Amazon listing name, hardcoded into the
+  // embed itself (see _LASSO_SHORT_TITLES in html_output.py). Once rendered,
+  // swap in the brand+type version from that div's data-short-title attribute
+  // -- doesn't touch Lasso's stored data, just what this page displays.
+  (function () {
+    var grid = document.querySelector(".picks-lasso-rail");
+    if (!grid) return;
+    function retheme() {
+      grid.querySelectorAll(".embed-lasso-cactus").forEach(function (el) {
+        el.classList.remove("embed-lasso-cactus");
+        el.classList.add("embed-lasso-cutter");
+      });
+      // Some picks (the ones with a "Boosted" badge) bundle the button and
+      // disclosure+date inside the same title/price box instead of their own
+      // top-level boxes, which only gives them the ~half-card text column --
+      // "Buy Now on Amazon" wrapped to 3 lines and the disclosure to 5+
+      // ragged ones (Che, 2026-08-16, caught on Sam Edelman vs. Aerosoles).
+      // Move both up to sit directly under the grid so the "btn"/"meta" CSS
+      // rules above (full card width, same as the other picks) apply.
+      grid.querySelectorAll(".embed-lasso-end, a.embed-lasso-button-1").forEach(function (el) {
+        var display = el.closest(".embed-lasso-display");
+        if (display && el.parentElement !== display) display.appendChild(el);
+      });
+      grid.querySelectorAll(".lasso-embed[data-short-title]").forEach(function (wrap) {
+        var short = wrap.getAttribute("data-short-title");
+        var t = wrap.querySelector(".embed-lasso-title");
+        if (t && t.textContent.trim() !== short) {
+          t.textContent = short;
+          if (t.hasAttribute("title")) t.setAttribute("title", short);
+        }
+      });
+      // Same frozen-at-creation issue as the colors: these embeds render
+      // "Buy Now" even though Lasso's saved button text is "Buy on Amazon".
+      // Amazon's Associates terms require the link's own wording make clear
+      // it goes to Amazon (Che, 2026-08-15) -- "Buy Now" alone doesn't say
+      // that, so it's forced to "Buy Now on Amazon" here rather than trusting
+      // whatever text shipped with the embed.
+      grid.querySelectorAll("a.embed-lasso-button-1, a.embed-lasso-button-2").forEach(function (btn) {
+        if (btn.textContent.trim() !== "Buy Now on Amazon") btn.textContent = "Buy Now on Amazon";
+      });
+      // Real list price / coupon, hand-verified against Amazon (see
+      // cache/amazon_picks_verified_prices.json) and passed in via
+      // data-list-price/data-discount-pct/data-coupon on the wrapper div.
+      // Reuses .price-was/.pct-pill from the deal grid so a real discount
+      // here reads exactly like a real discount everywhere else on the site.
+      grid.querySelectorAll(".lasso-embed[data-list-price], .lasso-embed[data-coupon]").forEach(function (wrap) {
+        var priceEl = wrap.querySelector(".embed-lasso-price");
+        if (!priceEl || priceEl.dataset.pkEnriched) return;
+        priceEl.dataset.pkEnriched = "1";
+        var listPrice = wrap.getAttribute("data-list-price");
+        var pct = wrap.getAttribute("data-discount-pct");
+        if (listPrice && pct) {
+          var was = document.createElement("span");
+          was.className = "price-was";
+          was.textContent = "$" + listPrice;
+          var pill = document.createElement("span");
+          pill.className = "pct-pill";
+          pill.textContent = pct + "% off";
+          priceEl.appendChild(was);
+          priceEl.appendChild(pill);
+        }
+        var coupon = wrap.getAttribute("data-coupon");
+        if (coupon) {
+          var note = document.createElement("div");
+          note.className = "pick-lasso-coupon";
+          note.textContent = "+ " + coupon;
+          priceEl.insertAdjacentElement("afterend", note);
+        }
+      });
+    }
+    retheme();
+    new MutationObserver(retheme).observe(grid, {subtree: true, childList: true, attributes: true, attributeFilter: ["class"]});
+  })();
 </script>
 </body></html>
