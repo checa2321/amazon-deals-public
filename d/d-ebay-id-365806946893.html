@@ -31,7 +31,7 @@ gtag('config', 'G-1R6E61L78L');
 <meta property="og:image" content="https://i.ebayimg.com/images/g/IDYAAeSwEFxqQ-Qk/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.ebayimg.com/images/g/IDYAAeSwEFxqQ-Qk/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Home in Oklahoma, Stagecoach Outlaws, Fuzzy Settles Down, Arizona Days DVD","description":"50% off -- was $19.99, now $9.99 at Ebay.","image":"https://i.ebayimg.com/images/g/IDYAAeSwEFxqQ-Qk/s-l500.jpg","offers":{"@type":"Offer","price":"9.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-365806946893.html","priceValidUntil":"2026-08-18T06:03:59Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Books, Music & Movies","item":"https://halfornothing.com/books-music-movies.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Home in Oklahoma, Stagecoach Outlaws, Fuzzy Settles Down, Arizona Days DVD","description":"50% off -- was $19.99, now $9.99 at Ebay.","image":"https://i.ebayimg.com/images/g/IDYAAeSwEFxqQ-Qk/s-l500.jpg","offers":{"@type":"Offer","price":"9.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-365806946893.html","priceValidUntil":"2026-08-18T07:04:56Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Books, Music & Movies","item":"https://halfornothing.com/books-music-movies.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -288,10 +288,18 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 .picks-head h2{margin:0;font:800 clamp(1.3rem,3.4vw,1.75rem)/1.15 var(--display);
                letter-spacing:-.02em;color:var(--ink)}
 .picks-head p{margin:9px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink-soft);max-width:62ch}
-.picks-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.picks-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:13px}
 .picks-meta span{font:600 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;
                  color:var(--muted);background:var(--card);border:1px solid var(--rule);
                  border-radius:999px;padding:6px 11px}
+.picks-see-all{font:700 12.5px/1 var(--display);color:var(--signal);text-decoration:none}
+.picks-see-all:hover{text-decoration:underline}
+/* amazon-picks.html: same .pick/.pick-lasso cards as the homepage rail, just
+   wrapped for a grid since there's no viewport to scroll-snap into. */
+.picks-page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+                 gap:14px;margin-top:18px}
+.picks-page-grid-lasso{grid-template-columns:repeat(auto-fill,minmax(360px,1fr))}
+.picks-page-grid .pick{flex:none;width:100%}
 /* Carousel, not a wrapping grid: past a handful of picks a flat grid pushes
    the eBay/Walmart deals grid too far down the page. Same scroll-snap rail
    mechanism as .td-rail (see that comment for why it's native, not a library). */
