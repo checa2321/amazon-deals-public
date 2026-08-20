@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i.ebayimg.com/images/g/8PkAAeSww5Nqdk0v/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.ebayimg.com/images/g/8PkAAeSww5Nqdk0v/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"French Connection 59054FCU653 Smoke Cat Eye Ladies Sunglasses 10261794.LTS CRY","description":"77% off -- was $64.00, now $14.83 at Ebay.","image":"https://i.ebayimg.com/images/g/8PkAAeSww5Nqdk0v/s-l500.jpg","offers":{"@type":"Offer","price":"14.83","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-178313848471.html","priceValidUntil":"2026-08-20T08:07:31Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Fashion & Accessories","item":"https://halfornothing.com/fashion.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"French Connection 59054FCU653 Smoke Cat Eye Ladies Sunglasses 10261794.LTS CRY","description":"77% off -- was $64.00, now $14.83 at Ebay.","image":"https://i.ebayimg.com/images/g/8PkAAeSww5Nqdk0v/s-l500.jpg","offers":{"@type":"Offer","price":"14.83","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-178313848471.html","priceValidUntil":"2026-08-20T09:02:32Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Fashion & Accessories","item":"https://halfornothing.com/fashion.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -254,6 +254,29 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 #catClear{background:var(--card);color:var(--ink);border:1px solid var(--rule);border-radius:999px;
           padding:9px 14px;font-size:13px;cursor:pointer}
 #catClear:hover{border-color:var(--signal)}
+
+/* amazon-picks.html's category filter sits inline in .picks-meta as a
+   fourth pill next to "N picks / Curated by hand / Amazon associate link"
+   -- #catFilterBtn above is an ID selector that only ever matched the deals
+   page's button, so this page's button rendered with zero styling (browser
+   default) until this rule existed. Matches .picks-meta span's exact look
+   rather than the deals page's larger pill so it reads as one row, not two
+   different UI languages stacked on top of each other. */
+#picksCatBtn{font:600 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;
+             color:var(--muted);background:var(--card);border:1px solid var(--rule);
+             border-radius:999px;padding:6px 11px;cursor:pointer}
+#picksCatBtn:hover{border-color:var(--signal);color:var(--signal)}
+/* z-index bumped past the deals-page panel's 40: the Lasso embeds in the
+   grid directly below this panel render as iframes, which can create their
+   own stacking context that ignores a same-level z-index and paints over a
+   position:absolute sibling regardless of source order. */
+#picksCatPanel{z-index:60}
+#picksCatApply{flex:1;background:var(--signal);color:#fff;border:none;border-radius:999px;
+               padding:9px 0;font-weight:700;font-size:13px;cursor:pointer}
+#picksCatApply:hover{background:var(--signal-dark)}
+#picksCatClear{background:var(--card);color:var(--ink);border:1px solid var(--rule);border-radius:999px;
+               padding:9px 14px;font-size:13px;cursor:pointer}
+#picksCatClear:hover{border-color:var(--signal)}
 
 /* ---- Amazon picks: hand-curated, deliberately NOT a deal card ----
    No price, no %-off badge, no Amazon product image, by policy (see
@@ -894,7 +917,7 @@ html{scroll-behavior:smooth}
 <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 2h26L2 28z" fill="currentColor"/><path d="M30 4v26H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
 <span class="lg-half">HALF</span><span class="lg-or">or</span><span class="lg-nothing">NOTHING</span></a>
 
-<div class="links"><a href="index.html">Deals</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
+<div class="links"><a href="index.html">Deals</a><a href="amazon-picks.html">Amazon Picks</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
 </div></nav>
 <header class="mast"><span class="mast-ghost" id="mastGhost" aria-hidden="true">&#189;</span><div class="wrap">
 <h1 class="brand"><span class="half">Half</span> <span class="brand-or">or</span> <span class="brand-nothing">Nothing</span></h1>
