@@ -35,6 +35,80 @@
     // crawlable navigation; no JS needed beyond open/close.
   }
 
+  // ---- Amazon Picks page: category filter + load more ----
+  // Separate from the deals-grid logic below because picks cards (`.pick` /
+  // `.pick-lasso`) are a different render path (see _render_pick_card in
+  // html_output.py) with their own CSS, not the `.card`/`.grid` this file's
+  // main block expects -- and this file loads on every page, including
+  // amazon-picks.html, where `grid` above is always null.
+  (function(){
+    var picksCatBtn = document.getElementById('picksCatBtn');
+    var picksCatPanel = document.getElementById('picksCatPanel');
+    var picksLoadMore = document.getElementById('picksLoadMore');
+    var picksPager = document.getElementById('picksPager');
+    var picksPagerStatus = document.getElementById('picksPagerStatus');
+    var picksEmpty = document.getElementById('picksFilterEmpty');
+    var allPicks = Array.prototype.slice.call(document.querySelectorAll('.pick'));
+    if (!allPicks.length) return;
+    var PICKS_PAGE_SIZE = 40;
+    var pState = { cats: [], page: 1 };
+
+    function pMatches(card){
+      if (!pState.cats.length) return true;
+      return pState.cats.indexOf(card.getAttribute('data-cat')) !== -1;
+    }
+    function pRender(){
+      var filtered = allPicks.filter(pMatches);
+      var shown = Math.min(filtered.length, pState.page * PICKS_PAGE_SIZE);
+      var visible = new Set(filtered.slice(0, shown));
+      allPicks.forEach(function(c){ c.style.display = visible.has(c) ? '' : 'none'; });
+      if (picksEmpty) picksEmpty.style.display = filtered.length ? 'none' : '';
+      var remaining = filtered.length - shown;
+      if (picksPager) picksPager.style.display = filtered.length ? 'flex' : 'none';
+      if (picksLoadMore) {
+        picksLoadMore.style.display = remaining > 0 ? '' : 'none';
+        picksLoadMore.textContent = 'Load ' + Math.min(PICKS_PAGE_SIZE, remaining) + ' more';
+      }
+      if (picksPagerStatus) {
+        picksPagerStatus.textContent = filtered.length
+          ? ('Showing ' + shown + ' of ' + filtered.length)
+          : '';
+      }
+    }
+    if (picksLoadMore) picksLoadMore.addEventListener('click', function(){
+      pState.page++;
+      pRender();
+    });
+    if (picksCatBtn && picksCatPanel) {
+      picksCatBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var was = picksCatPanel.classList.contains('open');
+        closeAll();
+        if (!was) picksCatPanel.classList.add('open');
+      });
+      picksCatPanel.addEventListener('click', function(e){ e.stopPropagation(); });
+      var picksApplyBtn = document.getElementById('picksCatApply');
+      var picksClearBtn = document.getElementById('picksCatClear');
+      if (picksApplyBtn) picksApplyBtn.addEventListener('click', function(){
+        var vals = [];
+        Array.prototype.forEach.call(picksCatPanel.querySelectorAll('input[type=checkbox]:checked'), function(b){
+          vals.push(b.value);
+        });
+        pState.cats = vals;
+        pState.page = 1;
+        picksCatBtn.textContent = vals.length ? ('Category (' + vals.length + ') ▾') : 'Category ▾';
+        picksCatPanel.classList.remove('open');
+        pRender();
+      });
+      if (picksClearBtn) picksClearBtn.addEventListener('click', function(){
+        Array.prototype.forEach.call(picksCatPanel.querySelectorAll('input[type=checkbox]'), function(b){
+          b.checked = false;
+        });
+      });
+    }
+    pRender();
+  })();
+
   if (!grid) return;
   var PAGE_SIZE = 40;
 
