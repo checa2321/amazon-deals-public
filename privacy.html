@@ -1,11 +1,17 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1R6E61L78L"></script>
+<script src="/assets/js/ga-init.js"></script>
+<script src="/assets/js/impact-tag.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy. Half or Nothing</title>
 <meta name="description" content="Half or Nothing collects nothing about you: no account, no analytics, no cookies set by this site. What the affiliate links and retailers do is spelled out here.">
-<meta name="impact-site-verification" value="af49e245-f07a-4b19-a67e-c1898e402a49">
+<meta name="impact-site-verification" value="fe006b32-5210-45b2-8b46-90aba1f5bbd3">
 <meta name="fo-verify" content="36141c38-378c-45b6-b864-23d8c13b94c4">
 <meta name="google-site-verification" content="f7g1-1eLILyzP5F5ZoIs4WsJXi_sfJB0Rm3-kYCop9w" />
+<meta name="p:domain_verify" content="b06c80659cb177658cb0a074eb84ed5a"/>
+<meta name="facebook-domain-verification" content="102jd0a5hrhgjx2lcmhxphz3614sa3" />
+<meta name="mitgo-verification" content="46ae6829-e2d7-444b-8d2a-5aafdcff824e" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 2h26L2 28z' fill='%23D93A12'/><path d='M30 4v26H4z' fill='none' stroke='%23D93A12' stroke-width='2.6' stroke-linejoin='round'/></svg>">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#D93A12">
@@ -83,17 +89,40 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
    mark below doesn't actually need the clip: it's inset a fixed 20px from
    the right edge (can't overflow horizontally) and hidden outright on
    mobile, so nothing was relying on this. */
-.mast{background:var(--card);color:var(--ink);padding:26px 0 24px;position:relative;
-      border-bottom:1px solid var(--rule)}
-/* left is set by JS (see INTERACTION_SCRIPT) to line up with the nav's
-   "Deals" link -- two different rows of the layout, so CSS alone can't
-   express "same x as that other element" once the nav is wide enough to
-   wrap links differently. right:20px is only the pre-JS/no-JS fallback. */
-.mast-ghost{position:absolute;right:20px;top:50%;transform:translateY(-48%);
-            font:900 140px/1 Georgia,serif;color:rgba(0,168,99,.09);
+/* The banner was flat white with a grey rule until 2026-08-13, which made the
+   whole top of the site read as black-and-white (Che: "come on you can do
+   better"). The colour is put in as a bloom weighted to the right, not as a
+   flat fill: the wordmark and tagline live in the left third, so that third
+   stays on plain --card and keeps its full ink-on-white contrast, while the
+   empty right half of the band (which carried nothing but the ghost mark)
+   does the work of looking alive. Three radial washes rather than one
+   gradient so the hues meet at soft edges instead of a visible seam. */
+.mast{color:var(--ink);padding:30px 0 28px;position:relative;border-bottom:0;
+      background:
+        radial-gradient(900px 340px at 86% 14%, rgba(217,58,18,.26), transparent 62%),
+        radial-gradient(720px 320px at 62% 104%, rgba(240,165,0,.32), transparent 60%),
+        radial-gradient(700px 320px at 104% 86%, rgba(0,168,99,.24), transparent 62%),
+        linear-gradient(100deg, var(--card) 0%, var(--card) 32%, #FFF2E4 68%, #FFE6D2 100%)}
+/* Same gradient hairline that closes the Amazon Picks band, so the two
+   coloured edges on the page read as one motif rather than two accidents. */
+.mast::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+             background:linear-gradient(90deg,var(--signal),#E8890C 42%,#F0A500 62%,var(--gate))}
+/* Sits at the content column's right edge -- the x where the Top Deals
+   carousel ends -- which is Che's call (2026-08-13) and pure arithmetic off
+   .wrap's own max-width and padding, so the JS that used to measure the nav's
+   "Deals" link and place this by hand is gone. */
+.mast-ghost{position:absolute;top:50%;transform:translateY(-48%);
+            right:max(28px, calc((100% - 1180px) / 2 + 28px));
+            font:900 clamp(130px,14vw,178px)/1 Georgia,serif;
+            color:rgba(0,168,99,.1);
             pointer-events:none;user-select:none;z-index:0}
-@supports(-webkit-text-stroke:2px red){
-  .mast-ghost{color:transparent;-webkit-text-stroke:2px rgba(0,168,99,.26)}
+/* Gradient-filled rather than outlined: at this size an outline reads as a
+   stray hairline, a fill reads as brand colour. Kept low-alpha so it stays
+   behind the stats line it overlaps. */
+@supports((-webkit-background-clip:text) or (background-clip:text)){
+  .mast-ghost{color:transparent;-webkit-text-stroke:0;
+              background:linear-gradient(150deg,var(--signal),#F0A500 55%,var(--gate));
+              -webkit-background-clip:text;background-clip:text;opacity:.3}
 }
 @media(max-width:760px){.mast-ghost{display:none}}
 .brand{font-weight:800;letter-spacing:-.02em;line-height:.95;position:relative;
@@ -227,23 +256,258 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 #catClear:hover{border-color:var(--signal)}
 
 /* ---- Amazon picks: hand-curated, deliberately NOT a deal card ----
-   No price, no %-off badge, no product image, by policy (see
-   _amazon_picks_html). So the card leans on type instead: the title does the
-   work a product photo does elsewhere, and Che's note is the reason to click.
-   Dotted border rather than the deal card's solid one, so at a glance the eye
-   reads "different kind of thing" before it reads a word. */
-.picks{margin:30px 0 6px;padding:22px 0 4px;border-top:1px solid var(--rule)}
-.picks-head h2{margin:0;font:800 1.05rem/1.2 var(--display);letter-spacing:-.01em;color:var(--ink)}
-.picks-head p{margin:5px 0 16px;font-size:13px;color:var(--muted);max-width:60ch}
-.picks-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.pick{display:flex;flex-direction:column;gap:7px;padding:15px 16px;text-decoration:none;
-      background:var(--card);border:1.5px dashed var(--rule);border-radius:6px;
-      transition:border-color .15s ease,transform .15s ease}
-.pick:hover{border-color:var(--signal);transform:translateY(-2px)}
-.pick-title{font:700 14px/1.35 var(--display);color:var(--ink)}
-.pick-note{font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
-.pick-cta{margin-top:auto;padding-top:4px;font:600 12px/1 var(--mono);color:var(--signal)}
-@media(max-width:560px){.picks-grid{grid-template-columns:1fr}}
+   No price, no %-off badge, no Amazon product image, by policy (see
+   _amazon_picks_html). Every other card on this page is carried by a product
+   photo and a big orange %-off pill; strip both and what was left read as a
+   list of grey text links nobody's eye stopped on (Che, 2026-08-13: "esta muy
+   simple, ni se nota").
+
+   The fix is to stop treating the missing photo as a hole and give the card
+   art we're allowed to own: a category-coloured gradient panel carrying a
+   line-drawn glyph and the pick's rank numeral. That art is generated from
+   the pick's category, so it costs no request, can't 404, and can never be
+   Amazon Product Advertising Content. Result is a rail with real colour
+   rhythm sitting inside its own banded section, so the eye reads
+   "editorial shelf, not scanner output" before it reads a word. */
+.picks{position:relative;margin:34px 0 8px;padding:26px 24px 28px;overflow:hidden;
+       background:var(--paper-2);border:1px solid var(--rule);border-radius:24px}
+/* The gold hairline is the section's only fixed colour. Picks are the one
+   thing on the page a human chose, so they get an accent the machine-made
+   cards (all --signal red) never use. */
+.picks::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+               background:linear-gradient(90deg,#F0A500,#E8890C 45%,var(--signal))}
+@media(max-width:640px){.picks{padding:20px 14px 22px;border-radius:18px}}
+.picks-head{margin-bottom:18px}
+.picks-eyebrow{display:inline-flex;align-items:center;gap:7px;
+               font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+               color:#B8791A;margin-bottom:9px}
+.picks-eyebrow::before{content:"";width:16px;height:2px;background:#E8890C}
+.picks-head h2{margin:0;font:800 clamp(1.3rem,3.4vw,1.75rem)/1.15 var(--display);
+               letter-spacing:-.02em;color:var(--ink)}
+.picks-head p{margin:9px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink-soft);max-width:62ch}
+.picks-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:13px}
+.picks-meta span{font:600 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;
+                 color:var(--muted);background:var(--card);border:1px solid var(--rule);
+                 border-radius:999px;padding:6px 11px}
+.picks-see-all{font:700 12.5px/1 var(--display);color:var(--signal);text-decoration:none}
+.picks-see-all:hover{text-decoration:underline}
+/* amazon-picks.html: same .pick/.pick-lasso cards as the homepage rail, just
+   wrapped for a grid since there's no viewport to scroll-snap into. */
+.picks-page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+                 gap:14px;margin-top:18px}
+.picks-page-grid-lasso{grid-template-columns:repeat(auto-fill,minmax(360px,1fr))}
+.picks-page-grid .pick{flex:none;width:100%}
+/* Carousel, not a wrapping grid: past a handful of picks a flat grid pushes
+   the eBay/Walmart deals grid too far down the page. Same scroll-snap rail
+   mechanism as .td-rail (see that comment for why it's native, not a library). */
+.picks-rail{position:relative}
+.picks-viewport{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+                scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;
+                margin:0 -6px;padding:6px}
+.picks-viewport::-webkit-scrollbar{display:none}
+.picks-track{display:flex;gap:14px;width:max-content;padding-bottom:2px}
+.pick{scroll-snap-align:start;flex:0 0 236px;width:236px;display:flex;flex-direction:column;
+      text-decoration:none;overflow:hidden;
+      background:var(--card);border:1px solid var(--rule);border-radius:14px;
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.pick:hover,.pick:focus-visible{transform:translateY(-4px);border-color:transparent;
+      box-shadow:0 12px 26px rgba(0,0,0,.15)}
+/* --pk-a/--pk-b are set per card from the pick's category (PICK_FAMILIES). */
+.pick-art{position:relative;height:132px;display:flex;align-items:flex-end;padding:12px 13px;
+          background:linear-gradient(140deg,var(--pk-a,#52525B),var(--pk-b,#27272A));
+          color:#fff;overflow:hidden}
+/* Glyph and numeral are the two layers doing the product photo's job: the
+   glyph says what kind of thing this is at thumbnail size, the numeral says
+   the list is ordered and finite. Both sit under the chip, never over it. */
+.pick-glyph{position:absolute;top:16px;left:14px;width:40px;height:40px;
+            stroke:#fff;stroke-width:1.6;fill:none;opacity:.95;
+            stroke-linecap:round;stroke-linejoin:round;
+            transition:transform .25s ease}
+.pick:hover .pick-glyph{transform:scale(1.12) rotate(-4deg)}
+.pick-num{position:absolute;top:-6px;right:6px;font:800 62px/1 var(--display);
+          letter-spacing:-.04em;color:rgba(255,255,255,.22);pointer-events:none;
+          font-variant-numeric:tabular-nums}
+.pick-cat{position:relative;z-index:2;max-width:100%;
+          font:700 9.5px/1.2 var(--mono);letter-spacing:.07em;text-transform:uppercase;
+          background:rgba(0,0,0,.32);border-radius:999px;padding:6px 10px;
+          overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pick-body{display:flex;flex-direction:column;gap:7px;padding:13px 14px 14px;flex:1}
+.pick-title{font:700 13.5px/1.38 var(--display);color:var(--ink);
+            display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+            transition:color .15s ease}
+.pick:hover .pick-title{color:var(--signal)}
+.pick-note{font-size:12.5px;line-height:1.5;color:var(--ink-soft);
+           display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pick-cta{margin-top:auto;padding-top:11px;border-top:1px solid var(--rule);
+          display:flex;align-items:center;justify-content:space-between;gap:8px;
+          font:700 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;
+          color:var(--signal)}
+.pick-cta i{font-style:normal;transition:transform .18s ease}
+.pick:hover .pick-cta i{transform:translateX(4px)}
+.picks-arrow{position:absolute;top:66px;transform:translateY(-50%);z-index:5;
+             width:38px;height:38px;border-radius:50%;cursor:pointer;
+             background:var(--card);border:1px solid var(--rule);color:var(--ink);
+             font:400 22px/1 var(--display);display:flex;align-items:center;justify-content:center;
+             box-shadow:0 2px 10px rgba(0,0,0,.16);
+             transition:background .15s ease,color .15s ease,border-color .15s ease,opacity .15s ease}
+.picks-arrow:hover{background:var(--signal);border-color:var(--signal);color:#fff}
+.picks-arrow:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.picks-arrow[disabled]{opacity:0;pointer-events:none}
+.picks-prev{left:-13px}
+.picks-next{right:-13px}
+@media(max-width:820px){
+  .pick{flex:0 0 200px;width:200px}
+  .pick-art{height:118px}
+  .picks-arrow{display:none}
+  .picks-viewport,.picks-lasso-viewport{scroll-snap-type:x proximity}
+}
+
+/* ---- Amazon picks: real Lasso embeds (photo, price, Buy button) ----
+   Lasso's own embed lays itself out as a text/image flex split sized for a
+   wide column; forced into the 236px rail alongside the SVG-art picks, the
+   image shrank to a ~36px sliver and the full product description stretched
+   the card past 1500px tall (Che, 2026-08-15: unacceptable). Fixed 120x120
+   photo + grid-templated boxes (below) solved that; these render as their own
+   horizontal scroll-snap rail -- same mechanism as .picks-rail/.td-rail --
+   rather than a 2-col grid, so more of them fit across without pushing the
+   page down a full row per pair (Che, 2026-08-15). initRail('lassoViewport',
+   ...) below drives the arrow buttons. */
+.picks-lasso-rail{position:relative;margin-top:14px}
+.picks-lasso-rail .picks-arrow{top:50%}
+.picks-lasso-viewport{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+                scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;
+                margin:0 -6px;padding:6px}
+.picks-lasso-viewport::-webkit-scrollbar{display:none}
+.picks-lasso-track{display:flex;gap:14px;width:max-content;padding-bottom:2px}
+.pick-lasso{scroll-snap-align:start;flex:0 0 400px;width:400px;background:var(--card);
+            border:1px solid var(--rule);border-radius:14px;padding:16px;position:relative;
+            overflow:hidden;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.pick-lasso:hover{transform:translateY(-4px);border-color:transparent;box-shadow:0 12px 26px rgba(0,0,0,.15)}
+@media(max-width:640px){.pick-lasso{flex:0 0 320px;width:320px}}
+/* Category chip + rank numeral, carried over from the SVG-art picks (same
+   --pk-a/--pk-b/_pick_art() as those cards) so the two rails read as one
+   family. Both sit in the card's own chrome -- absolutely positioned over
+   the *card*, never over the <img> itself -- so nothing here touches,
+   recolors or overlays Amazon's product photo (Che, 2026-08-15: wanted the
+   old carousel's look back without risking Amazon's content-alteration
+   rules; keeping our art off the photo entirely is the line). */
+.pick-lasso-num{position:absolute;top:2px;right:14px;font:800 54px/1 var(--display);
+            letter-spacing:-.03em;color:var(--pk-a,var(--rule));opacity:.16;
+            pointer-events:none;font-variant-numeric:tabular-nums;z-index:0}
+.pick-lasso-cat{position:absolute;top:14px;right:14px;z-index:2;max-width:150px;
+            font:700 9px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+            color:#fff;background:linear-gradient(135deg,var(--pk-a,#52525B),var(--pk-b,#27272A));
+            border-radius:999px;padding:5px 10px;overflow:hidden;text-overflow:ellipsis;
+            white-space:nowrap}
+.pick-lasso .lasso-embed{position:relative;z-index:1}
+/* Lasso's Cutter theme splits box-1 (title/price/desc) and box-2 (image) as a
+   50/50 *proportion* of the card, so the photo shrinks every time the card
+   does -- the opposite of every other product photo on this site, which is a
+   fixed 120x120 .thumb that never shrinks (Che, 2026-08-15: wants the eBay/
+   Walmart card shape, photo pinned at .thumb size, not scaling down). Grid
+   areas take over box placement entirely (ignoring Lasso's own flex
+   percentages, all !important, via a more specific selector -- same
+   technique already proven for the color variables above) so the photo
+   column is a hard 120px like .thumb and only the text column flexes.
+
+   Which box is which is NOT consistent: embeds minted via the Lasso
+   WordPress plugin (the first 20) put title/price in box-1 and the image in
+   box-2, but a "Boosted"/badged product (2026-08-15: caught on Soundcore,
+   which shows a "Limited time deal" ribbon) swaps to box-1=image,
+   box-2=everything-else instead. Targeting by :has() on what's actually
+   inside the box, rather than the box's number, makes this correct either
+   way instead of only for whichever layout happened to get tested. box-4 is
+   Lasso's own always-empty box. box-5 (commission disclosure) and box-6 (the
+   "price accurate as of <date>" stamp) both stay -- Che flagged 2026-08-15
+   that a price served live off Amazon's API needs that "as of" timestamp
+   visible to stay inside Amazon's own pricing-display terms, so this only
+   compacts them to one line each rather than dropping either. Description
+   dropped per the same note -- these are one-line picks now, not blurbs. */
+.pick-lasso .embed-lasso-display{display:grid !important;grid-template-columns:120px 1fr !important;
+            grid-template-areas:"img text" "btn btn" "meta meta" "date date" !important;
+            column-gap:14px !important;row-gap:4px !important;align-items:center !important;
+            margin:0 !important;padding:0 !important}
+.pick-lasso .embed-lasso-box-1:has(.embed-lasso-title),
+.pick-lasso .embed-lasso-box-2:has(.embed-lasso-title){
+            grid-area:text !important;flex:none !important;max-width:none !important;
+            padding:26px 0 0 !important;align-self:center !important}
+.pick-lasso .embed-lasso-box-1:has(.embed-lasso-image),
+.pick-lasso .embed-lasso-box-2:has(.embed-lasso-image){
+            grid-area:img !important;flex:none !important;max-width:none !important;
+            margin:0 !important;padding:0 !important;align-self:start !important}
+.pick-lasso .embed-lasso-box-3{grid-area:btn !important;flex:none !important;max-width:none !important;padding:0 !important}
+.pick-lasso .embed-lasso-box-4{display:none !important}
+.pick-lasso .embed-lasso-box-5{grid-area:meta !important;flex:none !important;
+            max-width:none !important;padding:0 !important;display:block !important}
+.pick-lasso .embed-lasso-box-6{grid-area:date !important;flex:none !important;
+            max-width:none !important;padding:0 !important;display:block !important}
+/* The "boosted"/badged structure (see the :has() comment above) bundles
+   disclosure+date together in one .embed-lasso-end div, nested INSIDE the
+   box that also holds title/price/button -- so on a narrow (mobile) card
+   that div only gets the ~186px text column, not the full card width, and
+   "Half or Nothing may earn commissions..." wrapped into 5+ ragged lines
+   (Che, 2026-08-16: only picks using the OTHER structure, box-5/6, looked
+   right). CSS Grid can't hand a nested element its own grid-area without
+   dissolving every sibling around it too (title/price would need their own
+   areas and start overlapping) -- so retheme() below physically moves
+   .embed-lasso-end out to be a direct child of .embed-lasso-display instead,
+   the same DOM-surgery approach already used there for the title/button
+   text. This rule is just where it lands once moved. */
+.pick-lasso .embed-lasso-end{grid-area:meta !important;width:100% !important}
+.pick-lasso .embed-lasso-image{display:block !important;margin:0 !important;padding:0 !important}
+.pick-lasso .embed-lasso-image-no-lazy{width:120px !important;height:120px !important;
+            object-fit:contain !important;border-radius:12px;border:1px solid var(--rule);
+            background:var(--paper-3)}
+.pick-lasso .embed-lasso-title,.pick-lasso a.embed-lasso-title{font-size:14px !important;
+            line-height:1.4 !important;font-weight:600 !important;margin:0 0 4px !important}
+.pick-lasso .embed-lasso-price{font-size:13px !important;margin:0 !important}
+.pick-lasso .embed-lasso-description{display:none !important}
+.pick-lasso a.embed-lasso-button-1{grid-area:btn !important;padding:9px 14px !important;
+            font-size:12px !important;border-radius:8px !important}
+.pick-lasso .embed-lasso-date,.pick-lasso .embed-lasso-disclosure{font-size:10.5px !important;
+            padding:0 !important;color:var(--muted) !important}
+/* Price gets its own accent (Che, 2026-08-15: bigger, different color if
+   possible) -- reusing --signal, the same red the eBay/Walmart cards use for
+   their own price numbers, so it reads as "the number that matters" rather
+   than introducing a third accent color to the section. Lasso's own price
+   rule hardcodes color:rgb(0,0,0) (not a variable), so it has to be beaten
+   the same specificity way as everything else here, not just relied on to
+   inherit --embed-lasso-title. */
+.pick-lasso .embed-lasso-price{font-size:20px !important;font-weight:800 !important;
+            color:var(--signal) !important;margin:2px 0 8px !important;display:flex !important;
+            align-items:baseline !important;gap:8px !important;flex-wrap:wrap !important}
+/* .price-was/.pct-pill are appended into .embed-lasso-price by the retheme()
+   script below, from a list price Che hand-verified on Amazon itself (Lasso's
+   own base_price field is not reliable enough to trust for this -- caught it
+   reporting "no discount" on items Amazon's own page showed at -50% the same
+   day, 2026-08-15). Reused classes, not new ones, so a real discount here
+   looks exactly like a real discount on every other card on the site.
+   .pick-lasso-coupon is ours: a coupon Amazon offers on top of that price,
+   which nothing else on the page has a slot for. */
+.pick-lasso-coupon{font:700 11px/1.3 var(--mono);color:var(--gate);margin:-4px 0 8px;
+            letter-spacing:.02em}
+/* These 20 embeds were minted through Lasso's WordPress plugin flow, not the
+   Websites/halfornothing.com project Che configures in Lasso's own "Display
+   Settings" -- so the badge/button colors he set and saved there (verified
+   persisted, 2026-08-15) never reach them; each embed carries its own frozen
+   color snapshot from creation, injected as `.lasso-embed{--embed-lasso-*:
+   ... !important}`. Same values, applied here instead: this selector is more
+   specific than Lasso's own, so it wins the cascade regardless of !important
+   on both sides. Update these if Che changes the palette in Lasso again --
+   this does not read from there live. Title is tied to the site's own --ink
+   instead of a fixed hex so it stays legible in whichever theme the visitor
+   has (Che, 2026-08-15: background should follow light/dark, not stay
+   hardcoded white). Background is transparent rather than var(--card): the
+   embed no longer needs to paint its own card surface -- .pick-lasso already
+   does, in the same theme-aware color -- and painting it a second time here
+   opaquely covered the category chip/rank numeral sitting behind it. */
+.pick-lasso .lasso-embed{
+  --embed-lasso-main:#00A863 !important;
+  --embed-lasso-title:var(--ink) !important;
+  --embed-lasso-button:#FF9900 !important;
+  --embed-lasso-button-text:#ffffff !important;
+  --embed-lasso-background:transparent !important;
+}
 
 /* ---- mega menu (top nav Categories, DealNews-style flyout) ---- */
 .megamenu-wrap{position:relative;margin:16px 0 0}
@@ -558,12 +822,72 @@ html{scroll-behavior:smooth}
   .best-cta{background:var(--signal-dark);border-color:var(--signal-dark)}
   .best-cta:hover{background:var(--card);color:var(--signal)}
   .src-tag{background:#45453F}
+  /* The picks eyebrow gold is mixed for white paper; on the dark band it
+     drops below the contrast floor, so it lightens rather than inverts. */
+  .picks-eyebrow{color:#E8A33A}
+  .picks-eyebrow::before{background:#E8A33A}
+  /* The banner's warm paper tint would glow grey-white here, so the base
+     ramps into a warm near-black instead and the washes carry more alpha to
+     stay visible against it. Same three hues, same right-weighted bloom. */
+  .mast{background:
+        radial-gradient(900px 340px at 86% 14%, rgba(255,79,41,.20), transparent 62%),
+        radial-gradient(720px 320px at 62% 104%, rgba(240,165,0,.16), transparent 60%),
+        radial-gradient(700px 320px at 104% 86%, rgba(31,191,127,.15), transparent 62%),
+        linear-gradient(100deg, var(--card) 0%, var(--card) 34%, #241B17 72%, #2B1F19 100%)}
+  .mast-ghost{opacity:.38}
   footer.site{border-top-color:var(--rule)}
 }
 
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+
+/* ---- durable per-deal pages (/d/{id}.html), pilot 2026-08-14 ---- */
+.deal-page{display:flex;gap:32px;margin:22px 0 40px;flex-wrap:wrap}
+.deal-page-media{flex:0 0 320px;max-width:100%;background:var(--card);
+                  border:1px solid var(--rule);border-radius:4px;overflow:hidden;
+                  display:flex;align-items:center;justify-content:center;min-height:240px}
+.deal-page-media img{width:100%;height:auto;display:block}
+.deal-page-body{flex:1 1 340px;min-width:0}
+.deal-page-body h1{font-size:1.4rem;line-height:1.3;margin:0 0 10px;font-weight:800}
+.deal-status{font:600 12px/1 var(--mono);letter-spacing:.03em;text-transform:uppercase;
+             margin:0 0 14px}
+.deal-status-live{color:var(--gate)}
+.deal-status-expired{color:var(--muted)}
+.deal-page-price{font-size:1.15rem;margin:0 0 18px}
+.deal-page-price b{color:var(--ink);font-size:1.5rem;margin-right:8px}
+.deal-page-price s{color:var(--muted);margin-right:8px}
+.deal-page-pct{font:800 12px/1 var(--mono);color:#fff;background:var(--signal);
+               padding:5px 8px;border-radius:999px;letter-spacing:.03em}
+.deal-cta{display:inline-block;background:var(--signal);color:#fff;font-weight:700;
+          text-decoration:none;padding:13px 22px;border-radius:4px;font-size:14.5px}
+.deal-cta:hover{background:var(--signal-dark)}
+.deal-cta-secondary{background:transparent;color:var(--signal);border:1px solid var(--signal)}
+.deal-cta-secondary:hover{background:var(--signal);color:#fff}
+.archive-list{list-style:none;margin:0 0 28px;padding:0;font-size:14px;line-height:2}
+.archive-list a{color:var(--ink-soft);text-decoration:none}
+.archive-list a:hover{color:var(--signal)}
+
+/* ---- Discount Index (discount-index.html), 2026-08-14 ---- */
+.idx-stat-row{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 30px}
+.idx-stat{background:var(--card);border:1px solid var(--rule);border-radius:6px;
+          padding:14px 18px;min-width:130px;flex:1 1 130px}
+.idx-stat b{display:block;font:800 1.6rem/1.1 var(--mono);color:var(--signal);
+            font-variant-numeric:tabular-nums;margin-bottom:2px}
+.idx-stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.idx-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 34px}
+.idx-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+.idx-table caption{text-align:left;font-weight:700;font-size:1rem;margin-bottom:10px;color:var(--ink)}
+.idx-table th,.idx-table td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--rule);
+                             white-space:nowrap}
+.idx-table th:first-child,.idx-table td:first-child{text-align:left;white-space:normal}
+.idx-table th{font:600 11px/1.3 var(--mono);letter-spacing:.04em;text-transform:uppercase;
+               color:var(--muted);vertical-align:bottom}
+.idx-table td{font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.idx-table td:first-child{color:var(--ink);font-weight:600}
+.idx-table td a{color:var(--ink);text-decoration:none}
+.idx-table td a:hover{color:var(--signal)}
+.idx-table tbody tr:hover td{background:var(--paper-2)}
 </style></head><body>
 <nav class="topnav"><div class="inner">
 <a class="logo" href="index.html" aria-label="Half or Nothing">
@@ -641,7 +965,7 @@ page gets updated <strong>before</strong> that goes live, and the date above cha
 </details>
 <details class="disclosure">
 <summary>eBay, Walmart &amp; Amazon</summary>
-<div class="disclosure-body"><p class="trust-line"><b>eBay and Walmart.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged.</p><p class="trust-line"><b>Amazon works differently.</b> The Amazon Picks section is hand-picked by Che, one at a time, with no price or discount number attached -- see <a href="about.html">About</a> for why.</p></div>
+<div class="disclosure-body"><p class="trust-line"><b>eBay and Walmart.</b> Rescanned hourly. Sorted purely by discount, and nothing under 50% is listed. No countdown timers, no invented scarcity: every number on this page is measured, not staged. See <a href="how-we-verify-deals.html">How We Verify Deals</a> for the full methodology.</p><p class="trust-line"><b>Amazon works differently.</b> The Amazon Picks section is hand-picked by Che, one at a time, with no price or discount number attached -- see <a href="about.html">About</a> for why.</p></div>
 </details>
 <details class="disclosure">
 <summary>Affiliate disclosure &amp; how this page is built</summary>
@@ -663,638 +987,18 @@ page gets updated <strong>before</strong> that goes live, and the date above cha
 <li><a href="https://www.instagram.com/halfornothing_" target="_blank" rel="noopener me" aria-label="Half or Nothing on Instagram" title="@halfornothing_">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
 </a></li>
-<li><a href="https://www.facebook.com/profile.php?id=1205000582704641" target="_blank" rel="noopener me" aria-label="Half or Nothing on Facebook" title="Half or Nothing">
+<li><a href="https://www.facebook.com/profile.php?id=61593284395516" target="_blank" rel="noopener me" aria-label="Half or Nothing on Facebook" title="Half or Nothing">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+</a></li>
+<li><a href="https://www.pinterest.com/halfornothing_/" target="_blank" rel="noopener me" aria-label="Half or Nothing on Pinterest" title="@halfornothing_">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.86-2.056-4.861-4.99-4.861-3.399 0-5.393 2.549-5.393 5.184 0 1.027.395 2.127.889 2.726a.36.36 0 0 1 .083.343c-.091.378-.293 1.192-.332 1.36-.053.218-.174.265-.402.159-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.379l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.62 0 11.988-5.367 11.988-11.987C23.997 5.367 18.628 0 12.017 0z"/></svg>
 </a></li>
 </ul>
 </div></footer>
 </main>
 <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">&#9650;</button>
-<script>
-(function(){
-  var SOCIAL_CUSTOM_ID = 'honsocial';
-  function closeAll(){
-    var open = document.querySelectorAll('.over-menu.active,.megamenu.open,.catfilter-panel.open,.has-sub.open,.mega-left>li.open');
-    Array.prototype.forEach.call(open, function(el){
-      el.classList.remove('active');
-      el.classList.remove('open');
-      // The trigger's aria-expanded has to come back down with the panel, or
-      // assistive tech keeps announcing a menu that is no longer on screen.
-      var trig = el.querySelector(':scope > [aria-expanded]');
-      if (trig) trig.setAttribute('aria-expanded', 'false');
-    });
-  }
-  document.addEventListener('click', closeAll);
-  // Escape closes whatever is open, the behaviour every menu widget is
-  // expected to have and the only way out for a keyboard user.
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeAll();
-  });
-
-  var grid = document.querySelector('.grid');
-
-  // ---- top-nav Categories mega menu (all pages) ----
-  var megaBtn = document.getElementById('megaBtn');
-  var megaPanel = document.getElementById('megaPanel');
-  if (megaBtn && megaPanel) {
-    megaBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      var was = megaPanel.classList.contains('open');
-      closeAll();
-      if (!was) megaPanel.classList.add('open');
-    });
-    megaPanel.addEventListener('click', function(e){ e.stopPropagation(); });
-    // mega-menu links are plain hrefs to the per-category pages -- real,
-    // crawlable navigation; no JS needed beyond open/close.
-  }
-
-  if (!grid) return;
-  var PAGE_SIZE = 40;
-
-  var allCards = Array.prototype.filter.call(grid.children, function(el){
-    return el.classList.contains('card');
-  });
-  var banner = grid.querySelector('.divider-banner');
-  if (banner) banner.style.display = 'none';
-
-  // ---- card markup, browser side ----
-  // Mirrors _card() in html_output.py. Only the markup is duplicated: every
-  // value it prints is computed once in Python by _card_fields() and carried
-  // in deals.json, so the display *rules* live in one place. If you change
-  // the card's structure or its data- attributes in _card(), change them
-  // here too, because the grid ends up holding cards from both builders.
-  function esc(s){
-    return String(s == null ? '' : s)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
-  }
-  function money(n){ return '$' + Number(n).toFixed(2); }
-
-  function buildCard(d){
-    var url = esc(d.url || '#');
-    var title = esc(d.title);
-    var thumb = d.image_url
-      ? "<a class='thumb' href='" + url + "' target='_blank' rel='noopener sponsored' tabindex='-1' aria-hidden='true'>"
-        + '<img src="' + esc(d.image_url) + '" alt="' + esc(String(d.title).slice(0,100)) + '"'
-        + ' loading="lazy" decoding="async" width="120" height="120" referrerpolicy="no-referrer"></a>'
-      : "<span class='thumb noimg'>No image</span>";
-    var pills = '';
-    if (d.is_new) pills += "<span class='newpill'>New</span>";
-    // (pills intentionally minimal here -- see _card() in the generator)
-    var menu =
-      "<div class='over-menu' data-url='" + url + "' data-title='" + title + "'>"
-      + "<button type='button' class='dots' aria-haspopup='true' aria-expanded='false'"
-      + " aria-label='More options for " + title + "'>&#8942;</button>"
-      + "<div class='dropdown'>"
-      + "<button type='button' class='menu-open'>Open in New Tab</button>"
-      + "<a class='menu-report' href='contact.html'>Report an Error</a>"
-      + "<div class='has-sub'>"
-      + "<button type='button' class='menu-share-lbl' aria-expanded='false'>&#9666; Share</button>"
-      + "<div class='subdrop'>"
-      + "<button type='button' class='sh' data-net='copy'>Copy Link</button>"
-      + "<button type='button' class='sh' data-net='email'>Email</button>"
-      + "<button type='button' class='sh' data-net='facebook'>Facebook</button>"
-      + "<button type='button' class='sh' data-net='twitter'>Twitter / X</button>"
-      + "<button type='button' class='sh' data-net='pinterest'>Pinterest</button>"
-      + '</div></div></div></div>';
-
-    var el = document.createElement('div');
-    el.className = 'card ' + (d.is_new ? 'v' : 'z');
-    el.id = d.id;
-    el.setAttribute('data-cat', d.category || '');
-    el.setAttribute('data-subcat', d.subcategory || '');
-    el.setAttribute('data-title', String(d.title).toLowerCase());
-    el.setAttribute('data-price', d.price);
-    el.setAttribute('data-discount', d.discount_pct);
-    el.setAttribute('data-age', d.age_minutes);
-    el.innerHTML = thumb
-      + "<div class='body'>" + menu
-      + "<h3 class='clamp2'><a href='" + url + "' target='_blank' rel='noopener sponsored'>" + title + '</a></h3>'
-      + "<div class='prices'><span class='price-now'>" + money(d.price) + '</span>'
-      + "<span class='price-was'>" + money(d.original_price) + '</span>'
-      + "<span class='pct-pill'>" + Math.round(d.discount_pct) + '% off</span></div>'
-      + "<div class='meta'><span class='src-tag'>" + esc(d.source_label) + '</span>'
-      + '<span>Seen ' + esc(d.seen_text) + '</span>' + pills + '</div>'
-      + "<a class='cta' href='" + url + "' target='_blank' rel='noopener sponsored'>View Deal</a>"
-      + '</div>';
-    return el;
-  }
-
-  var searchEl = document.getElementById('dealSearch');
-  var sortEl = document.getElementById('dealSort');
-  var pagerEl = document.getElementById('pager');
-  var loadMoreBtn = document.getElementById('loadMore');
-  var pagerStatus = document.getElementById('pagerStatus');
-  var emptyEl = document.getElementById('filterEmpty');
-  var catBtn = document.getElementById('catFilterBtn');
-  var catPanel = document.getElementById('catFilterPanel');
-
-  var state = { search: '', cats: [], page: 1, sort: 'default' };
-
-  // `missing` decides which end an unparseable attribute lands on. It used to
-  // always be -Infinity, which is right for a descending sort (unknown goes
-  // last) and exactly wrong for an ascending one: a card with no data-price
-  // sorted to the very top of "Price: low to high" as if it were free.
-  function num(card, attr, missing){
-    var n = parseFloat(card.getAttribute(attr));
-    return isNaN(n) ? (missing === undefined ? -Infinity : missing) : n;
-  }
-  function matches(card){
-    if (state.cats.length) {
-      var cat = card.getAttribute('data-cat');
-      var sub = card.getAttribute('data-subcat');
-      var hit = false;
-      for (var i = 0; i < state.cats.length; i++) {
-        var v = state.cats[i];
-        if (v === cat || (sub && v === cat + ':' + sub)) { hit = true; break; }
-      }
-      if (!hit) return false;
-    }
-    if (state.search && card.getAttribute('data-title').indexOf(state.search) === -1) return false;
-    return true;
-  }
-  function sortCompare(a, b){
-    if (state.sort === 'name-asc') return a.getAttribute('data-title').localeCompare(b.getAttribute('data-title'));
-    if (state.sort === 'name-desc') return b.getAttribute('data-title').localeCompare(a.getAttribute('data-title'));
-    if (state.sort === 'price-asc') return num(a, 'data-price', Infinity) - num(b, 'data-price', Infinity);
-    if (state.sort === 'price-desc') return num(b, 'data-price') - num(a, 'data-price');
-    // data-age is minutes since last seen, so ascending = newest first, and an
-    // unknown age belongs at the bottom (Infinity), not billed as the freshest.
-    if (state.sort === 'newest') return num(a, 'data-age', Infinity) - num(b, 'data-age', Infinity);
-    return num(b, 'data-discount') - num(a, 'data-discount');
-  }
-
-  function render(){
-    var filtered = allCards.filter(matches);
-
-    if (state.sort !== 'default') {
-      filtered = filtered.slice().sort(sortCompare);
-      filtered.forEach(function(c){ grid.appendChild(c); });
-    }
-
-    // Cumulative, not paged: state.page counts how many batches are revealed,
-    // so loading more appends below what you were already reading instead of
-    // swapping the page under you and throwing you back to the top.
-    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-    if (state.page > totalPages) state.page = totalPages;
-    var shown = Math.min(filtered.length, state.page * PAGE_SIZE);
-    var visibleSet = new Set(filtered.slice(0, shown));
-
-    allCards.forEach(function(c){ c.style.display = visibleSet.has(c) ? '' : 'none'; });
-
-    if (emptyEl) emptyEl.style.display = filtered.length ? 'none' : '';
-    var remaining = filtered.length - shown;
-    if (pagerEl) pagerEl.style.display = remaining > 0 ? 'flex' : 'none';
-    if (pagerStatus) {
-      pagerStatus.textContent = filtered.length
-        ? ('Showing ' + shown + ' of ' + filtered.length)
-        : '';
-    }
-    if (loadMoreBtn) {
-      loadMoreBtn.textContent = remaining > 0
-        ? ('Load ' + Math.min(PAGE_SIZE, remaining) + ' more')
-        : 'Load more';
-    }
-  }
-
-  function applyCats(vals){
-    state.cats = vals;
-    state.page = 1;
-    if (catPanel) {
-      Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]'), function(b){
-        b.checked = vals.indexOf(b.value) !== -1;
-      });
-    }
-    if (catBtn) {
-      catBtn.textContent = vals.length ? ('Category (' + vals.length + ') \u25be') : 'Category \u25be';
-    }
-    render();
-  }
-
-  if (searchEl) {
-    searchEl.addEventListener('input', function(){
-      state.search = searchEl.value.trim().toLowerCase();
-      state.page = 1;
-      render();
-    });
-  }
-
-  if (sortEl) {
-    sortEl.addEventListener('change', function(){
-      state.sort = sortEl.value;
-      state.page = 1;
-      render();
-    });
-  }
-
-  // ---- category filter dropdown (checkbox panel + Apply) ----
-  if (catBtn && catPanel) {
-    catBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      var was = catPanel.classList.contains('open');
-      closeAll();
-      if (!was) {
-        Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]'), function(b){
-          b.checked = state.cats.indexOf(b.value) !== -1;
-        });
-        catPanel.classList.add('open');
-      }
-    });
-    catPanel.addEventListener('click', function(e){ e.stopPropagation(); });
-    // Subcategory rows are collapsed behind a caret on their parent. Delegated
-    // so it survives the panel being rebuilt, and opened automatically when a
-    // subcategory inside is already part of the active filter -- otherwise
-    // reopening the panel shows the parent unchecked with its checked child
-    // hidden, which reads as the filter having been lost.
-    catPanel.addEventListener('click', function(e){
-      var caret = e.target.closest ? e.target.closest('.catfilter-caret') : null;
-      if (!caret) return;
-      var subs = caret.parentNode.nextElementSibling;
-      if (!subs || subs.className.indexOf('catfilter-subs') === -1) return;
-      var open = subs.classList.toggle('open');
-      caret.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    catBtn.addEventListener('click', function(){
-      Array.prototype.forEach.call(catPanel.querySelectorAll('.catfilter-subs'), function(subs){
-        if (!subs.querySelector('input:checked')) return;
-        subs.classList.add('open');
-        var caret = subs.previousElementSibling &&
-                    subs.previousElementSibling.querySelector('.catfilter-caret');
-        if (caret) caret.setAttribute('aria-expanded', 'true');
-      });
-    });
-    var applyBtn = document.getElementById('catApply');
-    var clearBtn = document.getElementById('catClear');
-    if (applyBtn) applyBtn.addEventListener('click', function(){
-      var vals = [];
-      Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]:checked'), function(b){
-        vals.push(b.value);
-      });
-      applyCats(vals);
-      catPanel.classList.remove('open');
-    });
-    if (clearBtn) clearBtn.addEventListener('click', function(){
-      Array.prototype.forEach.call(catPanel.querySelectorAll('input[type=checkbox]'), function(b){
-        b.checked = false;
-      });
-    });
-  }
-
-  // No scroll jump: the newly revealed cards start exactly where the button
-  // was, so the reader carries on from the same spot.
-  if (loadMoreBtn) loadMoreBtn.addEventListener('click', function(){
-    state.page++;
-    render();
-  });
-
-  // ---- per-card overflow menu: open in new tab / report / share flyout ----
-  function copyToClipboard(text){
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text);
-      return;
-    }
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.focus();
-    ta.select();
-    try { document.execCommand('copy'); } catch (err) {}
-    document.body.removeChild(ta);
-  }
-  function shareTarget(net, pageUrl, title){
-    var u = encodeURIComponent(pageUrl);
-    var t = encodeURIComponent(title);
-    if (net === 'email') return 'mailto:?subject=' + t + '&body=' + u;
-    if (net === 'facebook') return 'https://www.facebook.com/sharer/sharer.php?u=' + u;
-    if (net === 'twitter') return 'https://twitter.com/intent/tweet?url=' + u + '&text=' + t;
-    if (net === 'pinterest') return 'https://pinterest.com/pin/create/button/?url=' + u + '&description=' + t;
-    return '';
-  }
-
-  // One delegated listener on the grid instead of ~7 listeners per card.
-  // Necessary now that most cards are built in the browser after this script
-  // runs: per-element listeners attached at load would only ever cover the
-  // server-rendered head of the grid, leaving the overflow menu dead on
-  // every injected card. Also cheaper -- this used to attach ~42,000
-  // listeners on a 6,000-card page.
-  function cardShareUrl(card){
-    // ?deal= rather than #. The "#" form is what these buttons handed out
-    // until 2026-08-11, and it is the form confirmed to break when pasted
-    // into an Instagram/TikTok/Facebook caption -- the caption parser reads
-    // "#d" as the start of a hashtag and swallows the rest of the URL.
-    return location.protocol + '//' + location.host + location.pathname
-           + (card && card.id ? '?deal=' + encodeURIComponent(card.id) : '');
-  }
-
-  grid.addEventListener('click', function(e){
-    var menu = e.target.closest ? e.target.closest('.over-menu') : null;
-    if (!menu) return;
-    e.stopPropagation();
-
-    var url = menu.getAttribute('data-url');
-    var title = menu.getAttribute('data-title') || 'Deal';
-    var pageUrl = cardShareUrl(menu.closest('.card'));
-    var dots = menu.querySelector('.dots');
-
-    var shareBtn = e.target.closest('.sh');
-    if (shareBtn) {
-      e.preventDefault();
-      var net = shareBtn.getAttribute('data-net');
-      if (net === 'copy') {
-        copyToClipboard(pageUrl);
-        shareBtn.textContent = 'Copied!';
-        setTimeout(function(){
-          shareBtn.textContent = 'Copy Link';
-          menu.classList.remove('active');
-        }, 900);
-        return;
-      }
-      var target = shareTarget(net, pageUrl, title);
-      if (!target) return;
-      if (net === 'email') { location.href = target; }
-      else { window.open(target, '_blank', 'noopener'); }
-      menu.classList.remove('active');
-      return;
-    }
-
-    var shareLbl = e.target.closest('.menu-share-lbl');
-    if (shareLbl) {
-      e.preventDefault();
-      var nowOpen = shareLbl.parentElement.classList.toggle('open');
-      shareLbl.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
-      return;
-    }
-
-    if (e.target.closest('.menu-open')) {
-      e.preventDefault();
-      window.open(url, '_blank', 'noopener');
-      menu.classList.remove('active');
-      return;
-    }
-
-    // "Report an Error" is a real href; let it navigate.
-    if (e.target.closest('.menu-report')) return;
-    // Anything else inside the open dropdown is not a control.
-    if (e.target.closest('.dropdown')) return;
-
-    // Toggle on the whole button, not just the glyph. The listener used to sit
-    // on the .dots span, which measures 4.8x18px inside a 28x28 button -- 89%
-    // of what looks like a button did nothing when clicked (measured in-page
-    // 2026-08-10).
-    var was = menu.classList.contains('active');
-    closeAll();
-    if (!was) menu.classList.add('active');
-    if (dots) dots.setAttribute('aria-expanded', was ? 'false' : 'true');
-  });
-
-  // ---- deep-link: #d-<id> (or ?deal=d-<id>) from social posts must survive
-  // pagination. The ?deal= form exists because Instagram/TikTok/Facebook
-  // caption text parses a bare "#" as the start of a hashtag and visibly
-  // breaks the link (confirmed live 2026-08-11: "halfornothing.com/#d-ebay-
-  // id-..." rendered with "#d" as a blue hashtag, garbling the rest) --
-  // ?deal= has no "#" for the caption parser to trip on, same target either
-  // way since both just resolve to the card's DOM id.
-  // A ?deal= link that resolves to nothing used to fail silently: the visitor
-  // landed on an ordinary front page with no hint that the thing they clicked
-  // for was gone, and no way to tell that from "the site is broken". These
-  // links live in social posts and outlive the listings they point at, so the
-  // miss case is normal traffic, not an edge case, and it needs an answer.
-  function wantedDeal(){
-    return !!(new URLSearchParams(location.search).get('deal')
-              || (location.hash && location.hash.length > 1));
-  }
-
-  function dealGoneNotice(){
-    if (document.getElementById('dealGone')) return;
-    var box = document.createElement('div');
-    box.id = 'dealGone';
-    box.className = 'deal-gone';
-    box.innerHTML = "<b>That deal has ended.</b> The listing you followed sold out or "
-      + "was taken down at the retailer. Everything below is live right now, "
-      + "at 50% off or better.";
-    var main = document.querySelector('main.wrap');
-    if (main) main.insertBefore(box, main.firstChild);
-  }
-
-  function gotoDeepLink(){
-    var dealParam = new URLSearchParams(location.search).get('deal');
-    if (!dealParam && !(location.hash && location.hash.length > 1)) return false;
-    var targetId = dealParam || location.hash.slice(1);
-    var targetCard = document.getElementById(targetId);
-    if (!targetCard || !targetCard.classList.contains('card')) return false;
-    var filteredNow = allCards.filter(matches);
-    var idx = filteredNow.indexOf(targetCard);
-    if (idx === -1 && state.cats.length) {
-      state.cats = [];
-      filteredNow = allCards.filter(matches);
-      idx = filteredNow.indexOf(targetCard);
-    }
-    if (idx === -1) return false;
-    state.page = Math.floor(idx / PAGE_SIZE) + 1;
-    render();
-    targetCard.classList.add('linked');
-    // Re-tag just this card's outbound links as social traffic. Only this
-    // card, not the whole grid: the visitor followed a post to this specific
-    // deal, so this is the click whose commission answers "does posting
-    // actually sell anything". Retagging all 13,000 links would both cost a
-    // long main-thread pass and blur the answer, since anything else they
-    // browse to afterwards is ordinary on-site discovery.
-    Array.prototype.forEach.call(targetCard.querySelectorAll('a[href*="campid="]'), function(a){
-      a.href = a.href.replace(/([?&]customid=)[^&]*/, '$1' + SOCIAL_CUSTOM_ID);
-    });
-    var m = targetCard.querySelector('.over-menu');
-    if (m) {
-      m.setAttribute('data-url',
-        (m.getAttribute('data-url') || '').replace(/([?&]customid=)[^&]*/, '$1' + SOCIAL_CUSTOM_ID));
-    }
-    setTimeout(function(){
-      targetCard.scrollIntoView({behavior: 'smooth', block: 'center'});
-    }, 50);
-    return true;
-  }
-
-  var deepLinked = gotoDeepLink();
-  if (!deepLinked) render();
-
-  // ---- the rest of the catalogue, from deals.json ----
-  // The document carries only the first screenful of cards; everything below
-  // that is built here. Deliberately after the first render, so the page is
-  // interactive with what it already has before the fetch resolves, and so a
-  // failed or blocked fetch degrades to "the first 60 deals work" rather
-  // than to an empty page.
-  var feedUrl = grid.getAttribute('data-feed');
-  // No feed to wait for (the local view), so a miss is already conclusive.
-  if ((!feedUrl || !window.fetch) && !deepLinked && wantedDeal()) dealGoneNotice();
-  if (feedUrl && window.fetch) {
-    var wantCat = grid.getAttribute('data-feed-cat');
-    var wantSub = grid.getAttribute('data-feed-subcat');
-    fetch(feedUrl, {cache: 'no-cache'})
-      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function(feed){
-        // Match against ids already in the document rather than assuming the
-        // document holds exactly the feed's first N: the two are built from
-        // the same ordered list, but keying on identity means a change to
-        // FIRST_PAINT_CARDS, or any ordering difference, can't duplicate or
-        // skip a card.
-        var have = {};
-        allCards.forEach(function(c){ have[c.id] = true; });
-
-        var frag = document.createDocumentFragment();
-        var added = 0;
-        (feed.deals || []).forEach(function(d){
-          if (have[d.id]) return;
-          if (wantCat && d.category !== wantCat) return;
-          if (wantSub && d.subcategory !== wantSub) return;
-          frag.appendChild(buildCard(d));
-          added++;
-        });
-        if (!added) return;
-        grid.appendChild(frag);
-
-        allCards = Array.prototype.filter.call(grid.children, function(el){
-          return el.classList.contains('card');
-        });
-        // A deep link may point at a card that only just arrived, so try it
-        // again now that the full set is present.
-        if (!deepLinked) { deepLinked = gotoDeepLink(); }
-        if (!deepLinked) {
-          render();
-          // Only now, with the whole catalogue loaded, is a miss really a
-          // miss. Saying so before the fetch resolved would cry wolf at
-          // every deep link to a card that simply hadn't arrived yet.
-          if (wantedDeal()) dealGoneNotice();
-        }
-      })
-      .catch(function(){
-        // Silent by design: the page is already usable. Surfacing a fetch
-        // error here would be a broken-looking site over a working one.
-      });
-  }
-})();
-
-// ---- ghost mark: align under the "Deals" nav link ----
-// "Deals" lives in the sticky topnav, the ghost lives in the hero below it --
-// two different rows, so this is a real "match that other element's x
-// position" problem, not something a single CSS rule can express once the
-// nav's own width (and therefore where "Deals" lands) depends on viewport.
-// Recomputed on load and resize; the CSS right:20px stays as the fallback
-// for the instant before this runs (and for no-JS).
-(function(){
-  var ghost = document.getElementById('mastGhost');
-  var deals = document.querySelector('.topnav .links a[aria-current="page"]');
-  var mast = document.querySelector('header.mast');
-  if (!ghost || !deals || !mast) return;
-
-  function place(){
-    if (getComputedStyle(ghost).display === 'none') return; // hidden on mobile
-    var dealsLeft = deals.getBoundingClientRect().left;
-    var mastLeft = mast.getBoundingClientRect().left;
-    ghost.style.left = (dealsLeft - mastLeft) + 'px';
-    ghost.style.right = 'auto';
-  }
-  place();
-  window.addEventListener('resize', place);
-})();
-
-// ---- hero search: rotating "Search for <term>" hint ----
-// A layered span rather than the placeholder attribute, so the lead-in stays
-// put while only the term swaps. Hides the moment anything is typed, and holds
-// still for anyone who asked for reduced motion.
-(function(){
-  var input = document.getElementById('dealSearch');
-  var hint = document.getElementById('searchHint');
-  var word = document.getElementById('searchHintWord');
-  if (!input || !hint || !word) return;
-
-  var terms;
-  try { terms = JSON.parse(input.getAttribute('data-hints') || '[]'); }
-  catch (e) { terms = []; }
-  if (!terms.length) { hint.classList.add('gone'); return; }
-
-  function sync(){ hint.classList.toggle('gone', !!input.value); }
-  input.addEventListener('input', sync);
-  sync();
-
-  word.textContent = terms[0];
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var i = 0;
-  setInterval(function(){
-    if (input.value || document.hidden) return;
-    i = (i + 1) % terms.length;
-    word.style.opacity = '0';
-    setTimeout(function(){ word.textContent = terms[i]; word.style.opacity = ''; }, 180);
-  }, 2600);
-  word.style.transition = 'opacity .18s ease';
-})();
-
-// ---- Today's Top Deals rail: arrow buttons + edge-aware disabling ----
-// The viewport is a real scroll container, so the arrows only nudge it; swipe,
-// trackpad and keyboard scrolling already work without any of this. Arrows
-// fade out at each end rather than sitting there dead.
-(function(){
-  var vp = document.getElementById('tdViewport');
-  var prev = document.getElementById('tdPrev');
-  var next = document.getElementById('tdNext');
-  if (!vp || !prev || !next) return;
-
-  function step(){
-    var card = vp.querySelector('.td-card');
-    var w = card ? card.getBoundingClientRect().width + 14 : 232;
-    return Math.max(w, Math.floor(vp.clientWidth / w) * w);
-  }
-  function sync(){
-    var max = vp.scrollWidth - vp.clientWidth;
-    prev.disabled = vp.scrollLeft <= 2;
-    next.disabled = vp.scrollLeft >= max - 2;
-  }
-  prev.addEventListener('click', function(){ vp.scrollBy({left: -step(), behavior:'smooth'}); });
-  next.addEventListener('click', function(){ vp.scrollBy({left: step(), behavior:'smooth'}); });
-  vp.addEventListener('scroll', function(){
-    window.requestAnimationFrame(sync);
-  }, {passive:true});
-  window.addEventListener('resize', sync);
-  sync();
-})();
-
-(function(){
-  var btn = document.getElementById('backToTop');
-  if (!btn) return;
-  window.addEventListener('scroll', function(){
-    btn.classList.toggle('show', window.scrollY > 600);
-  }, {passive:true});
-  btn.addEventListener('click', function(){
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  });
-})();
-
-(function(){
-  var el = document.getElementById('lastUpdated');
-  if (!el) return;
-  var updatedAt = new Date(el.getAttribute('data-updated'));
-  function relative(){
-    var mins = Math.round((Date.now() - updatedAt.getTime()) / 60000);
-    var text;
-    if (mins < 1) text = 'Just now';
-    else if (mins === 1) text = '1 min ago';
-    else if (mins < 60) text = mins + ' min ago';
-    else {
-      var hrs = Math.round(mins / 60);
-      text = hrs === 1 ? '1 hour ago' : hrs + ' hours ago';
-    }
-    el.textContent = text;
-  }
-  relative();
-  setInterval(relative, 30000);
-})();
-</script>
+<script src="/assets/js/interaction.js"></script>
 <script type="text/javascript" src="https://js.codedrink.com/snippet.min.js" defer></script>
-<script type="text/javascript" defer>
-  document.addEventListener("LSAFFEventLoaded",
-    function(e) {
-      e.detail.init();
-    });
-</script>
+<script type="text/javascript" src="/assets/js/lasso-picks.js" defer></script>
+<script type="text/javascript" src="https://s.skimresources.com/js/307865X1796159.skimlinks.js"></script>
 </body></html>
