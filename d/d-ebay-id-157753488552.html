@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i.ebayimg.com/images/g/NcEAAeSwvLhqeAgj/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.ebayimg.com/images/g/NcEAAeSwvLhqeAgj/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Lacoste Blue Square Unisex Sunglasses L789S/53 L789S/53","description":"59% off -- was $116.00, now $47.69 at Ebay.","image":"https://i.ebayimg.com/images/g/NcEAAeSwvLhqeAgj/s-l500.jpg","offers":{"@type":"Offer","price":"47.69","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-157753488552.html","priceValidUntil":"2026-08-21T06:10:12Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Fashion & Accessories","item":"https://halfornothing.com/fashion.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Lacoste Blue Square Unisex Sunglasses L789S/53 L789S/53","description":"59% off -- was $116.00, now $47.69 at Ebay.","image":"https://i.ebayimg.com/images/g/NcEAAeSwvLhqeAgj/s-l500.jpg","offers":{"@type":"Offer","price":"47.69","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-157753488552.html","priceValidUntil":"2026-08-21T06:35:34Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Fashion & Accessories","item":"https://halfornothing.com/fashion.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -620,49 +620,54 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 
 .card .body{padding:14px 16px 14px 4px;position:relative;flex:1;min-width:0;
             display:flex;flex-direction:column;gap:7px;justify-content:center}
-.card .over-menu{position:absolute;top:10px;right:12px;width:28px;height:28px;
+/* Was scoped to ".card .over-menu" -- unscoped from that ancestor 2026-08-20
+   so Amazon Picks cards (.pick-lasso, not .card) and their durable share
+   pages (.deal-page-body) get the same collapsed/positioned menu instead of
+   an unstyled, permanently-expanded list of buttons. .over-menu is specific
+   enough as a class name that this doesn't need a .card qualifier at all. */
+.over-menu{position:absolute;top:10px;right:12px;width:28px;height:28px;
                   background:var(--card);border:1px solid var(--rule);border-radius:10px;
                   display:flex;align-items:center;justify-content:center;cursor:pointer;
                   font-size:18px;line-height:1;color:var(--ink);z-index:10;
                   transition:all .15s}
-.card .over-menu:hover{background:var(--paper-3);border-color:var(--signal)}
+.over-menu:hover{background:var(--paper-3);border-color:var(--signal)}
 /* Invisible ring that widens the tap target to ~46px without growing the
    drawn button: a 28px control is under the 44px minimum for a fingertip, and
    this card is dense enough that a visibly bigger button would crowd the
    title. Sits only around the button, never over the dropdown below it. */
-.card .over-menu::before{content:'';position:absolute;inset:-9px;border-radius:8px}
+.over-menu::before{content:'';position:absolute;inset:-9px;border-radius:8px}
 /* .dots is a real <button> so the menu is keyboard-operable; it fills the
    .over-menu box and inherits its look rather than drawing a second one. */
-.card .over-menu .dots{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;
+.over-menu .dots{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;
                         background:none;border:0;font:inherit;color:inherit;line-height:1;
                         cursor:pointer;display:flex;align-items:center;justify-content:center}
-.card .over-menu .dots:focus-visible,.card .over-menu .dropdown a:focus-visible,
-.card .over-menu .dropdown button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.over-menu .dots:focus-visible,.over-menu .dropdown a:focus-visible,
+.over-menu .dropdown button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 /* an OPEN menu must out-stack the ⋮ buttons of later cards -- its dropdown
    overlaps the card below, and z-index ties break by DOM order (later wins),
    which made Share unclickable on every card except the last row */
-.card .over-menu.active{z-index:1000}
-.card .over-menu .dropdown{display:none;position:absolute;top:100%;right:0;
+.over-menu.active{z-index:1000}
+.over-menu .dropdown{display:none;position:absolute;top:100%;right:0;
                             background:var(--card);border:1px solid var(--rule);border-radius:12px;
                             min-width:180px;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.12);
                             z-index:20}
-.card .over-menu.active .dropdown{display:block;animation:menufade .12s ease}
-.card .over-menu .dropdown a,.card .over-menu .dropdown button{
+.over-menu.active .dropdown{display:block;animation:menufade .12s ease}
+.over-menu .dropdown a,.over-menu .dropdown button{
                               display:flex;align-items:center;gap:10px;padding:11px 14px;
                               width:100%;background:none;font-family:inherit;text-align:left;
                               border:0;color:var(--ink);text-decoration:none;font-size:13px;
                               font-weight:500;border-bottom:1px solid var(--rule);cursor:pointer;
                               transition:all .15s}
-.card .over-menu .dropdown>*:last-child{border-bottom:none}
-.card .over-menu .dropdown a:hover,.card .over-menu .dropdown button:hover{
+.over-menu .dropdown>*:last-child{border-bottom:none}
+.over-menu .dropdown a:hover,.over-menu .dropdown button:hover{
                               background:var(--paper-3);color:var(--signal)}
-.card .over-menu .has-sub{position:relative}
-.card .over-menu .has-sub>button{border-bottom:none}
-.card .over-menu .subdrop{display:none;position:absolute;right:100%;top:0;margin-right:4px;
+.over-menu .has-sub{position:relative}
+.over-menu .has-sub>button{border-bottom:none}
+.over-menu .subdrop{display:none;position:absolute;right:100%;top:0;margin-right:4px;
                           background:var(--card);border:1px solid var(--rule);border-radius:12px;
                           min-width:130px;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:30}
-.card .over-menu .has-sub:hover .subdrop,
-.card .over-menu .has-sub.open .subdrop{display:block;animation:menufade .12s ease}
+.over-menu .has-sub:hover .subdrop,
+.over-menu .has-sub.open .subdrop{display:block;animation:menufade .12s ease}
 
 .card h3{font-size:14px;line-height:1.4;font-weight:600;margin:0;color:var(--ink);padding-right:34px}
 .card h3 a{color:inherit;text-decoration:none}
@@ -729,7 +734,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
   /* was 22px here -- shrinking the one control on the card that fingers have
      to hit was backwards; keep it full size on phones and let ::before carry
      the tap area past it */
-  .card .over-menu{width:28px;height:28px;font-size:17px}
+  .over-menu{width:28px;height:28px;font-size:17px}
 }
 /* ---- brand motif: the diagonal cut from the logo, echoed in chips + CTAs ---- */
 /* the diagonal notch was dropped 2026-08-10: against 16-24px rounded corners
@@ -869,10 +874,21 @@ html{scroll-behavior:smooth}
 .deal-page{display:flex;gap:32px;margin:22px 0 40px;flex-wrap:wrap}
 .deal-page-media{flex:0 0 320px;max-width:100%;background:var(--card);
                   border:1px solid var(--rule);border-radius:4px;overflow:hidden;
-                  display:flex;align-items:center;justify-content:center;min-height:240px}
+                  display:flex;align-items:center;justify-content:center;min-height:240px;
+                  position:relative}
 .deal-page-media img{width:100%;height:auto;display:block}
 .deal-page-body{flex:1 1 340px;min-width:0}
 .deal-page-body h1{font-size:1.4rem;line-height:1.3;margin:0 0 10px;font-weight:800}
+
+/* ---- durable per-pick pages (/d/pick-{asin}.html), 2026-08-20 ---- */
+/* Not inside .deal-page-body, since this page's product widget is the
+   Lasso embed itself, not the media+body split deal pages use. */
+.pick-page-title{font-size:1.4rem;line-height:1.3;margin:18px 0 10px;font-weight:800}
+/* Empty strip above the Lasso embed for the Share button to live in --
+   position:relative gives .over-menu (position:absolute) something to
+   anchor to that is NOT the product photo. See amazon_pick_pages.py's
+   render_pick_page docstring for why this can never be inside the embed. */
+.pick-page-toolbar{position:relative;height:36px;margin-bottom:4px}
 .deal-status{font:600 12px/1 var(--mono);letter-spacing:.03em;text-transform:uppercase;
              margin:0 0 14px}
 .deal-status-live{color:var(--gate)}
