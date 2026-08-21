@@ -393,10 +393,18 @@
   }
 
   if (searchEl) {
+    // Filtering runs over every card in the grid (thousands), so doing it on
+    // every keystroke synchronously blocks the main thread long enough to
+    // feel like input lag while typing. Debouncing lets fast typing finish
+    // before the filter/render pass runs.
+    var searchDebounce;
     searchEl.addEventListener('input', function(){
-      state.search = searchEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
-      state.page = 1;
-      render();
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(function(){
+        state.search = searchEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        state.page = 1;
+        render();
+      }, 150);
     });
   }
 
