@@ -399,7 +399,15 @@
            + (card && card.id ? '?deal=' + encodeURIComponent(card.id) : '');
   }
 
-  grid.addEventListener('click', function(e){
+  // Was grid.addEventListener -- broke entirely on any page with an
+  // .over-menu but no .grid container (e.g. the durable /d/pick-*.html
+  // Amazon Picks share pages added 2026-08-20: grid was null there, so the
+  // listener never attached and Share silently did nothing). Delegating on
+  // document instead costs nothing on grid pages (e.target.closest('.over-menu')
+  // already scopes the logic correctly regardless of which ancestor the
+  // listener sits on) and makes the Share button work on any page that has
+  // one, not just the grid-based deal listings.
+  document.addEventListener('click', function(e){
     var menu = e.target.closest ? e.target.closest('.over-menu') : null;
     if (!menu) return;
     e.stopPropagation();
