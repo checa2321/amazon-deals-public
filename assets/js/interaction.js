@@ -18,6 +18,116 @@
     if (e.key === 'Escape') closeAll();
   });
 
+  // ---- per-card overflow menu: open in new tab / report / share flyout ----
+  function copyToClipboard(text){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text);
+      return;
+    }
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (err) {}
+    document.body.removeChild(ta);
+  }
+  function shareTarget(net, pageUrl, title){
+    var u = encodeURIComponent(pageUrl);
+    var t = encodeURIComponent(title);
+    if (net === 'email') return 'mailto:?subject=' + t + '&body=' + u;
+    if (net === 'facebook') return 'https://www.facebook.com/sharer/sharer.php?u=' + u;
+    if (net === 'twitter') return 'https://twitter.com/intent/tweet?url=' + u + '&text=' + t;
+    if (net === 'pinterest') return 'https://pinterest.com/pin/create/button/?url=' + u + '&description=' + t;
+    return '';
+  }
+
+  // One delegated listener on the grid instead of ~7 listeners per card.
+  // Necessary now that most cards are built in the browser after this script
+  // runs: per-element listeners attached at load would only ever cover the
+  // server-rendered head of the grid, leaving the overflow menu dead on
+  // every injected card. Also cheaper -- this used to attach ~42,000
+  // listeners on a 6,000-card page.
+  function cardShareUrl(card){
+    // ?deal= rather than #. The "#" form is what these buttons handed out
+    // until 2026-08-11, and it is the form confirmed to break when pasted
+    // into an Instagram/TikTok/Facebook caption -- the caption parser reads
+    // "#d" as the start of a hashtag and swallows the rest of the URL.
+    return location.protocol + '//' + location.host + location.pathname
+           + (card && card.id ? '?deal=' + encodeURIComponent(card.id) : '');
+  }
+
+  // Was grid.addEventListener -- broke entirely on any page with an
+  // .over-menu but no .grid container (e.g. the durable /d/pick-*.html
+  // Amazon Picks share pages added 2026-08-20: grid was null there, so the
+  // listener never attached and Share silently did nothing). Delegating on
+  // document instead costs nothing on grid pages (e.target.closest('.over-menu')
+  // already scopes the logic correctly regardless of which ancestor the
+  // listener sits on) and makes the Share button work on any page that has
+  // one, not just the grid-based deal listings.
+  document.addEventListener('click', function(e){
+    var menu = e.target.closest ? e.target.closest('.over-menu') : null;
+    if (!menu) return;
+    e.stopPropagation();
+
+    var url = menu.getAttribute('data-url');
+    var title = menu.getAttribute('data-title') || 'Deal';
+    var pageUrl = cardShareUrl(menu.closest('.card'));
+    var dots = menu.querySelector('.dots');
+
+    var shareBtn = e.target.closest('.sh');
+    if (shareBtn) {
+      e.preventDefault();
+      var net = shareBtn.getAttribute('data-net');
+      if (net === 'copy') {
+        copyToClipboard(pageUrl);
+        shareBtn.textContent = 'Copied!';
+        setTimeout(function(){
+          shareBtn.textContent = 'Copy Link';
+          menu.classList.remove('active');
+        }, 900);
+        return;
+      }
+      var target = shareTarget(net, pageUrl, title);
+      if (!target) return;
+      if (net === 'email') { location.href = target; }
+      else { window.open(target, '_blank', 'noopener'); }
+      menu.classList.remove('active');
+      return;
+    }
+
+    var shareLbl = e.target.closest('.menu-share-lbl');
+    if (shareLbl) {
+      e.preventDefault();
+      var nowOpen = shareLbl.parentElement.classList.toggle('open');
+      shareLbl.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+      return;
+    }
+
+    if (e.target.closest('.menu-open')) {
+      e.preventDefault();
+      window.open(url, '_blank', 'noopener');
+      menu.classList.remove('active');
+      return;
+    }
+
+    // "Report an Error" is a real href; let it navigate.
+    if (e.target.closest('.menu-report')) return;
+    // Anything else inside the open dropdown is not a control.
+    if (e.target.closest('.dropdown')) return;
+
+    // Toggle on the whole button, not just the glyph. The listener used to sit
+    // on the .dots span, which measures 4.8x18px inside a 28x28 button -- 89%
+    // of what looks like a button did nothing when clicked (measured in-page
+    // 2026-08-10).
+    var was = menu.classList.contains('active');
+    closeAll();
+    if (!was) menu.classList.add('active');
+    if (dots) dots.setAttribute('aria-expanded', was ? 'false' : 'true');
+  });
+
   var grid = document.querySelector('.grid');
 
   // ---- top-nav Categories mega menu (all pages) ----
@@ -358,115 +468,6 @@
     render();
   });
 
-  // ---- per-card overflow menu: open in new tab / report / share flyout ----
-  function copyToClipboard(text){
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text);
-      return;
-    }
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.focus();
-    ta.select();
-    try { document.execCommand('copy'); } catch (err) {}
-    document.body.removeChild(ta);
-  }
-  function shareTarget(net, pageUrl, title){
-    var u = encodeURIComponent(pageUrl);
-    var t = encodeURIComponent(title);
-    if (net === 'email') return 'mailto:?subject=' + t + '&body=' + u;
-    if (net === 'facebook') return 'https://www.facebook.com/sharer/sharer.php?u=' + u;
-    if (net === 'twitter') return 'https://twitter.com/intent/tweet?url=' + u + '&text=' + t;
-    if (net === 'pinterest') return 'https://pinterest.com/pin/create/button/?url=' + u + '&description=' + t;
-    return '';
-  }
-
-  // One delegated listener on the grid instead of ~7 listeners per card.
-  // Necessary now that most cards are built in the browser after this script
-  // runs: per-element listeners attached at load would only ever cover the
-  // server-rendered head of the grid, leaving the overflow menu dead on
-  // every injected card. Also cheaper -- this used to attach ~42,000
-  // listeners on a 6,000-card page.
-  function cardShareUrl(card){
-    // ?deal= rather than #. The "#" form is what these buttons handed out
-    // until 2026-08-11, and it is the form confirmed to break when pasted
-    // into an Instagram/TikTok/Facebook caption -- the caption parser reads
-    // "#d" as the start of a hashtag and swallows the rest of the URL.
-    return location.protocol + '//' + location.host + location.pathname
-           + (card && card.id ? '?deal=' + encodeURIComponent(card.id) : '');
-  }
-
-  // Was grid.addEventListener -- broke entirely on any page with an
-  // .over-menu but no .grid container (e.g. the durable /d/pick-*.html
-  // Amazon Picks share pages added 2026-08-20: grid was null there, so the
-  // listener never attached and Share silently did nothing). Delegating on
-  // document instead costs nothing on grid pages (e.target.closest('.over-menu')
-  // already scopes the logic correctly regardless of which ancestor the
-  // listener sits on) and makes the Share button work on any page that has
-  // one, not just the grid-based deal listings.
-  document.addEventListener('click', function(e){
-    var menu = e.target.closest ? e.target.closest('.over-menu') : null;
-    if (!menu) return;
-    e.stopPropagation();
-
-    var url = menu.getAttribute('data-url');
-    var title = menu.getAttribute('data-title') || 'Deal';
-    var pageUrl = cardShareUrl(menu.closest('.card'));
-    var dots = menu.querySelector('.dots');
-
-    var shareBtn = e.target.closest('.sh');
-    if (shareBtn) {
-      e.preventDefault();
-      var net = shareBtn.getAttribute('data-net');
-      if (net === 'copy') {
-        copyToClipboard(pageUrl);
-        shareBtn.textContent = 'Copied!';
-        setTimeout(function(){
-          shareBtn.textContent = 'Copy Link';
-          menu.classList.remove('active');
-        }, 900);
-        return;
-      }
-      var target = shareTarget(net, pageUrl, title);
-      if (!target) return;
-      if (net === 'email') { location.href = target; }
-      else { window.open(target, '_blank', 'noopener'); }
-      menu.classList.remove('active');
-      return;
-    }
-
-    var shareLbl = e.target.closest('.menu-share-lbl');
-    if (shareLbl) {
-      e.preventDefault();
-      var nowOpen = shareLbl.parentElement.classList.toggle('open');
-      shareLbl.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
-      return;
-    }
-
-    if (e.target.closest('.menu-open')) {
-      e.preventDefault();
-      window.open(url, '_blank', 'noopener');
-      menu.classList.remove('active');
-      return;
-    }
-
-    // "Report an Error" is a real href; let it navigate.
-    if (e.target.closest('.menu-report')) return;
-    // Anything else inside the open dropdown is not a control.
-    if (e.target.closest('.dropdown')) return;
-
-    // Toggle on the whole button, not just the glyph. The listener used to sit
-    // on the .dots span, which measures 4.8x18px inside a 28x28 button -- 89%
-    // of what looks like a button did nothing when clicked (measured in-page
-    // 2026-08-10).
-    var was = menu.classList.contains('active');
-    closeAll();
-    if (!was) menu.classList.add('active');
-    if (dots) dots.setAttribute('aria-expanded', was ? 'false' : 'true');
-  });
 
   // ---- deep-link: #d-<id> (or ?deal=d-<id>) from social posts must survive
   // pagination. The ?deal= form exists because Instagram/TikTok/Facebook
