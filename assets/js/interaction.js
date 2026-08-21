@@ -387,14 +387,14 @@
       });
     }
     if (catBtn) {
-      catBtn.textContent = vals.length ? ('Category (' + vals.length + ') \\u25be') : 'Category \\u25be';
+      catBtn.textContent = vals.length ? ('Category (' + vals.length + ') ▾') : 'Category ▾';
     }
     render();
   }
 
   if (searchEl) {
     searchEl.addEventListener('input', function(){
-      state.search = searchEl.value.trim().toLowerCase().split(/\\s+/).filter(Boolean);
+      state.search = searchEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
       state.page = 1;
       render();
     });
