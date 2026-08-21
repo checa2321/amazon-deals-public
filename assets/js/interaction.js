@@ -247,7 +247,7 @@
     var thumb = d.image_url
       ? "<a class='thumb' href='" + url + "' target='_blank' rel='noopener sponsored' tabindex='-1' aria-hidden='true'>"
         + '<img src="' + esc(d.image_url) + '" alt="' + esc(String(d.title).slice(0,100)) + '"'
-        + ' loading="lazy" decoding="async" width="120" height="120" referrerpolicy="no-referrer"></a>'
+        + ' loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>'
       : "<span class='thumb noimg'>No image</span>";
     var pills = '';
     if (d.is_new) pills += "<span class='newpill'>New</span>";
@@ -287,7 +287,7 @@
       + "<span class='pct-pill'>" + Math.round(d.discount_pct) + '% off</span></div>'
       + "<div class='meta'><span class='src-tag'>" + esc(d.source_label) + '</span>'
       + '<span>Seen ' + esc(d.seen_text) + '</span>' + pills + '</div>'
-      + "<a class='cta' href='" + url + "' target='_blank' rel='noopener sponsored'>View Deal</a>"
+      + "<a class='cta' href='" + url + "' target='_blank' rel='noopener sponsored'>Buy on " + esc(d.source_label) + '</a>'
       + '</div>';
     return el;
   }
