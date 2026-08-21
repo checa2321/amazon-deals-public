@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i.ebayimg.com/images/g/TNAAAeSwgwRqgrPD/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.ebayimg.com/images/g/TNAAAeSwgwRqgrPD/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Fendi Shiny Light Brown Shield Ladies Sunglasses FE40135I 39E 140 FE40135I 39E","description":"54% off -- was $495.00, now $228.99 at Ebay.","image":"https://i.ebayimg.com/images/g/TNAAAeSwgwRqgrPD/s-l500.jpg","offers":{"@type":"Offer","price":"228.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-178195417242.html","priceValidUntil":"2026-08-21T22:07:09Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Fashion & Accessories","item":"https://halfornothing.com/fashion.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Fendi Shiny Light Brown Shield Ladies Sunglasses FE40135I 39E 140 FE40135I 39E","description":"54% off -- was $495.00, now $228.99 at Ebay.","image":"https://i.ebayimg.com/images/g/TNAAAeSwgwRqgrPD/s-l500.jpg","offers":{"@type":"Offer","price":"228.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-178195417242.html","priceValidUntil":"2026-08-21T23:07:02Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Fashion & Accessories","item":"https://halfornothing.com/fashion.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -593,20 +593,25 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
                 letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
                 border-bottom:2px solid var(--ink);margin-bottom:8px}
 /* ---- horizontal deal cards: fixed 120x120 thumbnail left, details right ---- */
-.grid{margin-top:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.grid{margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
 
+/* Portrait cards, same shape/size as the Today's Top Deals rail (.td-card)
+   so the main grid and the rail read as one card language -- image on top,
+   details stacked below, instead of the old thumbnail-left row. */
 .card{background:var(--card);border-radius:16px;border:1px solid var(--rule);
-      box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;align-items:stretch;
+      box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;flex-direction:column;
       transition:box-shadow .15s ease;position:relative}
 .card:hover{box-shadow:0 4px 14px rgba(0,0,0,.12)}
 .card.v{border-left:3px solid var(--gate)}
 .card.linked{box-shadow:0 0 0 3px rgba(0,168,99,.25)}
 
-.thumb{width:120px;height:120px;flex-shrink:0;margin:12px;border-radius:12px;
-       overflow:hidden;background:var(--paper-3);align-self:center;display:block;
-       border:1px solid var(--rule)}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s ease}
+.thumb{width:100%;height:170px;flex-shrink:0;margin:0;border-radius:16px 16px 0 0;
+       overflow:hidden;background:#fff;display:block;
+       border:0;border-bottom:1px solid var(--rule)}
+.thumb img{width:100%;height:100%;object-fit:contain;display:block;padding:10px;
+           box-sizing:border-box;transition:transform .2s ease}
 .card:hover .thumb img{transform:scale(1.05)}
 .thumb.noimg{display:flex;align-items:center;justify-content:center;
              color:#bbb;font-size:11px;font-family:var(--mono)}
@@ -618,8 +623,8 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
 .newpill{background:var(--gate);color:#fff;font-size:9px;font-weight:700;
          letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
 
-.card .body{padding:14px 16px 14px 4px;position:relative;flex:1;min-width:0;
-            display:flex;flex-direction:column;gap:7px;justify-content:center}
+.card .body{padding:14px 16px 16px;position:relative;flex:1;min-width:0;
+            display:flex;flex-direction:column;gap:7px}
 /* Was scoped to ".card .over-menu" -- unscoped from that ancestor 2026-08-20
    so Amazon Picks cards (.pick-lasso, not .card) and their durable share
    pages (.deal-page-body) get the same collapsed/positioned menu instead of
@@ -942,7 +947,7 @@ html{scroll-behavior:smooth}
 
 </div></header>
 <main class="wrap">
-<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='fashion.html'>Fashion &amp; Accessories</a> <span>&rsaquo;</span> <b>Deal</b></nav><article class='deal-page'><div class='deal-page-media'><img src='https://i.ebayimg.com/images/g/TNAAAeSwgwRqgrPD/s-l500.jpg' alt='Fendi Shiny Light Brown Shield Ladies Sunglasses FE40135I 39E 140 FE40135I 39E' loading='eager' decoding='async' referrerpolicy='no-referrer'></div><div class='deal-page-body'><h1>Fendi Shiny Light Brown Shield Ladies Sunglasses FE40135I 39E 140 FE40135I 39E</h1><p class='deal-status deal-status-live'>Live now &middot; verified within the last 6 hours.</p><p class='deal-page-price'><b>$228.99</b><s>$495.00</s><span class='deal-page-pct'>54% off</span></p><a class='deal-cta' href='https://www.ebay.com/itm/178195417242?_skw=sunglasses&amp;hash=item297d46489a%3Ag%3ATNAAAeSwgwRqgrPD&amp;amdata=enc%3AAQALAAAA8ACCtXRWQnOEpyOqnQQ8KGaWTJbK1BKmAKGzaUfJqBMx6eKo5Dkgfka2HhcE5fooNu1GrrzzhPo9vq%2FjZt1T2UPGuuDxQe3FmcjVIjgNM7uW7u1UZCzxZ3sV57yve8IsK78YfAtEHNxIqskIJClevlZ2EhM6tC9dJrBia2t01hJiD%2BKfdxHNwZzte91HWu97XOBWPEGqODTRQzmhegQJCqJx34OMS2cKzT%2FBT%2Fyq2WODthdRdCOX2dUxh%2BhhUAxViY7zyzXFutBMLwU1%2BQ5X%2BCE%2BzXj%2BlPxqxmem7JVf508u3uo6wvZtxXEozWGlpSHdCQ%3D%3D&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;customid=hond' target='_blank' rel='noopener sponsored'>Get this deal at Ebay &rarr;</a></div></article>
+<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='fashion.html'>Fashion &amp; Accessories</a> <span>&rsaquo;</span> <b>Deal</b></nav><article class='deal-page'><div class='deal-page-media'><img src='https://i.ebayimg.com/images/g/TNAAAeSwgwRqgrPD/s-l500.jpg' alt='Fendi Shiny Light Brown Shield Ladies Sunglasses FE40135I 39E 140 FE40135I 39E' loading='eager' decoding='async' referrerpolicy='no-referrer'></div><div class='deal-page-body'><h1>Fendi Shiny Light Brown Shield Ladies Sunglasses FE40135I 39E 140 FE40135I 39E</h1><p class='deal-status deal-status-live'>Live now &middot; verified within the last 6 hours.</p><p class='deal-page-price'><b>$228.99</b><s>$495.00</s><span class='deal-page-pct'>54% off</span></p><a class='deal-cta' href='https://www.ebay.com/itm/178195417242?_skw=sunglasses&amp;hash=item297d46489a%3Ag%3ATNAAAeSwgwRqgrPD&amp;amdata=enc%3AAQALAAAA8ACCtXRWQnOEpyOqnQQ8KGaWTJbK1BKmAKGzaUfJqBMx6eKo5Dkgfka2HhcE5fooNu1GrrzzhPo9vq%2FjZt1T2UPGuuDxQe3FmcjVIjgNM7uW7u1UZCzxZ3sV57yve8IsK78YfAtEHNxIqskIJClevlY4QXQOCECbpEuuGUYSkBos5o1NvT2fK1PTAqK%2FyUzU8VW2lSGaYgdYitAvh0Aa2FI18U79XrQCdihIqCMO2MMUvmP0jgKePKAIfZsIy7d3nFmesdqlQtuajFJEnG0%2F8F0SWLg0vZU5WEzcEFEXLjVQkeMBaddPmWS9cTliJjxhLQ%3D%3D&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;customid=hond' target='_blank' rel='noopener sponsored'>Get this deal at Ebay &rarr;</a></div></article>
 <footer class="site"><div class="footer-grid">
 <div class="footer-main">
 <details class="disclosure">
