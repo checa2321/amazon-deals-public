@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i5.walmartimages.com/seo/Crayola-Crayons-Bulk-Classroom-Supplies-for-Teachers-24-Crayon-Packs-with-24-Assorted-Colors_2223b8eb-fe2a-45f5-be19-ebb26083cb28.34e0b3e6c6cc5fef468f0ae4ecc54093.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i5.walmartimages.com/seo/Crayola-Crayons-Bulk-Classroom-Supplies-for-Teachers-24-Crayon-Packs-with-24-Assorted-Colors_2223b8eb-fe2a-45f5-be19-ebb26083cb28.34e0b3e6c6cc5fef468f0ae4ecc54093.jpeg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Crayola Crayons Bulk, Classroom Supplies for Teachers, 24 Crayon Packs with 24 Assorted Colors","description":"50% off -- was $23.99, now $12.00 at Walmart.","image":"https://i5.walmartimages.com/seo/Crayola-Crayons-Bulk-Classroom-Supplies-for-Teachers-24-Crayon-Packs-with-24-Assorted-Colors_2223b8eb-fe2a-45f5-be19-ebb26083cb28.34e0b3e6c6cc5fef468f0ae4ecc54093.jpeg","offers":{"@type":"Offer","price":"12.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-walmart-id-105689981.html","priceValidUntil":"2026-08-22T20:07:19Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Office & More","item":"https://halfornothing.com/office-more.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Crayola Crayons Bulk, Classroom Supplies for Teachers, 24 Crayon Packs with 24 Assorted Colors","description":"50% off -- was $23.99, now $12.00 at Walmart.","image":"https://i5.walmartimages.com/seo/Crayola-Crayons-Bulk-Classroom-Supplies-for-Teachers-24-Crayon-Packs-with-24-Assorted-Colors_2223b8eb-fe2a-45f5-be19-ebb26083cb28.34e0b3e6c6cc5fef468f0ae4ecc54093.jpeg","offers":{"@type":"Offer","price":"12.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-walmart-id-105689981.html","priceValidUntil":"2026-08-22T21:06:12Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Office & More","item":"https://halfornothing.com/office-more.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -172,6 +172,11 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
   font:400 13.5px/1.35 var(--display);color:var(--ink);cursor:pointer}
 .herosearch-suggest button:hover,.herosearch-suggest button.active{background:var(--paper-2)}
 .herosearch-suggest button b{color:var(--signal);font-weight:700}
+/* Marks a suggestion that comes from the Picks feed, not this page's own
+   grid -- clicking it navigates to amazon-picks.html instead of filtering
+   in place, which is different enough behavior to flag before the click. */
+.sugg-tag{display:block;margin-top:2px;font:600 9.5px/1 var(--mono);
+  letter-spacing:.05em;text-transform:uppercase;color:var(--gate)}
 
 .stats{margin-top:14px;font:500 11px/1 var(--mono);letter-spacing:.07em;
        text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;

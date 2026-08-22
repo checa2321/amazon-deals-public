@@ -172,6 +172,11 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
   font:400 13.5px/1.35 var(--display);color:var(--ink);cursor:pointer}
 .herosearch-suggest button:hover,.herosearch-suggest button.active{background:var(--paper-2)}
 .herosearch-suggest button b{color:var(--signal);font-weight:700}
+/* Marks a suggestion that comes from the Picks feed, not this page's own
+   grid -- clicking it navigates to amazon-picks.html instead of filtering
+   in place, which is different enough behavior to flag before the click. */
+.sugg-tag{display:block;margin-top:2px;font:600 9.5px/1 var(--mono);
+  letter-spacing:.05em;text-transform:uppercase;color:var(--gate)}
 
 .stats{margin-top:14px;font:500 11px/1 var(--mono);letter-spacing:.07em;
        text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;
