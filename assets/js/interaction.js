@@ -153,7 +153,24 @@
   // _card()/_render_pick_card() in html_output.py.
   function reEsc(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
-  function attachSearchSuggest(input, box, getCards, onSelect){
+  // Amazon Picks are a separate catalogue, not part of any deal grid (see
+  // _render_pick_card in html_output.py), so they're invisible to a search
+  // that only scans the current page's cards. This is the fix for that:
+  // a tiny title-only feed (picks-search.json), fetched once and cached
+  // here, that the deal-grid search below also matches against. Lazy --
+  // only the first real keystroke triggers the fetch -- so pages nobody
+  // searches from never pay for it.
+  var picksIndexPromise = null;
+  function loadPicksIndex(){
+    if (!picksIndexPromise) {
+      picksIndexPromise = (window.fetch ? fetch('/picks-search.json') : Promise.reject())
+        .then(function(r){ return r.ok ? r.json() : []; })
+        .catch(function(){ return []; });
+    }
+    return picksIndexPromise;
+  }
+
+  function attachSearchSuggest(input, box, getCards, onSelect, includePicks){
     if (!input) return;
     // `box` is missing on any page whose HTML hasn't been regenerated since
     // this dropdown shipped (old static output has the search input but not
@@ -163,6 +180,8 @@
     var SUGGEST_MAX = 8;
     var items = [];
     var activeIdx = -1;
+    var picksIndex = null;
+    if (includePicks) loadPicksIndex().then(function(list){ picksIndex = list; });
 
     function close(){ if (box) { box.classList.remove('open'); activeIdx = -1; } }
 
@@ -174,7 +193,16 @@
         var titleLower = cards[i].getAttribute('data-title') || '';
         if (titleLower.indexOf(query) === -1 || seen[titleLower]) continue;
         seen[titleLower] = true;
-        out.push(cards[i].getAttribute('data-title-display') || titleLower);
+        out.push({title: cards[i].getAttribute('data-title-display') || titleLower, pick: false});
+      }
+      if (picksIndex) {
+        for (var p = 0; p < picksIndex.length && out.length < SUGGEST_MAX; p++) {
+          var t = picksIndex[p];
+          var tl = t.toLowerCase();
+          if (tl.indexOf(query) === -1 || seen[tl]) continue;
+          seen[tl] = true;
+          out.push({title: t, pick: true});
+        }
       }
       return out;
     }
@@ -186,9 +214,11 @@
       activeIdx = -1;
       if (!items.length) { close(); return; }
       var hl = new RegExp('(' + reEsc(query) + ')', 'ig');
-      box.innerHTML = items.map(function(title){
-        var marked = esc(title).replace(hl, '<b>$1</b>');
-        return "<button type='button' role='option' data-value=\"" + esc(title) + '">' + marked + '</button>';
+      box.innerHTML = items.map(function(it){
+        var marked = esc(it.title).replace(hl, '<b>$1</b>');
+        var tag = it.pick ? "<span class='sugg-tag'>Amazon Pick</span>" : '';
+        return "<button type='button' role='option' data-value=\"" + esc(it.title) + '"'
+          + (it.pick ? " data-pick='1'" : '') + '>' + marked + tag + '</button>';
       }).join('');
       box.classList.add('open');
     }
@@ -202,10 +232,17 @@
       }
     }
 
-    function pick(title){
-      input.value = title;
+    function choose(it){
+      if (it.pick) {
+        // Picks aren't on this page at all -- send the click to the one
+        // page that has them, with the search already applied there (see
+        // applyPicksQueryParam below).
+        location.href = '/amazon-picks.html?q=' + encodeURIComponent(it.title);
+        return;
+      }
+      input.value = it.title;
       close();
-      onSelect(title);
+      onSelect(it.title);
     }
 
     // Filtering can run over thousands of cards, so doing it on every
@@ -240,7 +277,7 @@
         setActive(activeIdx);
       } else if (e.key === 'Enter' && activeIdx >= 0) {
         e.preventDefault();
-        pick(items[activeIdx]);
+        choose(items[activeIdx]);
       } else if (e.key === 'Escape') {
         close();
       }
@@ -251,7 +288,7 @@
         // mousedown, not click: fires before the input's blur, so the value
         // it reads is still whatever was just typed.
         var btn = e.target.closest ? e.target.closest('button') : null;
-        if (btn) pick(btn.getAttribute('data-value'));
+        if (btn) choose({title: btn.getAttribute('data-value'), pick: !!btn.getAttribute('data-pick')});
       });
     }
   }
@@ -337,8 +374,9 @@
     // _picks_hero_search_html in html_output.py) -- harmless to share since
     // the deal-grid block below bails out early on this page (no .grid), so
     // only this wiring ever touches them here.
+    var picksSearchEl = document.getElementById('dealSearch');
     attachSearchSuggest(
-      document.getElementById('dealSearch'),
+      picksSearchEl,
       document.getElementById('searchSuggest'),
       function(){ return allPicks; },
       function(text){
@@ -347,6 +385,14 @@
         pRender();
       }
     );
+    // Landed here from a pick suggestion clicked on another page (see
+    // choose() in attachSearchSuggest) -- ?q= carries the exact title, same
+    // pattern as applyQueryParam() below for the deal grid.
+    var picksQ = new URLSearchParams(location.search).get('q');
+    if (picksQ && picksSearchEl) {
+      picksSearchEl.value = picksQ;
+      pState.search = picksQ.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    }
     pRender();
   })();
 
@@ -532,7 +578,8 @@
       state.search = text.toLowerCase().split(/\s+/).filter(Boolean);
       state.page = 1;
       render();
-    }
+    },
+    true
   );
 
   if (sortEl) {
