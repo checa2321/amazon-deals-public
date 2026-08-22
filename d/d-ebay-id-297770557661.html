@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i.ebayimg.com/images/g/-b8AAeSwynFqJzBQ/s-l500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.ebayimg.com/images/g/-b8AAeSwynFqJzBQ/s-l500.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Mikasa Sweet Pea 18/8 Stainless Steel Teaspoon (Set of Twelve)","description":"50% off -- was $500.00, now $249.99 at Ebay.","image":"https://i.ebayimg.com/images/g/-b8AAeSwynFqJzBQ/s-l500.jpg","offers":{"@type":"Offer","price":"249.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-297770557661.html","priceValidUntil":"2026-08-22T19:06:40Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Home & Kitchen","item":"https://halfornothing.com/home-kitchen.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Mikasa Sweet Pea 18/8 Stainless Steel Teaspoon (Set of Twelve)","description":"50% off -- was $500.00, now $249.99 at Ebay.","image":"https://i.ebayimg.com/images/g/-b8AAeSwynFqJzBQ/s-l500.jpg","offers":{"@type":"Offer","price":"249.99","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://halfornothing.com/d/d-ebay-id-297770557661.html","priceValidUntil":"2026-08-22T20:07:19Z"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Deals","item":"https://halfornothing.com/"},{"@type":"ListItem","position":2,"name":"Home & Kitchen","item":"https://halfornothing.com/home-kitchen.html"}]}</script>
 <style>
 :root{
   --signal:#D93A12; --signal-dark:#B8331A; --gate:#00a863; --gate-soft:#5C9B81;
@@ -156,6 +156,22 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
                     background:var(--signal);margin-left:2px;vertical-align:-.14em;
                     animation:caret 1s steps(1) infinite}
 @keyframes caret{50%{opacity:0}}
+
+/* Amazon-style suggestion dropdown: absolutely positioned off .herosearch
+   (already position:relative), so it floats below the input without
+   pushing the nav layout around. Hidden by default -- interaction.js toggles
+   .open the same way it does for every other panel on the site (see
+   closeAll()), so Escape/outside-click close this one for free. */
+.herosearch-suggest{position:absolute;left:0;right:0;top:calc(100% + 8px);
+  background:var(--card);border:1px solid var(--rule);border-radius:14px;
+  box-shadow:0 14px 32px rgba(0,0,0,.14);padding:6px;z-index:40;
+  max-height:360px;overflow-y:auto;display:none}
+.herosearch-suggest.open{display:block}
+.herosearch-suggest button{display:block;width:100%;text-align:left;
+  background:transparent;border:0;border-radius:9px;padding:10px 12px;
+  font:400 13.5px/1.35 var(--display);color:var(--ink);cursor:pointer}
+.herosearch-suggest button:hover,.herosearch-suggest button.active{background:var(--paper-2)}
+.herosearch-suggest button b{color:var(--signal);font-weight:700}
 
 .stats{margin-top:14px;font:500 11px/1 var(--mono);letter-spacing:.07em;
        text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;
@@ -937,7 +953,7 @@ html{scroll-behavior:smooth}
 <a class="logo" href="index.html" aria-label="Half or Nothing">
 <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 2h26L2 28z" fill="currentColor"/><path d="M30 4v26H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
 <span class="lg-half">HALF</span><span class="lg-or">or</span><span class="lg-nothing">NOTHING</span></a>
-
+<form class='herosearch' role='search' action='/index.html' method='get'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><circle cx='11' cy='11' r='7'></circle><line x1='21' y1='21' x2='16.65' y2='16.65'></line></svg><input type='search' name='q' aria-label='Search deals' autocomplete='off'></form>
 <div class="links"><a href="index.html">Deals</a><a href="amazon-picks.html">Amazon Picks</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
 </div></nav>
 <header class="mast"><span class="mast-ghost" id="mastGhost" aria-hidden="true">&#189;</span><div class="wrap">
@@ -947,7 +963,7 @@ html{scroll-behavior:smooth}
 
 </div></header>
 <main class="wrap">
-<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='home-kitchen.html'>Home &amp; Kitchen</a> <span>&rsaquo;</span> <b>Deal</b></nav><article class='deal-page'><div class='deal-page-media'><img src='https://i.ebayimg.com/images/g/-b8AAeSwynFqJzBQ/s-l500.jpg' alt='Mikasa Sweet Pea 18/8 Stainless Steel Teaspoon (Set of Twelve)' loading='eager' decoding='async' referrerpolicy='no-referrer'></div><div class='deal-page-body'><h1>Mikasa Sweet Pea 18/8 Stainless Steel Teaspoon (Set of Twelve)</h1><p class='deal-status deal-status-live'>Live now &middot; verified within the last 6 hours.</p><p class='deal-page-price'><b>$249.99</b><s>$500.00</s><span class='deal-page-pct'>50% off</span></p><a class='deal-cta' href='https://www.ebay.com/itm/297770557661?_skw=flatware+set&amp;hash=item45548220dd%3Ag%3A-b8AAeSwynFqJzBQ&amp;amdata=enc%3AAQALAAAA8ACCtXRWQnOEpyOqnQQ8KGZhnTD8%2Fw3GMBzgh5Tjokxx9LIHQIaEQc2WNNfsdVQgvqFSZTsuY1MFF6rxTuIGyqrVz5lcJ8HrTGbbEjAuC19%2F8PdGXWcKW%2Fs115%2BRxhXHi%2Bm5A0lBEMDpM%2FmsDaf7LAwQ6P%2F%2B9GizGZ2e%2F62I%2F9ukwEiJDHPTa4G6t09Zt3WUi9C42lZFsJwrT60g20%2Fzz7Z%2BM%2BKV%2BLvh0AHEH23BdA%2BF9MshCP1gAZsYgxdLKPWJKEFg%2Fol792e8ajMioOfMZxfM391e0txh9OCzLfn3TdLtBQIydbmPqrgyGb2KaSg7Kw%3D%3D&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;customid=hond' target='_blank' rel='noopener sponsored'>Get this deal at Ebay &rarr;</a></div></article>
+<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='home-kitchen.html'>Home &amp; Kitchen</a> <span>&rsaquo;</span> <b>Deal</b></nav><article class='deal-page'><div class='deal-page-media'><img src='https://i.ebayimg.com/images/g/-b8AAeSwynFqJzBQ/s-l500.jpg' alt='Mikasa Sweet Pea 18/8 Stainless Steel Teaspoon (Set of Twelve)' loading='eager' decoding='async' referrerpolicy='no-referrer'></div><div class='deal-page-body'><h1>Mikasa Sweet Pea 18/8 Stainless Steel Teaspoon (Set of Twelve)</h1><p class='deal-status deal-status-live'>Live now &middot; verified within the last 6 hours.</p><p class='deal-page-price'><b>$249.99</b><s>$500.00</s><span class='deal-page-pct'>50% off</span></p><a class='deal-cta' href='https://www.ebay.com/itm/297770557661?_skw=flatware+set&amp;hash=item45548220dd%3Ag%3A-b8AAeSwynFqJzBQ&amp;amdata=enc%3AAQALAAAA8ACCtXRWQnOEpyOqnQQ8KGZhnTD8%2Fw3GMBzgh5Tjokxx9LIHQIaEQc2WNNfsdVQgvqFSZTsuY1MFF6rxTuIGyqrVz5lcJ8HrTGbbEjAuC19%2F8PdGXWcKW%2Fs115%2BRxhXHi%2Bm5A0lBEMDpM%2FmsDaf7LAwJi%2B%2F8M4Ci8V0q93spdmyv%2B5tCTsu3bc87leZEqLP%2B7EfS2CIWLzYH8uoqoyfzj49jRsvphdPfPkshkHJ6RWC3HG8Vfu9xmSFEss228F%2B6UoqS00OEWFhkyp466%2B3a8lxqIL4wYwBtM1RIjTICZ%2FCeR8oMGvXVXFq3xwUYmIv6Hw%3D%3D&amp;campid=5339186549&amp;toolid=10001&amp;mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;customid=hond' target='_blank' rel='noopener sponsored'>Get this deal at Ebay &rarr;</a></div></article>
 <footer class="site"><div class="footer-grid">
 <div class="footer-main">
 <details class="disclosure">

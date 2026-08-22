@@ -157,6 +157,22 @@ body{margin:0;background:var(--paper-2);color:var(--ink);
                     animation:caret 1s steps(1) infinite}
 @keyframes caret{50%{opacity:0}}
 
+/* Amazon-style suggestion dropdown: absolutely positioned off .herosearch
+   (already position:relative), so it floats below the input without
+   pushing the nav layout around. Hidden by default -- interaction.js toggles
+   .open the same way it does for every other panel on the site (see
+   closeAll()), so Escape/outside-click close this one for free. */
+.herosearch-suggest{position:absolute;left:0;right:0;top:calc(100% + 8px);
+  background:var(--card);border:1px solid var(--rule);border-radius:14px;
+  box-shadow:0 14px 32px rgba(0,0,0,.14);padding:6px;z-index:40;
+  max-height:360px;overflow-y:auto;display:none}
+.herosearch-suggest.open{display:block}
+.herosearch-suggest button{display:block;width:100%;text-align:left;
+  background:transparent;border:0;border-radius:9px;padding:10px 12px;
+  font:400 13.5px/1.35 var(--display);color:var(--ink);cursor:pointer}
+.herosearch-suggest button:hover,.herosearch-suggest button.active{background:var(--paper-2)}
+.herosearch-suggest button b{color:var(--signal);font-weight:700}
+
 .stats{margin-top:14px;font:500 11px/1 var(--mono);letter-spacing:.07em;
        text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;
        gap:8px 18px;align-items:baseline;position:relative}
@@ -947,7 +963,7 @@ html{scroll-behavior:smooth}
 
 </div></header>
 <main class="wrap">
-<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='amazon-picks.html'>Amazon Picks</a> <span>&rsaquo;</span> <b>Land Guard Galvanized Elevated Vegetable Garden Bed</b></nav><h1 class='pick-page-title'>Land Guard Galvanized Elevated Vegetable Garden Bed</h1><div class='pick-page-toolbar'><div class='over-menu' data-url='https://halfornothing.com/d/pick-B0H4QZT7V9.html' data-title='Land Guard Galvanized Elevated Vegetable Garden Bed'><button type='button' class='dots' aria-haspopup='true' aria-expanded='false' aria-label='More options for Land Guard Galvanized Elevated Vegetable Garden Bed'>&#8942;</button><div class='dropdown'><button type='button' class='menu-open'>Open in New Tab</button><a class='menu-report' href='contact.html'>Report an Error</a><div class='has-sub'><button type='button' class='menu-share-lbl' aria-expanded='false'>&#9666; Share</button><div class='subdrop'><button type='button' class='sh' data-net='copy'>Copy Link</button><button type='button' class='sh' data-net='email'>Email</button><button type='button' class='sh' data-net='facebook'>Facebook</button><button type='button' class='sh' data-net='twitter'>Twitter / X</button><button type='button' class='sh' data-net='pinterest'>Pinterest</button></div></div></div></div></div><div class='picks-page-grid picks-page-grid-lasso' style='max-width:400px'><div class='pick pick-lasso' data-cat='outdoor' style='--pk-a:#16A34A;--pk-b:#4D7C0F'><span class='pick-lasso-num' aria-hidden='true'>01</span><span class='pick-lasso-cat'>Patio, Lawn &amp; Garden</span><div class='lasso-embed' data-id='UUUUUOnoZG' data-short-title='Land Guard Raised Garden Bed' data-coupon='50% coupon'></div></div></div>
+<nav class='crumbs' aria-label='Breadcrumb'><a href='index.html'>All deals</a> <span>&rsaquo;</span> <a href='amazon-picks.html'>Amazon Picks</a> <span>&rsaquo;</span> <b>Land Guard Galvanized Elevated Vegetable Garden Bed</b></nav><h1 class='pick-page-title'>Land Guard Galvanized Elevated Vegetable Garden Bed</h1><div class='pick-page-toolbar'><div class='over-menu' data-url='https://halfornothing.com/d/pick-B0H4QZT7V9.html' data-title='Land Guard Galvanized Elevated Vegetable Garden Bed'><button type='button' class='dots' aria-haspopup='true' aria-expanded='false' aria-label='More options for Land Guard Galvanized Elevated Vegetable Garden Bed'>&#8942;</button><div class='dropdown'><button type='button' class='menu-open'>Open in New Tab</button><a class='menu-report' href='contact.html'>Report an Error</a><div class='has-sub'><button type='button' class='menu-share-lbl' aria-expanded='false'>&#9666; Share</button><div class='subdrop'><button type='button' class='sh' data-net='copy'>Copy Link</button><button type='button' class='sh' data-net='email'>Email</button><button type='button' class='sh' data-net='facebook'>Facebook</button><button type='button' class='sh' data-net='twitter'>Twitter / X</button><button type='button' class='sh' data-net='pinterest'>Pinterest</button></div></div></div></div></div><div class='picks-page-grid picks-page-grid-lasso' style='max-width:400px'><div class='pick pick-lasso' data-cat='outdoor' data-title='land guard galvanized elevated vegetable garden bed' data-title-display='Land Guard Galvanized Elevated Vegetable Garden Bed' style='--pk-a:#16A34A;--pk-b:#4D7C0F'><span class='pick-lasso-num' aria-hidden='true'>01</span><span class='pick-lasso-cat'>Patio, Lawn &amp; Garden</span><div class='lasso-embed' data-id='UUUUUOnoZG' data-short-title='Land Guard Raised Garden Bed' data-coupon='50% coupon'></div></div></div>
 <footer class="site"><div class="footer-grid">
 <div class="footer-main">
 <details class="disclosure">
