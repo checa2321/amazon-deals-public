@@ -435,7 +435,7 @@
       + " aria-label='More options for " + title + "'>&#8942;</button>"
       + "<div class='dropdown'>"
       + "<button type='button' class='menu-open'>Open in New Tab</button>"
-      + "<a class='menu-report' href='contact.html'>Report an Error</a>"
+      + "<a class='menu-report' href='/contact.html'>Report an Error</a>"
       + "<div class='has-sub'>"
       + "<button type='button' class='menu-share-lbl' aria-expanded='false'>&#9666; Share</button>"
       + "<div class='subdrop'>"
