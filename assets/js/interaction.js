@@ -1,7 +1,7 @@
 (function(){
   var SOCIAL_CUSTOM_ID = 'honsocial';
   function closeAll(){
-    var open = document.querySelectorAll('.over-menu.active,.megamenu.open,.catfilter-panel.open,.has-sub.open,.mega-left>li.open');
+    var open = document.querySelectorAll('.over-menu.active,.megamenu.open,.catfilter-panel.open,.has-sub.open,.mega-left>li.open,.herosearch-suggest.open');
     Array.prototype.forEach.call(open, function(el){
       el.classList.remove('active');
       el.classList.remove('open');
@@ -145,6 +145,117 @@
     // crawlable navigation; no JS needed beyond open/close.
   }
 
+  // ---- shared: Amazon-style suggestion dropdown under a search box ----
+  // One implementation wired to two different card sets below (the deal
+  // grid and Amazon Picks) instead of two near-identical copies. Every card
+  // it reads from must carry data-title (lowercased, for matching) and
+  // data-title-display (original case, for what the dropdown shows) -- see
+  // _card()/_render_pick_card() in html_output.py.
+  function reEsc(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function attachSearchSuggest(input, box, getCards, onSelect){
+    if (!input) return;
+    // `box` is missing on any page whose HTML hasn't been regenerated since
+    // this dropdown shipped (old static output has the search input but not
+    // the #searchSuggest div). Filtering must still work on those pages --
+    // only the dropdown itself is allowed to no-op -- so every box-touching
+    // step below is individually guarded rather than bailing out up front.
+    var SUGGEST_MAX = 8;
+    var items = [];
+    var activeIdx = -1;
+
+    function close(){ if (box) { box.classList.remove('open'); activeIdx = -1; } }
+
+    function collect(query){
+      var seen = {};
+      var out = [];
+      var cards = getCards();
+      for (var i = 0; i < cards.length && out.length < SUGGEST_MAX; i++) {
+        var titleLower = cards[i].getAttribute('data-title') || '';
+        if (titleLower.indexOf(query) === -1 || seen[titleLower]) continue;
+        seen[titleLower] = true;
+        out.push(cards[i].getAttribute('data-title-display') || titleLower);
+      }
+      return out;
+    }
+
+    function render(query){
+      if (!box) return;
+      if (query.length < 2) { close(); items = []; return; }
+      items = collect(query);
+      activeIdx = -1;
+      if (!items.length) { close(); return; }
+      var hl = new RegExp('(' + reEsc(query) + ')', 'ig');
+      box.innerHTML = items.map(function(title){
+        var marked = esc(title).replace(hl, '<b>$1</b>');
+        return "<button type='button' role='option' data-value=\"" + esc(title) + '">' + marked + '</button>';
+      }).join('');
+      box.classList.add('open');
+    }
+
+    function setActive(idx){
+      var btns = box.querySelectorAll('button');
+      Array.prototype.forEach.call(btns, function(b){ b.classList.remove('active'); });
+      if (idx >= 0 && idx < btns.length) {
+        btns[idx].classList.add('active');
+        btns[idx].scrollIntoView({block: 'nearest'});
+      }
+    }
+
+    function pick(title){
+      input.value = title;
+      close();
+      onSelect(title);
+    }
+
+    // Filtering can run over thousands of cards, so doing it on every
+    // keystroke synchronously blocks the main thread long enough to feel
+    // like input lag while typing. Debouncing lets fast typing finish
+    // before the filter/suggestion pass runs.
+    var debounce;
+    input.addEventListener('input', function(){
+      clearTimeout(debounce);
+      debounce = setTimeout(function(){
+        var v = input.value.trim();
+        onSelect(v);
+        render(v.toLowerCase());
+      }, 150);
+    });
+    // Clicking into the field is a click on .herosearch, which bubbles to
+    // the document-level closeAll() above and would hide the dropdown the
+    // same tick it opens. Same fix as megaBtn/megaPanel use: stop it here.
+    input.addEventListener('click', function(e){ e.stopPropagation(); });
+    input.addEventListener('focus', function(){
+      if (box && input.value.trim().length >= 2) render(input.value.trim().toLowerCase());
+    });
+    input.addEventListener('keydown', function(e){
+      if (!box || !box.classList.contains('open')) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIdx = Math.min(activeIdx + 1, items.length - 1);
+        setActive(activeIdx);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIdx = Math.max(activeIdx - 1, -1);
+        setActive(activeIdx);
+      } else if (e.key === 'Enter' && activeIdx >= 0) {
+        e.preventDefault();
+        pick(items[activeIdx]);
+      } else if (e.key === 'Escape') {
+        close();
+      }
+    });
+    if (box) {
+      box.addEventListener('click', function(e){ e.stopPropagation(); });
+      box.addEventListener('mousedown', function(e){
+        // mousedown, not click: fires before the input's blur, so the value
+        // it reads is still whatever was just typed.
+        var btn = e.target.closest ? e.target.closest('button') : null;
+        if (btn) pick(btn.getAttribute('data-value'));
+      });
+    }
+  }
+
   // ---- Amazon Picks page: category filter + load more ----
   // Separate from the deals-grid logic below because picks cards (`.pick` /
   // `.pick-lasso`) are a different render path (see _render_pick_card in
@@ -161,11 +272,17 @@
     var allPicks = Array.prototype.slice.call(document.querySelectorAll('.pick'));
     if (!allPicks.length) return;
     var PICKS_PAGE_SIZE = 40;
-    var pState = { cats: [], page: 1 };
+    var pState = { cats: [], search: [], page: 1 };
 
     function pMatches(card){
-      if (!pState.cats.length) return true;
-      return pState.cats.indexOf(card.getAttribute('data-cat')) !== -1;
+      if (pState.cats.length && pState.cats.indexOf(card.getAttribute('data-cat')) === -1) return false;
+      if (pState.search.length) {
+        var title = card.getAttribute('data-title') || '';
+        for (var w = 0; w < pState.search.length; w++) {
+          if (title.indexOf(pState.search[w]) === -1) return false;
+        }
+      }
+      return true;
     }
     function pRender(){
       var filtered = allPicks.filter(pMatches);
@@ -216,6 +333,20 @@
         });
       });
     }
+    // Same #dealSearch/#searchSuggest ids the deal-grid pages use (see
+    // _picks_hero_search_html in html_output.py) -- harmless to share since
+    // the deal-grid block below bails out early on this page (no .grid), so
+    // only this wiring ever touches them here.
+    attachSearchSuggest(
+      document.getElementById('dealSearch'),
+      document.getElementById('searchSuggest'),
+      function(){ return allPicks; },
+      function(text){
+        pState.search = text.toLowerCase().split(/\s+/).filter(Boolean);
+        pState.page = 1;
+        pRender();
+      }
+    );
     pRender();
   })();
 
@@ -275,6 +406,7 @@
     el.setAttribute('data-cat', d.category || '');
     el.setAttribute('data-subcat', d.subcategory || '');
     el.setAttribute('data-title', String(d.title).toLowerCase());
+    el.setAttribute('data-title-display', String(d.title));
     el.setAttribute('data-price', d.price);
     el.setAttribute('data-discount', d.discount_pct);
     el.setAttribute('data-age', d.age_minutes);
@@ -392,21 +524,16 @@
     render();
   }
 
-  if (searchEl) {
-    // Filtering runs over every card in the grid (thousands), so doing it on
-    // every keystroke synchronously blocks the main thread long enough to
-    // feel like input lag while typing. Debouncing lets fast typing finish
-    // before the filter/render pass runs.
-    var searchDebounce;
-    searchEl.addEventListener('input', function(){
-      clearTimeout(searchDebounce);
-      searchDebounce = setTimeout(function(){
-        state.search = searchEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
-        state.page = 1;
-        render();
-      }, 150);
-    });
-  }
+  attachSearchSuggest(
+    searchEl,
+    document.getElementById('searchSuggest'),
+    function(){ return allCards; },
+    function(text){
+      state.search = text.toLowerCase().split(/\s+/).filter(Boolean);
+      state.page = 1;
+      render();
+    }
+  );
 
   if (sortEl) {
     sortEl.addEventListener('change', function(){
@@ -543,8 +670,23 @@
     return true;
   }
 
+  // Pages with no grid of their own (About, Contact, Discount Index, /d/
+  // deal pages, ...) carry a plain GET-form search box that submits here as
+  // ?q=<value> -- see _redirect_search_html in html_output.py. No JS was
+  // needed to send it; this is the JS needed to receive it.
+  function applyQueryParam(){
+    var q = new URLSearchParams(location.search).get('q');
+    if (!q || !searchEl) return false;
+    searchEl.value = q;
+    state.search = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    return true;
+  }
+
   var deepLinked = gotoDeepLink();
-  if (!deepLinked) render();
+  if (!deepLinked) {
+    applyQueryParam();
+    render();
+  }
 
   // ---- the rest of the catalogue, from deals.json ----
   // The document carries only the first screenful of cards; everything below
